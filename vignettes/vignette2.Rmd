@@ -1,0 +1,57 @@
+---
+title: "Meta-analysis"
+author: "Alencar Xavier and Shizhong Xu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Background for Meta-analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r,echo=FALSE,message=F,comment=F,warning=F}
+require(knitr)
+```
+
+# Meta-analysis of multiple populations along with GxE
+
+## Genome-wide association
+
+Let the dataset have $n$ observations, $f$ subpopulations, $m$ markers and $e$ environments. The method starts from the genome-wide association analysis in the $j^{th}$ environment, following the alternative model $y_j = \mu_j + Z\hat{\gamma}_i + \xi_j + \epsilon_j$. Where $y$ is the vector corresponding to the response variable, $\mu$ is the intercept, $Z$ is a $n\times f$ incidence matrix indicating the haplotype of the maker under evaluation, $\hat{\gamma}_i$ is a vector of the allele effects of the $i^{th}$ marker of $f$ subpopulations, $\xi$ is a vector of length $n$ corresponding to the polygenic term and $\epsilon$ is a vector of residuals with length $n$.
+
+## Meta-analysis
+
+For each $i$ marker, the meta-analysis is based upon the concept of sufficient statistics, assuming that environments are independent and all information in each environment can be expressed by the allele effects $\hat{\gamma}_i$ and the observed residual matrix $R_i$ obtained from the association analysis. The meta-analysis attempt to verify whether the genetic ($G$) and environmental ($E$) components of $\gamma$ differ from zero and, in addition, to verify the existance of $G\times E$ component. In this step, the set of $\hat{\gamma}$ from the association analyses becomes the response variable, a vector with length $e\times f$. For the $i^{th}$ marker, variance components are obtained from the following random model: $\gamma_i = \mu_i + Z\alpha_i + W\beta_i + H\delta_i + e_i$. Where $\mu_i$ is the intercept, $Z$ is a $ef\times f$ incidence matrix indicating the allele source, $\alpha_i$ is the genetic effect associated to the marker, $W$ is a $ef\times e$ incidence matrix indicating the environmental factor, $\beta_i$ is the coefficient associated to each environment, $H$ is the incidence matrix of genotype by environment interaction, $\delta_i$ is the coefficient associated to the $G\times E$ term, and $e_i$ is the vector of residuals with a known residual covariance matrix $R$, a block diagonal matrix $ef\times ef$.
+
+## AMMI term
+
+The $G\times E$ term might saturate the model once each regression coefficient $\gamma$ is observed as an unreplicated combination of genotype and environment. The saturation does not occur because the residuals are not independent and the structure is known. Yet, there exist an alternative reparameterization of this term: the additive main effect and multiplicative interaction (AMMI) term. The AMMI term works as follows: Suppose that the analysis are being performed in a dataset with $f=5$ subpopulations and $e=4$ environments. Once $\gamma$ has been estimated from the association analysis (step 1) and variance components of the genetic and environmental have been estimated with meta-analysis (step 2), then one can build the following $E$ matrix of residuals that also contains the higher-order interaction term:
+
+```{r, echo=FALSE}
+GE = paste('$\\varepsilon_{',rep(1:4,each=5),
+           rep(1:5,length.out=20),'}$',sep='')
+GE = matrix(GE,5,4)
+colnames(GE) = paste('E',1:4,sep='')
+rownames(GE) = paste('G',1:5,sep='')
+kable(GE)
+```
+
+The AMMI term is extracted from the singlar-value decomposition (SVD). The SVD procedure is commonly used for the extraction of signals from non-square matrices. The decomposition is $E = UDS'$. Where, $U$ is a $e\times e$ matrix, $D$ is a $e\times f$ retangular diagonal matrix, and $S$ is a $f\times f$ matrix. In analogy to the Eigendecomposition, $U$ and $S$ represent Eigenvectors while $D$ are Eigenvalues. Likewise, a small fraction of principal components contain the most amount of information to recontruct the original matrix. Suppose one recontructs $E$ using the first $p=2$ principal components:
+
+```{r, echo=FALSE}
+GE = paste('$q_{',rep(1:4,each=5),
+           rep(1:5,length.out=20),'}$',sep='')
+GE = matrix(GE,5,4)
+colnames(GE) = paste('E',1:4,sep='')
+rownames(GE) = paste('G',1:5,sep='')
+kable(GE)
+```
+
+The matrix above can be rearranged as a vector, and be included into the model of meta-analysis replacing the current $G\times E$ term. Thus, the model for the $i^{th}$ marker can be also expressed as $\gamma_i = \mu_i + Z\alpha_i + W\beta_i + Q\tau_i + e_i$.
+
+## Hypothesis testing
+
+The log-likelihood of the model is, therefore, $L(\mu,\sigma^2_\alpha,\sigma^2_\beta,\sigma^2_\tau) = -0.5( log|V|+(y-\mu)^TV^{-1}(y-\mu) )$, where the variance is expressed as $\sigma^2_\gamma = V = ZZ^T\sigma^2_\alpha + WW^T\sigma^2_\beta + QQ^T\sigma^2_\tau + R$ and the log-likelihood of the model above is tested against $L(\mu=\sigma^2_\alpha=\sigma^2_\beta=\sigma^2_\tau=0)$, providing the evidence that at least one of the coefficients (intercept and variance components) is not null. Thus, $LRT = -2(L_{\mu,\sigma^2_\alpha,\sigma^2_\beta,\sigma^2_\tau}-L_{0,0,0,0})$.
+
+## Woodbury's matrix identities
+
+The computational burden associated to the analysis above is originated from the determinant and inversion of the covariance matrix $V$, a square matrix with $ef$ rows and columns. Let $X=[Z\sigma_\alpha || W\sigma_\beta || Q\sigma_\tau]$, such that $V = XX^T+R$. Using the Woodbury's matrix identities, we have $V^{-1} = R^{-1}-R^{-1}X(X^TR^{-1}X+I)^{-1}X^TR^{-1}$ and $|V| = |X^TR^{-1}X+I||R|$, where the square matrix to be inverted has dimension $e+f+p$. For the example, in the analysis of a dataset with $e=18$ environments, $f=41$ subpopulations and using $p=2$ principal components for the $G\times E$ term, we invert a square matrix with dimension $18+41+2=61$ rows and columns intead of a matrix with $18\times 41=738$ rows and columns.

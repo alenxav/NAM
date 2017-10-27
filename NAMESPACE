@@ -1,0 +1,18 @@
+useDynLib(NAM, .registration = TRUE)
+exportPattern("^[[:alpha:]]+")
+importFrom("grDevices", "rgb")
+importFrom("graphics", "abline", "axis", "hist", "identify", "lines",
+           "par", "plot", "rect")
+importFrom("stats", "as.dist", "cor", "cov", "cov2cor", "dchisq","as.formula",
+           "density", "dist", "ecdf", "ksmooth", "lm", "median",
+           "model.frame", "model.matrix", "na.omit", "optim", "pchisq",
+           "predict", "qchisq", "rWishart", "rbeta", "rchisq",
+           "rgamma", "rnorm", "rpois", "runif", "sd", "smooth", "var")
+importFrom("utils", "head", "read.delim", "read.table",
+           "setTxtProgressBar", "tail", "txtProgressBar")
+importFrom(Rcpp, evalCpp)
+importFrom(randomForest, randomForest)
+S3method(plot, NAM)
+S3method(plot, fst)
+S3method(plot, H2)
+S3method(plot, gibbs)
