@@ -190,6 +190,25 @@ To find out the Bonferroni threshold in LRT scale, try
 
 + `optim(1,fn=function(x)abs(-log(pchisq(lrt,0.5,lower.tail=FALSE),base = 10) + log(0.05/number_of_markers)),method="CG")$par`
 
+The meaning of each column from PolyTest is summarized below:
+
++ conv = convergence
++ fn1 = Likelihood of the full model (marker included) 
++ fn0 =  Likelihood of the reduced model (marker excluded) 
++ lod = lod score, Logarithm of Odds
++ pval = -log10(p-value) 
++ lrt = likelihood ratio test statistic
++ sigma2g = genetic variance estimated from the SNP
++ sigma2 = residual variance of the full model
++ h2 = narrow-sense heritability of the full model h2=Va/(Va+Ve), where Va=Var(SNP)+Var(Polygene)
++ lam_k = Va(snp)/Ve 
++ var.snp = variance explained by SNP as Var(marker)/Var(Y)
++ intercept = intercept of the model
++ std.eff (gwas/gwas2) = allele effect from the reference line (standard parent for NAM)
++ eff.1 = allele effect in sub-population 1 or family 1
++ eff.2 = allele effect in sub-population 2 or family 2
++ eff.X = allele effect in sub-population X or family X
+
 The output of the  GWAS function provides the allele effect into the GWAS of multiple populations context, testing one marker at a time. To find out the effect of each marker conditional to the genome (i.e. given all the other makers are in the model). This technique is known as whole-genome regression (WGR) method.
 
 + `WGR = wgr( y = phenotype, gen = genotypes)`
