@@ -1,8 +1,8 @@
 Package: NAM
 Type: Package
 Title: Nested Association Mapping
-Version: 1.5.4
-Date: 2017-10-17
+Version: 1.5.5
+Date: 2017-02-08
 Author: Alencar Xavier, William Muir, Katy Rainey, Shizhong Xu.
 Maintainer: Alencar Xavier <alenxav@gmail.com>
 Description: Designed for association studies in nested association mapping (NAM) panels, experimental and random panels. It includes tools for genome-wide associations of multiple populations, marker quality control, population genetics analysis, genome-wide prediction, solving mixed models and finding variance components through likelihood and Bayesian methods.
