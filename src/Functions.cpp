@@ -740,6 +740,6 @@ NumericMatrix GAU(NumericMatrix X){
 NumericVector SPC(NumericVector y, NumericVector blk, NumericVector row, NumericVector col, int rN=3, int cN=1){
   int n = y.size(); NumericVector Cov(n), Phe(n), Obs(n);
   for(int i=0; i<n; i++){; for(int j=0; j<n; j++){
-    if( (i!=j) & (blk[i]==blk[j]) & (abs(row[i]-row[j])<=rN) & (abs(col[i]-col[j])<=cN) ){
-      Phe[j] = y[j]; Obs[j] = 1; }else{ Phe[j] = 0; Obs[j] = 0; }}
-  Cov[i] = sum(Phe)/sum(Obs);} return Cov;}
+      if( (i>j) & (blk[i]==blk[j]) & (abs(row[i]-row[j])<=rN) & (abs(col[i]-col[j])<=cN) ){
+        Phe[i] = Phe[i]+y[j]; Obs[i] = Obs[i]+1; Phe[j] = Phe[j]+y[i]; Obs[j] = Obs[j]+1; }}}
+  Cov = Phe/Obs; return Cov;}
