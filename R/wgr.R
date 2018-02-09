@@ -118,7 +118,7 @@ wgr = function(y,X,
       Vk = rep(Vp,pk)
     }
     # Residual variance
-    Ve = (crossprod(e)+Se)/rchisq(1,n*bag+df)
+    Ve = (crossprod(e)+Se)[1,1]/rchisq(1,n*bag+df)
     L = Ve/Vb;
     # Intercept
     if(!is.null(eigK)){e = y-mu-X%*%b-U%*%h}else{e = y-mu-X%*%b}
