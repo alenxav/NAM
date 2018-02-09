@@ -1,5 +1,5 @@
 
-CV_NAM=function(y,gen,k=5,Seeds=1:5,IT=400,BI=100,cl=NULL){
+CV_NAM=function(y,gen,k=5,Seeds=1:5,IT=500,BI=100,cl=NULL){
   
   # Cross-validation function
   folds = function(Seed,y,gen,k,it,bi){
@@ -12,66 +12,53 @@ CV_NAM=function(y,gen,k=5,Seeds=1:5,IT=400,BI=100,cl=NULL){
     w=sample(1:N,Nk)
     Y=y; y[w]=NA
     
-    # BayesB
-    cat('BayesB\n')
-    f1=wgr(y,gen,iv = T,pi=0.8,verb=T,it=IT,bi=BI)
-    # BayesC
-    cat('BayesC\n')
-    f2=wgr(y,gen,pi=0.8,verb=T,it=IT,bi=BI)
-    # BEN
-    cat('BEN\n')
-    f3=ben(y,gen,it=IT,bi=BI,bag = 0.8)
-    # RF
-    cat('RF\n')
-    f4=gmm(y,gen,model = 'RF',it=round(IT/100),bi=round(BI/100))
-    # BRR
-    cat('BRR\n')
-    f5=gmm(y,gen,model = 'BRR',it=IT,bi=BI)
-    # BayesA
-    cat('BayesA\n')
-    f6=gmm(y,gen,model = 'BayesA',it=IT,bi=BI)
-    # GBLUP
-    cat('GBLUP\n')
-    f7=gmm(y,gen,model = 'GBLUP',it=IT,bi=BI)
-    # RKHS
-    cat('RKHS\n')
-    f8=gmm(y,gen,model = 'RKHS',it=IT,bi=BI)
-    # Ridge
-    cat('RR\n')
-    f9=emRR(y[-w],gen[-w,])
-    # BSR
-    cat('BSR\n')
-    f10=emBA(y[-w],gen[-w,])
-    # SSVS
-    cat('BVS\n')
-    f11=emBB(y[-w],gen[-w,])
-    # Mixture
-    cat('Mixture\n')
-    f12=emBC(y[-w],gen[-w,])
-    # Laplace
-    cat('Laplace\n')
-    f13=emDE(y[-w],gen[-w,])
-    # Mix L1l2
-    cat('MixL1L2\n')
-    f14=emBL(y[-w],gen[-w,])
-    # Elastic net
-    cat('ElasticNet\n')
-    f15=emEN(y[-w],gen[-w,])
-    # BLASSO2
-    cat('BLASSO-L2\n')
-    f16=wgr(y,gen,it=IT,bi=BI,de=TRUE)
+    cat('\n CROSS-VALIDATION CYCLE \n\n')
     
-    NamesMod = c('wgr.BayesB','wgr.BayesC','ben',
-                 'gmm.RF','gmm.BRR','gmm.BayesA','gmm.GBLUP','gmm.RKHS',
-                 'emRR','emBA','emBB','emBC','emDE','emBL','emEN','wgr.BL',
+    # BayesA
+    cat('BayesA (wgr)\n')
+    f1=wgr(y,gen,iv = T,it=IT,bi=BI,verb=T)
+    # BayesB
+    cat('BayesB (wgr)\n')
+    f2=wgr(y,gen,iv = T,pi=0.8,it=IT,bi=BI,verb=T)
+    # BayesC
+    cat('BayesC (wgr)\n')
+    f3=wgr(y,gen,pi=0.8,it=IT,bi=BI,verb=T)
+    # BRR
+    cat('BRR (wgr)\n')
+    f4=wgr(y,gen,iv = T,it=IT,bi=BI,verb=T)
+    # BRR
+    cat('BLASSO (wgr)\n')
+    f5=wgr(y,gen,de = T,it=IT,bi=BI,verb=T)
+    # GBLUP
+    cat('GBLUP (gmm)\n')
+    f6=gmm(y,gen,model='GBLUP',it=IT,bi=BI)
+    # RKHS
+    cat('RKHS (gmm)\n')
+    f7=gmm(y,gen,model='RKHS',it=IT,bi=BI)
+    # Ridge
+    cat('emRR\n')
+    f8=emRR(y[-w],gen[-w,])
+    # Laplace
+    cat('emDE\n')
+    f9=emDE(y[-w],gen[-w,])
+    # Mix L1l2
+    cat('emBL\n')
+    f10=emBL(y[-w],gen[-w,])
+    # Elastic net
+    cat('emEN\n')
+    f11=emEN(y[-w],gen[-w,])
+    
+    NamesMod = c('BayesA','BayesB','BayesC',
+                 'BRR','BLASSO','GBLUP','RKHS',
+                 'emRR','emDE','emBL','emEN',
                  'OBSERVATION')
     
     M = matrix(NA,Nk,length(NamesMod))
     colnames(M) = NamesMod
-    for(i in 1:3) M[,i]=get(paste('f',i,sep=''))$hat[w]
-    for(i in c(4:10)) M[,i]=get(paste('f',i,sep=''))$EBV[w]
-    for(i in 11:16) M[,i]=gen[w,]%*%get(paste('f',i,sep=''))$b
-    M[,17] = Y[w]
+    for(i in 1:5) M[,i]=get(paste('f',i,sep=''))$hat[w]
+    for(i in c(6:7)) M[,i]=get(paste('f',i,sep=''))$EBV[w]
+    for(i in 8:11) M[,i]=gen[w,]%*%get(paste('f',i,sep=''))$b
+    M[,12] = Y[w]
     return(M)
   }
   
