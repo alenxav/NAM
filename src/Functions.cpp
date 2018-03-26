@@ -2,97 +2,78 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-SEXP emBA(NumericVector y, NumericMatrix gen, double df = 4, double R2 = 0.5){
+SEXP emBA(NumericVector y, NumericMatrix gen, double df = 10, double R2 = 0.5){
   int it = 200;
   int p = gen.ncol();
   int n = gen.nrow();
-  double ve = 1;
-  double va = 1;
-  double vy = var(y);
-  NumericVector xx(p);
-  NumericVector vx(p);
-  for(int k=0; k<p; k++){
-    xx[k] = sum(gen(_,k)*gen(_,k));
-    vx[k] = var(gen(_,k));
-  }
-  NumericVector b(p);
-  NumericVector vb = b+va;
-  NumericVector Lmb = ve/vb;
-  double MSx = sum(vx);
-  double Sb = R2*(df+2)*vy/MSx;
-  double Se = (1-R2)*(df+2)*vy;
-  double shape_hp  = 1.1;
-  double rate_hp = (shape_hp-1)/Sb;
-  double mu = mean(y);
-  NumericVector e = y-mu;
-  double b0,eM,h2,Sb_j;
-  for(int i=0; i<it; i++){
-    Sb_j = (p*df/2+shape_hp)/(sum(1/vb)/2+rate_hp);
-    for(int j=0; j<p; j++){
-      b0 = b[j];
-      b[j] = (sum(gen(_,j)*e)+xx[j]*b0)/(xx[j]+Lmb[j]);
-      e = e-gen(_,j)*(b[j]-b0);
-      vb[j] = (Sb_j+b[j]*b[j]+va)/(df+2)+ve/(xx[j]+Lmb[j]);
-    }
-    va = sum(b*b)/p;
-    ve = (sum(e*e)+Se)/(n+df);
-    Lmb = ve/vb;
-    eM = mean(e);
-    mu = mu+eM;
-    e = e-eM;
-  }
-  double vg = sum(vb);
-  h2 = vg/(vg+ve);
-  NumericVector fit(n);
-  for(int k=0; k<n; k++){
-    fit[k] = sum(gen(k,_)*b)+mu;
-  }
-  return List::create(Named("mu") = mu,
-                      Named("b") = b,
-                      Named("hat") = fit,
-                      Named("Va") = vg,
-                      Named("Ve") = ve,
-                      Named("h2") = h2);
-}
-
-// [[Rcpp::export]]
-SEXP emBB(NumericVector y, NumericMatrix gen, double df = 4, double R2 = 0.5, double Pi = 0.7){
-  R2 = R2/5;
-  int it = 200;
-  df = df*10;
-  int p = gen.ncol();
-  int n = gen.nrow();
-  double va = 1;
   double ve = 1;
   NumericVector d(p);
   NumericVector b(p);
-  NumericVector vb = b+va;
+  NumericVector vb = b+1;
   NumericVector Lmb = ve/vb;
   double vy = var(y);
-  if(Pi>0.5){
-    Pi = 1-Pi;
-  } 
   NumericVector xx(p);
   NumericVector vx(p);
   for(int i=0; i<p; i++){
     xx[i] = sum(gen(_,i)*gen(_,i));
-    vx[i] = var(gen(_,i));
-  }
+    vx[i] = var(gen(_,i));}
+  double MSx = sum(vx);
+  double Sb = R2*df*vy/MSx;
+  double Se = (1-R2)*df*vy;
+  double mu = mean(y);
+  NumericVector e = y-mu;
+  double b0,b1,eM,h2;
+  for(int i=0; i<it; i++){
+    for(int j=0; j<p; j++){
+      b0 = b[j];
+      b1 = (sum(gen(_,j)*e)+xx[j]*b0)/(xx[j]+Lmb[j]);
+      e = e-gen(_,j)*(b1-b0);
+      b[j] = b1;
+      vb[j] = (Sb+b[j]*b[j])/(df+1);
+      e = e - gen(_,j)*(b1-b0);}
+    ve = (sum(e*e)+Se)/(n+df);
+    Lmb = ve/vb;
+    eM = mean(e);
+    mu = mu+eM;
+    e = e-eM;}
+  h2 = 1-ve/vy;
+  NumericVector fit(n);
+  for(int k=0; k<n; k++){fit[k] = sum(gen(k,_)*b)+mu;}
+  return List::create(Named("mu") = mu,
+                      Named("b") = b,
+                      Named("hat") = fit,
+                      Named("Vb") = vb,
+                      Named("Ve") = ve,
+                      Named("h2") = h2);}
+
+// [[Rcpp::export]]
+SEXP emBB(NumericVector y, NumericMatrix gen, double df = 10, double R2 = 0.5, double Pi = 0.75){
+  int it = 200;
+  int p = gen.ncol();
+  int n = gen.nrow();
+  double ve = 1;
+  NumericVector d(p);
+  NumericVector b(p);
+  NumericVector vb = b+1;
+  NumericVector Lmb = ve/vb;
+  double vy = var(y);
+  if(Pi>0.5){Pi = 1-Pi;} 
+  NumericVector xx(p);
+  NumericVector vx(p);
+  for(int i=0; i<p; i++){
+    xx[i] = sum(gen(_,i)*gen(_,i));
+    vx[i] = var(gen(_,i));}
   double MSx = sum(vx)*Pi;
-  double Sb = R2*(df+2)*vy/MSx;
-  double Se = (1-R2)*(df+2)*vy;
-  double shape_hp  = 1.1;
-  double rate_hp = (shape_hp-1)/Sb;
+  double Sb = R2*df*vy/MSx;
+  double Se = (1-R2)*df*vy;
   double mu = mean(y);
   NumericVector e = y-mu;
   NumericVector e1(n);
   NumericVector e2(n);
-  double b0,b1,LR,eM,h2,Sb_j,C;
+  double b0,b1,LR,eM,h2,C;
   double Pi0 = (1-Pi)/Pi;
-  double MD = Pi;
   for(int i=0; i<it; i++){
     C = -0.5/ve;
-    Sb_j = (p*df/2+shape_hp)/(sum(1/vb)/2+rate_hp);
     for(int j=0; j<p; j++){
       b0 = b[j];
       b1 = (sum(gen(_,j)*e)+xx[j]*b0)/(xx[j]+Lmb[j]);
@@ -100,64 +81,52 @@ SEXP emBB(NumericVector y, NumericMatrix gen, double df = 4, double R2 = 0.5, do
       e2 = e-gen(_,j)*(0-b0);
       LR = Pi0*exp(C*(sum(e2*e2)-sum(e1*e1)));
       d[j] = (1/(1+LR));
-      b[j] = b1*d[j]/MD;
-      vb[j] = (Sb_j+b[j]*b[j]+va)/(df+2);
-      e = e - gen(_,j)*(b1-b0);
-    }
-    MD = max(d);
-    va = sum(b*b)/p;
+      b[j] = b1*d[j];
+      vb[j] = (Sb+b[j]*b[j])/(df+1);
+      e = e - gen(_,j)*(b[j]-b0);}
     ve = (sum(e*e)+Se)/(n+df);
     Lmb = ve/vb;
     eM = mean(e);
     mu = mu+eM;
-    e = e-eM;
-  }
-  double vg = sum(vb)/Pi;
-  h2 = vg/(vg+ve);
+    e = e-eM;}
+  h2 = 1-ve/vy;
   NumericVector fit(n);
-  for(int k=0; k<n; k++){
-    fit[k] = sum(gen(k,_)*b)+mu;
-  }
+  for(int k=0; k<n; k++){fit[k] = sum(gen(k,_)*b)+mu;}
   return List::create(Named("mu") = mu,
                       Named("b") = b,
+                      Named("d") = d,
                       Named("hat") = fit,
-                      Named("Va") = vg,
+                      Named("Vb") = vb,
                       Named("Ve") = ve,
-                      Named("h2") = h2);
-}
+                      Named("h2") = h2);}
 
 // [[Rcpp::export]]
-SEXP emBC(NumericVector y, NumericMatrix gen, double df = 4, double R2 = 0.5, double Pi = 0.7){
-  R2 = R2/5;
+SEXP emBC(NumericVector y, NumericMatrix gen, double df = 10, double R2 = 0.5, double Pi = 0.75){
   int it = 200;
   int p = gen.ncol();
   int n = gen.nrow();
-  double Lmb = 1;
-  double vb = 1;
-  double va = 1;
-  double ve = 1;
+  NumericVector d(p);
+  NumericVector b(p);
   double vy = var(y);
-  if(Pi>0.5){
-    Pi = 1-Pi;
-  } 
+  if(Pi>0.5){Pi = 1-Pi;} 
   NumericVector xx(p);
   NumericVector vx(p);
   for(int i=0; i<p; i++){
     xx[i] = sum(gen(_,i)*gen(_,i));
     vx[i] = var(gen(_,i));
   }
-  double MSx = sum(vx)*Pi;
-  double Sb = R2*(df+2)*vy/MSx;
-  double Se = (1-R2)*(df+2)*vy;
+  double MSx = sum(vx)*Pi*(1-Pi);
+  double Sa = R2*df*vy/MSx;
+  double Se = (1-R2)*df*vy;
   double mu = mean(y);
-  NumericVector b(p);
-  NumericVector d(p);
   NumericVector e = y-mu;
   NumericVector e1(n);
   NumericVector e2(n);
+  double ve = Sa;
+  double va = Se;
+  double Lmb = ve/va;
   double b0,b1,LR,eM,h2,C;
   double Pi0 = (1-Pi)/Pi;
-  double MD = Pi;
   for(int i=0; i<it; i++){
     C = -0.5/ve;
     for(int j=0; j<p; j++){
@@ -168,51 +137,46 @@ SEXP emBC(NumericVector y, NumericMatrix gen, double df = 4, double R2 = 0.5, do
       LR = Pi0*exp(C*(sum(e2*e2)-sum(e1*e1)));
       d[j] = (1/(1+LR));
       b[j] = b1*d[j];
-      e = e - gen(_,j)*(b1-b0);
+      e = e - gen(_,j)*(b[j]-b0);
     }
-    MD = max(d);
-    b = b/MD;
-    vb = (sum(b*b)+Sb)/(p+df);
     ve = (sum(e*e)+Se)/(n+df);
-    Lmb = ve/vb;
+    va = (sum(b*b)+Sa)/(p+df)/(mean(d)-Pi);
+    Lmb = ve/va;
     eM = mean(e);
     mu = mu+eM;
     e = e-eM;
   }
-  va = mean(xx)*(sum(b*b)+Sb)/(p+df)/Pi;
-  h2 = va/(va+ve);
+  h2 = 1-ve/vy;
   NumericVector fit(n);
-  for(int k=0; k<n; k++){
-    fit[k] = sum(gen(k,_)*b)+mu;
-  }
+  for(int k=0; k<n; k++){fit[k] = sum(gen(k,_)*b)+mu;}
   return List::create(Named("mu") = mu,
                       Named("b") = b,
+                      Named("d") = d,
                       Named("hat") = fit,
+                      Named("Vg") = va*MSx,
                       Named("Va") = va,
                       Named("Ve") = ve,
                       Named("h2") = h2);
 }
 
 // [[Rcpp::export]]
-SEXP emRR(NumericVector y, NumericMatrix gen, double df = 4, double R2 = 0.5){
+SEXP emRR(NumericVector y, NumericMatrix gen, double df = 10, double R2 = 0.5){
   int it = 200;
-  df = df*10000;
   int p = gen.ncol();
   int n = gen.nrow();
-  double Lmb = 1;
-  double vb = 1;
-  double va = 1;
-  double ve = 1;
-  double vy = var(y);
   NumericVector xx(p);
   NumericVector vx(p);
   for(int k=0; k<p; k++){
     xx[k] = sum(gen(_,k)*gen(_,k));
-    vx[k] = var(gen(_,k));
-  }
+    vx[k] = var(gen(_,k));}
   double MSx = sum(vx);
-  double Sb = R2*(df+2)*vy/MSx;
-  double Se = (1-R2)*(df+2)*vy;
+  double Lmb = MSx;
+  double Rho = MSx*(1-R2)/R2;
+  double vy = var(y);
+  double ve = 0.5*vy;
+  double vb = ve/MSx;
+  double Se = (1-R2)*df*vy;
+  double Sb = R2*df*vy/MSx;
   double mu = mean(y);
   NumericVector b(p);
   NumericVector e = y-mu;
@@ -223,24 +187,20 @@ SEXP emRR(NumericVector y, NumericMatrix gen, double df = 4, double R2 = 0.5){
       b[j] = (sum(gen(_,j)*e)+xx[j]*b0)/(xx[j]+Lmb);
       e = e-gen(_,j)*(b[j]-b0);
     }
-    vb = (sum(b*b)+Sb)/(p+df+2);
-    ve = (sum(e*e)+Se)/(n+df+2);
-    Lmb = ve/vb;
+    vb = (sum(b*b)+Sb)/(p+df);
+    ve = (sum(e*e)+Se)/(n+df);
+    Lmb = sqrt(Rho*ve/vb);
     eM = mean(e);
     mu = mu+eM;
     e = e-eM;
   }
-  va = sqrt(vb)*mean(xx);
-  ve = sqrt(ve);
-  h2 = (va/(va+ve))*(va/(va+ve));
+  h2 = 1-ve/vy;
   NumericVector fit(n);
-  for(int k=0; k<n; k++){
-    fit[k] = sum(gen(k,_)*b)+mu;
-  }
+  for(int k=0; k<n; k++){ fit[k] = sum(gen(k,_)*b)+mu;}
   return List::create(Named("mu") = mu,
                       Named("b") = b,
                       Named("hat") = fit,
-                      Named("Va") = va,
+                      Named("Va") = vb,
                       Named("Ve") = ve,
                       Named("h2") = h2);
 }
