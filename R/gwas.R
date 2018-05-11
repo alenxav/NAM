@@ -613,32 +613,28 @@ gwas2 = function(y,gen,fam=NULL,chr=NULL,fixed=FALSE,EIG=NULL,cov=NULL){
   ## INTRODUCTION ##
   ##################
   
-  # Centralize when there is a cov
-  if(!is.null(cov)){
-    tm = tapply(y,fam,mean,na.rm=T)
-    cnt = tm[as.character(fam)]
-    y=y-cnt}
+  # SETTING THE FIXED EFFECT, CHROMOSOME, COVARIATE AND FAMILY WHEN IT IS NULL
+  if(is.null(fam)){fam=rep(1,length(y))};
+  if(is.null(chr)){chr=ncol(gen)}
+  if(is.null(cov)){covariate=matrix(1,length(y),1)}else{y=y-mean(y,na.rm=T); covariate=matrix(cov,ncol=1)}
   
   # REMOVAL OF MISSING Y's  
   anyNA = function(x) any(is.na(x))
   if(any(is.na(y))){
     wMIS=which(is.na(y))
-    y=y[-wMIS];gen=gen[-wMIS,];fam=fam[-wMIS];cov=cov[-wMIS]
+    y=y[-wMIS]
+    gen=gen[-wMIS,]
+    fam=fam[-wMIS]
+    covariate=covariate[-wMIS,]
   }else{wMIS=NULL}
   
   method="RH"
   fx=fixed
   SNPs=colnames(gen)
   
-  # SETTING THE FIXED EFFECT, CHROMOSOME AND FAMILY WHEN IT IS NULL
-  if(is.null(cov)){y=y-mean(y);covariate=matrix(1,length(y),1)} else covariate=matrix(cov,ncol=1)
-  if(is.null(fam)){fam=rep(1,length(y))} else{if(any(is.na(fam))) stop("Family vector must have no NA's")} # calc
-  if(is.null(chr)){chr=ncol(gen)} # calc
-  
   # ORDERING DATA BY FAMILY
   if(is.data.frame(gen)) gen=data.matrix(gen)
   FAM0 = as.vector(fam)
-  
   if(mean(order(fam)==1:length(fam))!=1){
     cat("Ordering Data",'\n')
     W = order(fam)
@@ -1125,6 +1121,7 @@ gwas2 = function(y,gen,fam=NULL,chr=NULL,fixed=FALSE,EIG=NULL,cov=NULL){
   ## RUN ##
   #########
   
+  y = as.vector(y)
   if(fx==1){
     fit=FIXEDsma(GEN=gen,MAP=MAP,fam=fam,chr=chr,y=y,COV=covariate,SNPnames=SNPs)
   }else{
@@ -1632,7 +1629,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
   ###       META-ANALYSIS      ###
   ################################
   
-  cat('\n Performing mata-analysis\n')
+  cat('\n Performing meta-analysis\n')
   
   META = function(ByEnv,Phe,fam,GEonly = TRUE,PLOT=FALSE,ammi=1){
     
@@ -1907,52 +1904,23 @@ gwas3 = function(y,gen,fam=NULL,chr=NULL,EIG=NULL,cov=NULL){
   method="RH"
   fx=fixed=NULL
   
-  # Centralize when there is a cov
-  if(!is.null(cov)){
-    tm = tapply(y,fam,mean,na.rm=T)
-    cnt = tm[as.character(fam)]
-    y=y-cnt}
+  # SETTING THE FIXED EFFECT, CHROMOSOME, COVARIATE AND FAMILY WHEN IT IS NULL
+  if(is.null(fam)){fam=rep(1,length(y))};
+  if(is.null(chr)){chr=ncol(gen)}
+  if(is.null(cov)){covariate=matrix(1,length(y),1)}else{y=y-mean(y,na.rm=T); covariate=matrix(cov,ncol=1)}
+  FAM0 = as.vector(fam)
   
   # REMOVAL OF MISSING Y's  
   anyNA = function(x) any(is.na(x))
   if(anyNA(y)&!is.null(EIG)) stop("No missing allowed when EIG is provided")
   if(anyNA(y)){
     wMIS=which(is.na(y))
-    y=y[-wMIS];gen=gen[-wMIS,];fam=fam[-wMIS];cov=cov[-wMIS]
-  }else{wMIS=NULL}
+    y=y[-wMIS];gen=gen[-wMIS,];fam=fam[-wMIS];covariate=covariate[-wMIS]
+  }else{
+    wMIS=NULL}
   
-  # SETTING THE FIXED EFFECT, CHROMOSOME AND FAMILY WHEN IT IS NULL
-  if(is.null(cov)) covariate=matrix(1,length(y),1) else covariate=matrix(cov,ncol=1)
-  if(is.null(fam)){fam=rep(1,length(y))} else{if(any(is.na(fam))) stop("Family vector must have no NA's")} # calc
-  if(is.null(chr)){chr=ncol(gen)} # calc
-  FAM0 = as.vector(fam)
-    
-  # ORDERING DATA BY FAMILY
-  
-  cat("Ordering Data",'\n')
-  organ=function(fam,y,covariate,Z){
-    a=cbind(fam,y,covariate,Z)
-    a=a[order(a[,1]),]
-    b=array(summary(factor(fam)))
-    c=c();for(i in 1:length(b)){d=rep(i,b[i]);c=c(c,d)}
-    y=a[,2];fam=c;covariate=a[,3];Z=a[,-c(1:3)];return(list(fam,y,covariate,Z))}
-  f=organ(fam,y,covariate,gen);fam=f[[1]];y=f[[2]];covariate=f[[3]];gen=f[[4]];rm(f);
-  covariate=matrix(covariate,ncol=1)
-  
-  # MARKER IMPUT FUNCTION
-  gen[gen==5]=NA
-  IMPUT=function(X){
-    dn = dimnames(X)
-    fill = function(x){
-      if(any(is.na(x))){
-        w = which(is.na(x))
-        m = mean(x,na.rm=TRUE)
-        x[w] = m}
-      return(x)}
-    X = apply(X,2,fill)
-    dimnames(X) = dn}
-  max80 = function(X,chr){
-    dn = dimnames(X)
+  # MARKER QUALITY CONTROLS FUNCTIONS
+  max75 = function(X,chr){
     nas = function(x) mean(is.na(x))
     m = apply(X,2,nas)
     if(any(m>0.75)){
@@ -1961,35 +1929,28 @@ gwas3 = function(y,gen,fam=NULL,chr=NULL,EIG=NULL,cov=NULL){
       Chr = c()
       for(i in 1:length(chr)) Chr = c(Chr, rep(i,chr[i]))
       Chr = Chr[-w]
-      chr = data.frame(table(Chr))[,2]
-    }
-    return(list("gen"=X,"chr"=chr))
-  }
+      chr = data.frame(table(Chr))[,2]}
+    return(list("gen"=X,"chr"=chr))}
+  IMPUTATION = function(X){
+    dn = dimnames(X)
+    imp = function(x){
+      if(any(is.na(x))){
+        x[is.na(x)] = mean(x,na.rm = TRUE)}
+      return(x)}
+    X = apply(X,2,imp)
+    dimnames(X) = dn
+    X = data.matrix(X)
+    return(X)}
   # NA's?
   if(any(is.na(gen))){
-    gen = max80(gen,chr)
+    cat('Imputing missing loci \n')
+    gen = max75(gen,chr)
     chr = gen$chr
-    gen = gen$gen
-    gen=IMPUT(gen)
-  } # calc
-  
+    gen = IMPUTATION(gen$gen)
+  }
   SNPs=colnames(gen)
   
   ## Acceleration GGG defines allele coding
-  
-  # OLD
-  GGG=function(G,fam){
-    f=max(fam)+1
-    POP = function(gfa){
-      J = rep(0,f);g = gfa[1];fa = gfa[2]
-      if(g==2){J[1]=2}else{if(g==1)
-      {J[1]=1;J[fa+1]=1}else{J[fa+1]=2}}
-      return(J)}
-    gfa = cbind(G,fam)
-    return(unlist(apply(gfa,1,POP)))
-  }
-  
-  # NEW
   GGG=function(G,fam) t(model.matrix(~G:factor(fam)-1))
   
   if(any(fam!=1)){
@@ -2014,7 +1975,6 @@ gwas3 = function(y,gen,fam=NULL,chr=NULL,EIG=NULL,cov=NULL){
       lambda = mean(diag(g1))
       G = g1/mean(diag(g1))
       return(list(G,lambda))}
-    
   }
   
   INPUT=function(gen,fam,chr){
@@ -2338,15 +2298,16 @@ gwas3 = function(y,gen,fam=NULL,chr=NULL,EIG=NULL,cov=NULL){
   ## RUN ##
   #########
   
+  y = as.vector(y)
+  covariate = matrix(covariate)
+  fit = RANDOMsma(gen=gen,MAP=MAP,fam=fam,chr=chr,y=y,COV=covariate,SNPnames=SNPs)
   
-  fit=RANDOMsma(gen=gen,MAP=MAP,fam=fam,chr=chr,y=y,COV=covariate,SNPnames=SNPs)
+  # fixing output bug
   moda=function(x){
     it=5;ny=length(x);k=ceiling(ny/2)-1; while(it>1){
       y=sort(x); inf=y[1:(ny-k)]; sup=y[(k+1):ny]
       diffs=sup-inf; i=min(which(diffs==min(diffs)))
       M=median(y[i:(i+k)]); it=it-1}; return(M)}
-
-  # fixing output
   neg = which(fit$PolyTest$lrt<0);fit$PolyTest$lrt[neg]=0
   mo = moda(fit$PolyTest$lrt)
   mos = which(fit$PolyTest$lrt==mo);fit$PolyTest$lrt[mo]=0
@@ -2354,9 +2315,7 @@ gwas3 = function(y,gen,fam=NULL,chr=NULL,EIG=NULL,cov=NULL){
   whEff = grep('eff',names(fit$PolyTest))
   if(any(whEff)) names(fit$PolyTest)[whEff] = paste('eff',unique(FAM0),sep='.')
   rownames(fit$PolyTest) = fit$SNPs
-  
   class(fit) <- "NAM"
-  
   return(fit)}
 
 # Meta analysis gor gwas3
