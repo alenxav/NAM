@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // emBA
 SEXP emBA(NumericVector y, NumericMatrix gen, double df, double R2);
-RcppExport SEXP NAM_emBA(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+RcppExport SEXP _NAM_emBA(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,7 +21,7 @@ END_RCPP
 }
 // emBB
 SEXP emBB(NumericVector y, NumericMatrix gen, double df, double R2, double Pi);
-RcppExport SEXP NAM_emBB(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP, SEXP PiSEXP) {
+RcppExport SEXP _NAM_emBB(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP, SEXP PiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -36,7 +36,7 @@ END_RCPP
 }
 // emBC
 SEXP emBC(NumericVector y, NumericMatrix gen, double df, double R2, double Pi);
-RcppExport SEXP NAM_emBC(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP, SEXP PiSEXP) {
+RcppExport SEXP _NAM_emBC(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP, SEXP PiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -51,7 +51,7 @@ END_RCPP
 }
 // emRR
 SEXP emRR(NumericVector y, NumericMatrix gen, double df, double R2);
-RcppExport SEXP NAM_emRR(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+RcppExport SEXP _NAM_emRR(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -65,7 +65,7 @@ END_RCPP
 }
 // emBL
 SEXP emBL(NumericVector y, NumericMatrix gen, double R2, double alpha);
-RcppExport SEXP NAM_emBL(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP, SEXP alphaSEXP) {
+RcppExport SEXP _NAM_emBL(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP, SEXP alphaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -79,7 +79,7 @@ END_RCPP
 }
 // emDE
 SEXP emDE(NumericVector y, NumericMatrix gen, double R2);
-RcppExport SEXP NAM_emDE(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP) {
+RcppExport SEXP _NAM_emDE(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -92,7 +92,7 @@ END_RCPP
 }
 // emEN
 SEXP emEN(NumericVector y, NumericMatrix gen, double R2, double alpha);
-RcppExport SEXP NAM_emEN(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP, SEXP alphaSEXP) {
+RcppExport SEXP _NAM_emEN(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP, SEXP alphaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -106,7 +106,7 @@ END_RCPP
 }
 // calcSize
 int calcSize(NumericVector col, NumericVector fam);
-RcppExport SEXP NAM_calcSize(SEXP colSEXP, SEXP famSEXP) {
+RcppExport SEXP _NAM_calcSize(SEXP colSEXP, SEXP famSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -118,7 +118,7 @@ END_RCPP
 }
 // funI
 NumericVector funI(NumericVector col, int fam, int finsiz, int f);
-RcppExport SEXP NAM_funI(SEXP colSEXP, SEXP famSEXP, SEXP finsizSEXP, SEXP fSEXP) {
+RcppExport SEXP _NAM_funI(SEXP colSEXP, SEXP famSEXP, SEXP finsizSEXP, SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -132,7 +132,7 @@ END_RCPP
 }
 // funX
 NumericVector funX(NumericVector col, int finsiz);
-RcppExport SEXP NAM_funX(SEXP colSEXP, SEXP finsizSEXP) {
+RcppExport SEXP _NAM_funX(SEXP colSEXP, SEXP finsizSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -144,7 +144,7 @@ END_RCPP
 }
 // gs
 void gs(NumericMatrix C, NumericVector g, NumericVector r, int N);
-RcppExport SEXP NAM_gs(SEXP CSEXP, SEXP gSEXP, SEXP rSEXP, SEXP NSEXP) {
+RcppExport SEXP _NAM_gs(SEXP CSEXP, SEXP gSEXP, SEXP rSEXP, SEXP NSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type C(CSEXP);
@@ -157,7 +157,7 @@ END_RCPP
 }
 // inputRow
 NumericVector inputRow(NumericVector x, int exp, int n);
-RcppExport SEXP NAM_inputRow(SEXP xSEXP, SEXP expSEXP, SEXP nSEXP) {
+RcppExport SEXP _NAM_inputRow(SEXP xSEXP, SEXP expSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -170,7 +170,7 @@ END_RCPP
 }
 // KMUP
 SEXP KMUP(NumericMatrix X, NumericVector b, NumericVector d, NumericVector xx, NumericVector e, NumericVector L, double Ve, double pi);
-RcppExport SEXP NAM_KMUP(SEXP XSEXP, SEXP bSEXP, SEXP dSEXP, SEXP xxSEXP, SEXP eSEXP, SEXP LSEXP, SEXP VeSEXP, SEXP piSEXP) {
+RcppExport SEXP _NAM_KMUP(SEXP XSEXP, SEXP bSEXP, SEXP dSEXP, SEXP xxSEXP, SEXP eSEXP, SEXP LSEXP, SEXP VeSEXP, SEXP piSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -188,7 +188,7 @@ END_RCPP
 }
 // KMUP2
 SEXP KMUP2(NumericMatrix X, NumericVector Use, NumericVector b, NumericVector d, NumericVector xx, NumericVector E, NumericVector L, double Ve, double pi);
-RcppExport SEXP NAM_KMUP2(SEXP XSEXP, SEXP UseSEXP, SEXP bSEXP, SEXP dSEXP, SEXP xxSEXP, SEXP ESEXP, SEXP LSEXP, SEXP VeSEXP, SEXP piSEXP) {
+RcppExport SEXP _NAM_KMUP2(SEXP XSEXP, SEXP UseSEXP, SEXP bSEXP, SEXP dSEXP, SEXP xxSEXP, SEXP ESEXP, SEXP LSEXP, SEXP VeSEXP, SEXP piSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -207,7 +207,7 @@ END_RCPP
 }
 // SAMP
 void SAMP(NumericMatrix C, NumericVector g, NumericVector r, int N, double Ve);
-RcppExport SEXP NAM_SAMP(SEXP CSEXP, SEXP gSEXP, SEXP rSEXP, SEXP NSEXP, SEXP VeSEXP) {
+RcppExport SEXP _NAM_SAMP(SEXP CSEXP, SEXP gSEXP, SEXP rSEXP, SEXP NSEXP, SEXP VeSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type C(CSEXP);
@@ -221,7 +221,7 @@ END_RCPP
 }
 // SAMP2
 void SAMP2(NumericMatrix X, NumericVector g, NumericVector y, NumericVector xx, NumericVector E, NumericVector L, int N, double Ve);
-RcppExport SEXP NAM_SAMP2(SEXP XSEXP, SEXP gSEXP, SEXP ySEXP, SEXP xxSEXP, SEXP ESEXP, SEXP LSEXP, SEXP NSEXP, SEXP VeSEXP) {
+RcppExport SEXP _NAM_SAMP2(SEXP XSEXP, SEXP gSEXP, SEXP ySEXP, SEXP xxSEXP, SEXP ESEXP, SEXP LSEXP, SEXP NSEXP, SEXP VeSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
@@ -238,7 +238,7 @@ END_RCPP
 }
 // timesMatrix
 NumericMatrix timesMatrix(NumericMatrix ma1, NumericVector h, NumericMatrix ma2, int rows, int cols);
-RcppExport SEXP NAM_timesMatrix(SEXP ma1SEXP, SEXP hSEXP, SEXP ma2SEXP, SEXP rowsSEXP, SEXP colsSEXP) {
+RcppExport SEXP _NAM_timesMatrix(SEXP ma1SEXP, SEXP hSEXP, SEXP ma2SEXP, SEXP rowsSEXP, SEXP colsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -253,7 +253,7 @@ END_RCPP
 }
 // timesVec
 NumericMatrix timesVec(NumericVector aa, NumericVector h, NumericMatrix bb, int q);
-RcppExport SEXP NAM_timesVec(SEXP aaSEXP, SEXP hSEXP, SEXP bbSEXP, SEXP qSEXP) {
+RcppExport SEXP _NAM_timesVec(SEXP aaSEXP, SEXP hSEXP, SEXP bbSEXP, SEXP qSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -267,7 +267,7 @@ END_RCPP
 }
 // CNT
 void CNT(NumericMatrix X);
-RcppExport SEXP NAM_CNT(SEXP XSEXP) {
+RcppExport SEXP _NAM_CNT(SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
@@ -277,7 +277,7 @@ END_RCPP
 }
 // MSX
 SEXP MSX(NumericMatrix X);
-RcppExport SEXP NAM_MSX(SEXP XSEXP) {
+RcppExport SEXP _NAM_MSX(SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -288,7 +288,7 @@ END_RCPP
 }
 // IMP
 void IMP(NumericMatrix X);
-RcppExport SEXP NAM_IMP(SEXP XSEXP) {
+RcppExport SEXP _NAM_IMP(SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
@@ -298,7 +298,7 @@ END_RCPP
 }
 // NOR
 SEXP NOR(NumericVector y, NumericMatrix X, double cxx, NumericVector xx, int maxit, double tol);
-RcppExport SEXP NAM_NOR(SEXP ySEXP, SEXP XSEXP, SEXP cxxSEXP, SEXP xxSEXP, SEXP maxitSEXP, SEXP tolSEXP) {
+RcppExport SEXP _NAM_NOR(SEXP ySEXP, SEXP XSEXP, SEXP cxxSEXP, SEXP xxSEXP, SEXP maxitSEXP, SEXP tolSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -314,7 +314,7 @@ END_RCPP
 }
 // GAU
 NumericMatrix GAU(NumericMatrix X);
-RcppExport SEXP NAM_GAU(SEXP XSEXP) {
+RcppExport SEXP _NAM_GAU(SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -325,7 +325,7 @@ END_RCPP
 }
 // SPC
 NumericVector SPC(NumericVector y, NumericVector blk, NumericVector row, NumericVector col, int rN, int cN);
-RcppExport SEXP NAM_SPC(SEXP ySEXP, SEXP blkSEXP, SEXP rowSEXP, SEXP colSEXP, SEXP rNSEXP, SEXP cNSEXP) {
+RcppExport SEXP _NAM_SPC(SEXP ySEXP, SEXP blkSEXP, SEXP rowSEXP, SEXP colSEXP, SEXP rNSEXP, SEXP cNSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -338,4 +338,37 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(SPC(y, blk, row, col, rN, cN));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_NAM_emBA", (DL_FUNC) &_NAM_emBA, 4},
+    {"_NAM_emBB", (DL_FUNC) &_NAM_emBB, 5},
+    {"_NAM_emBC", (DL_FUNC) &_NAM_emBC, 5},
+    {"_NAM_emRR", (DL_FUNC) &_NAM_emRR, 4},
+    {"_NAM_emBL", (DL_FUNC) &_NAM_emBL, 4},
+    {"_NAM_emDE", (DL_FUNC) &_NAM_emDE, 3},
+    {"_NAM_emEN", (DL_FUNC) &_NAM_emEN, 4},
+    {"_NAM_calcSize", (DL_FUNC) &_NAM_calcSize, 2},
+    {"_NAM_funI", (DL_FUNC) &_NAM_funI, 4},
+    {"_NAM_funX", (DL_FUNC) &_NAM_funX, 2},
+    {"_NAM_gs", (DL_FUNC) &_NAM_gs, 4},
+    {"_NAM_inputRow", (DL_FUNC) &_NAM_inputRow, 3},
+    {"_NAM_KMUP", (DL_FUNC) &_NAM_KMUP, 8},
+    {"_NAM_KMUP2", (DL_FUNC) &_NAM_KMUP2, 9},
+    {"_NAM_SAMP", (DL_FUNC) &_NAM_SAMP, 5},
+    {"_NAM_SAMP2", (DL_FUNC) &_NAM_SAMP2, 8},
+    {"_NAM_timesMatrix", (DL_FUNC) &_NAM_timesMatrix, 5},
+    {"_NAM_timesVec", (DL_FUNC) &_NAM_timesVec, 4},
+    {"_NAM_CNT", (DL_FUNC) &_NAM_CNT, 1},
+    {"_NAM_MSX", (DL_FUNC) &_NAM_MSX, 1},
+    {"_NAM_IMP", (DL_FUNC) &_NAM_IMP, 1},
+    {"_NAM_NOR", (DL_FUNC) &_NAM_NOR, 6},
+    {"_NAM_GAU", (DL_FUNC) &_NAM_GAU, 1},
+    {"_NAM_SPC", (DL_FUNC) &_NAM_SPC, 6},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_NAM(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

@@ -181,6 +181,7 @@ SEXP emRR(NumericVector y, NumericMatrix gen, double df = 10, double R2 = 0.5){
   NumericVector b(p);
   NumericVector e = y-mu;
   double b0,eM,h2;
+  df = df*100;
   for(int i=0; i<it; i++){
     for(int j=0; j<p; j++){
       b0 = b[j];
@@ -298,7 +299,7 @@ SEXP emDE(NumericVector y, NumericMatrix gen, double R2 = 0.5){
     e = e-eM;
     // Variance components
     Ve = sum(e*y)/(n-1);
-    Vb = b*b+(Ve/(xx+Lmb));
+    Vb = b*b+(Ve/(xx+Lmb+0.0001));
     Lmb = sqrt(cxx*Ve/Vb);
     // Convergence
     ++numit;
