@@ -5,27 +5,7 @@ snpH2=function(gen,K=NULL){
   if(!is.null(K)){ if(!is.numeric(K)) stop("Object K must to be a numeric matrix")  }
   anyNA = function(x) any(is.na(x))
   # Checking for missing and imputing
-  if(any(is.na(gen))){
-    IMPUT=function(X){
-      dn = dimnames(X)
-      fill = function(x){
-        if(any(is.na(x))){
-          w = which(is.na(x))
-          m = mean(x,na.rm=TRUE)
-          x[w] = m}
-        return(x)}
-      X = apply(X,2,fill)
-      dimnames(X) = dn}
-    maxNA = function(X){
-      dn = dimnames(X)
-      nas = function(x) mean(is.na(x))
-      m = apply(X,2,nas)
-      if(any(m>0.75)){
-        w = which(m>0.75)
-        X = X[,-w]}
-      return(X)}
-    gen = maxNA(gen)
-    gen = IMPUT(gen)}
+  if(any(is.na(gen))) IMP(gen)
 # Setup
 snps = ncol(gen)
 obs = nrow(gen)
