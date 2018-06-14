@@ -326,31 +326,31 @@ Although it is possible to use `reml` and `gibbs` to generate breeding values, t
 
 **a. BLUP**
 
-+ `BLUP = wgr(y = phenotype, gen = genotype, iv=FALSE, pi=0)`
++ `BLUP = wgr(y = phenotype, X = genotype, iv=FALSE, pi=0)`
 
 **b. BayesA**
 
-+ `BA = wgr(y = phenotype, gen = genotype, iv=TRUE, pi=0)`
++ `BA = wgr(y = phenotype, X = genotype, iv=TRUE, pi=0)`
 
 **c. BayesB**
 
-+ `BB = wgr(y = phenotype, gen = genotype, iv=TRUE, pi=0.8)`
++ `BB = wgr(y = phenotype, X = genotype, iv=TRUE, pi=0.8)`
 
 **d. BayesC**
 
-+ `BC = wgr(y = phenotype, gen = genotype, iv=FALSE, pi=0.8)`
++ `BC = wgr(y = phenotype, X = genotype, iv=FALSE, pi=0.8)`
 
-**e. Bayesian Elastic Net**
+**e. Bayesian Elastic Net** (under dev)
 
 + `BEN = ben(y = phenotype, gen = genotype)`
 
 **f. Bayesian LASSO**
 
-+ `BL = wgr(y = phenotype, gen = genotype, de=TRUE)`
++ `BL = wgr(y = phenotype, X = genotype, de=TRUE)`
 
 **g. Extended Bayesian LASSO**
 
-+ `EBL = wgr(y = phenotype, gen = genotype, de=TRUE, pi=0.8)`
++ `EBL = wgr(y = phenotype, X = genotype, de=TRUE, pi=0.8)`
 
 **h. GBLUP**
 
