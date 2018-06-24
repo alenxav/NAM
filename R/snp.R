@@ -308,7 +308,8 @@ cleanREP = function(y,gen,fam=NULL,thr=0.95){
 }
 
 # Some sort of Hidden Markov model for imputation
-markov=function(gen,chr){
+markov=function(gen,chr=NULL){
+  if(is.null(chr)) chr = ncol(gen)
   # vector chr
   CHR=NULL;for(i in 1:length(chr)){CHR=c(CHR,rep(i,chr[i]))}
   # Expectation and Transition Probability
