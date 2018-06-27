@@ -32,7 +32,7 @@ Numeric vector of length \eqn{n} indicating a stratification factor or which sub
 Numeric vector indicating the number of markers in each chromosome. The sum of \eqn{chr} must be equal to the number of columns in \eqn{gen}. Default assumes that all markers are from the same chromosome.
 }
   \item{window}{
-Numeric. If specified, genetic distance between markers is used for moving window strategy (Wang 2015). Window must be specified in Morgans (\eqn{e.g.} 0.05 would represent 5cM). Genetic distance is calculated assuming that individuals are RILs.
+Numeric. If specified, genetic distance between markers is used for moving window strategy. Window must be specified in Morgans (\eqn{e.g.} 0.05 would represent 5cM). Genetic distance is calculated assuming that individuals are RILs.
 }
   \item{fixed}{
 Logical. If TRUE, markers are treated as fixed effect and hence, evaluated through Wald statistics. If markers are specief as fixed, the argument 'window' is not applicable.
@@ -58,7 +58,7 @@ List of objected output from \code{gwas3} to perform meta-analysis.
 }
 \details{
 
-Special incidence matrix is recreated to optimize the information provided by the subpopulations. Each locus is recoded as a vector with length \eqn{f} equal to number of subpopulations, or NAM families, as the interaction locus by family. For example, a locus heterozigous from an individual from subpopulation 2 is coded as [ 1, 0, 1 , ... ,\eqn{f} ], a locus homozigous for the reference allele from any subpopulation is coded as [ 2, 0, 0, ... , \eqn{f} ] and a locus homozigous for the founder allele from an individual from subpopulation 1 is coded as [ 0, 2, 0, ... ,\eqn{f} ]. The base model for genome scanning is described by:
+Empirical Bayes model (Wang 2016) with a special incidence matrix is recreated to optimize the information provided by the subpopulations. Each locus is recoded as a vector with length \eqn{f} equal to number of subpopulations, or NAM families, as the interaction locus by family. For example, a locus heterozigous from an individual from subpopulation 2 is coded as [ 1, 0, 1 , ... ,\eqn{f} ], a locus homozigous for the reference allele from any subpopulation is coded as [ 2, 0, 0, ... , \eqn{f} ] and a locus homozigous for the founder allele from an individual from subpopulation 1 is coded as [ 0, 2, 0, ... ,\eqn{f} ]. The base model for genome scanning is described by:
 
 \deqn{y = Xb + Zu + g + e}
 
@@ -70,7 +70,7 @@ This model includes three extra terms: the left side genome ( \eqn{Zu[k-1]} ) an
 
 The polygenic term is calculated only once (Zhang et al 2010) using eigendecomposition with a GEMMA-like algorithm (Zhou ans Stephens 2012). Efficient inversion of capacitance matrix is obtained through the Woodbury matrix identities. Models and algorithms are described with more detail by Xavier et al (2015) and Wei and Xu (2016).
 
-In order to analyze large dateset, one can avoid memory issues by using the function "gwas2", but that the argument 'window' is not implemented for "gwas2". This function also allows used-defined kindship through the argument EIG, and the use of a numeric covariate vector through the argument cov.
+In order to analyze large dateset, one can avoid memory issues by using the function \eqn{gwas2}, but that the argument 'window' is not implemented for \eqn{gwas2}. This function also allows used-defined kindship through the argument EIG, and the use of a numeric covariate vector through the argument cov.
 
 When multi-environmental trials are the target of mapping, one may use the function \eqn{gwasGE} to perform analysis by environment, followed by "meta-analysis" used to combine the results. This strategy provides an idea of the variation on QTL effect due to environment, genetic background (provided by the stratification factor) and the interaction between environment and genetics.
 
@@ -90,8 +90,8 @@ The function gwas returns a list containing the method deployed (\eqn{Method}), 
 }
 \references{
 
-Wang, Q. An Empirical Bayes Method for Genome-Wide Association Studies. W799 Statistical Genomics. PAG XXXII. 2015.
-
+Wang, Q., Wei, J., Pan, Y., & Xu, S. (2016). An efficient empirical Bayes method for genomewide association studies. Journal of Animal Breeding and Genetics, 133(4), 253-263.  
+  
 Wei, J., & Xu, S. (2016). A Random Model Approach to QTL Mapping in Multi-parent Advanced Generation Inter-cross (MAGIC) Populations. Genetics, 202(2), 471-486.
 
 Xavier, A., Xu, S., Muir, W. M., & Rainey, K. M. (2015). NAM: Association Studies in Multiple Populations. Bioinformatics, 31(23), 3862-3864.
