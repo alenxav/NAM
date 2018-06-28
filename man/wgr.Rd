@@ -111,11 +111,4 @@ cor(y,BayesC$hat)
 BayesL = wgr(y,gen,de=TRUE,it=200,bi=50)
 cor(y,BayesL$hat)
 
-# Bagging  BLUP
-Bag = wgr(y,gen,bag=0.999,it=200,bi=50)
-cor(y,Bag$hat)
-
-# Subsampling  BLUP
-Sub = wgr(y,gen,bag=0.5,it=200,bi=50)
-cor(y,Sub$hat)
 }
