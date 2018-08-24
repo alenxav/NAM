@@ -536,7 +536,7 @@ SEXP KMUP(NumericMatrix X, NumericVector b, NumericVector d, NumericVector xx, N
         d[j] = 1;
         e = e1;
       }else{
-        b[j] = R::rnorm(0,sqrt(Ve/(xx[j]+L[j])));
+        b[j] = 0;
         d[j] = 0;
         e = e2;
       }
@@ -592,7 +592,7 @@ SEXP KMUP2(NumericMatrix X, NumericVector Use, NumericVector b,  NumericVector d
         d[j] = 1;
         e0 = e1;
       }else{
-        b[j] = R::rnorm(0,sqrt(Ve/(xx[j]+L[j])));
+        b[j] = 0;
         d[j] = 0;
         e0 = e2;
       }
