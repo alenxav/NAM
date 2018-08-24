@@ -47,18 +47,21 @@ CV_NAM=function(y,gen,k=5,Seeds=1:5,IT=500,BI=100,cl=NULL){
     # Elastic net
     cat('emEN\n')
     f11=emEN(y[-w],gen[-w,])
+    # Maximum likelihood
+    cat('emML\n')
+    f12=emML(y[-w],gen[-w,])
     
     NamesMod = c('BayesA','BayesB','BayesC',
                  'BRR','BLASSO','GBLUP','RKHS',
-                 'emRR','emDE','emBL','emEN',
+                 'emRR','emDE','emBL','emEN','emML'
                  'OBSERVATION')
     
     M = matrix(NA,Nk,length(NamesMod))
     colnames(M) = NamesMod
     for(i in 1:5) M[,i]=get(paste('f',i,sep=''))$hat[w]
     for(i in c(6:7)) M[,i]=get(paste('f',i,sep=''))$EBV[w]
-    for(i in 8:11) M[,i]=gen[w,]%*%get(paste('f',i,sep=''))$b
-    M[,12] = Y[w]
+    for(i in 8:12) M[,i]=gen[w,]%*%get(paste('f',i,sep=''))$b
+    M[,13] = Y[w]
     return(M)
   }
   
