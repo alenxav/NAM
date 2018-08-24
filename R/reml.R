@@ -19,13 +19,13 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
       if(class(Z)=="formula"){
         Q = paste(Z); Q[2]=paste(Q[2],'- 1'); Z=as.formula(Q)
         Z=model.matrix(Z)
-        }
-      K=tcrossprod(Z)
       }
+      K=tcrossprod(Z)
+    }
     if(model=='Kernel'){
       Z=diag(ncol(K))
       K0=K
-      }
+    }
     if(model=='Mixed'){
       if(class(Z)=="formula"){
         Q = paste(Z); Q[2]=paste(Q[2],'- 1'); Z=as.formula(Q)
@@ -33,7 +33,7 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
       }
       K0=K
       K = crossprod(t(Z),K); K=tcrossprod(K,Z)
-      }
+    }
     # Function starts here
     m = which(is.na(y)) # missing values
     if(any(m)){
@@ -76,7 +76,7 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
     # Finding lambda through optimization
     parm=optim(par=theta,fn=loglike,method="L-BFGS-B",lower=-10,upper=10)
     lambda=exp(parm$par)
-     # Variance components and fixed effect coefficient
+    # Variance components and fixed effect coefficient
     parmfix=fixed(lambda)
     beta=parmfix[1:q]
     sd=parmfix[(q+1):(2*q)]
@@ -89,16 +89,12 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
     # RKHS solution
     if(model=='Kernel'){
       if(any(m)){
-        qq=eigen(as.matrix(K0),symmetric=T)
+        qq = eigen(as.matrix(K0),symmetric=T)
         delta=qq[[1]]; uu=qq[[2]];
-        dr = which(cumsum(delta)/sum(delta)>0.98)[1]
         g = qr.solve(uu[-m,],re)
         g = g/(Ve/(delta*Vg)+1)
         U = uu%*%g
       }else{
-        dr = which(cumsum(delta)/sum(delta)>0.98)[1]
-        uu = uu[,1:dr]
-        delta = delta[1:dr]
         g = qr.solve(uu,re)
         g = g/(Ve/(delta*Vg)+1)
         U = uu%*%g
@@ -114,10 +110,10 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
       ZZ = crossprod(z)
       diag(K0)=diag(K0)+1e-8
       ZZ = ZZ + chol2inv(K0)*(Ve/Vg)
-      Zy = crossprod(z,y)
+      Zy = crossprod(z,re)
       U = solve(ZZ,Zy)
     }
-    REML = list("VC"=VC,"Fixed"=B,"EBV"=U)
+    REML = list("VC"=VC,"Fixed"=B,"EBV"=U,loglik=parm$value)
     
   }else{
     N = nrow(y)
@@ -152,41 +148,41 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
           Y3[,i] = b}
         return(Y3)}
       Y = impY(Y)}
-   ECM=function(Y,X,Z,K){Y=t(Y);X=t(X)
-   ECM1=function(ytl, xtl, Vgt,Vet,Bt, deltal){Vlt=deltal*Vgt+Vet; invVlt=solve(Vlt+diag(1e-06,d))
-   return(list(Vlt=Vlt, gtl=deltal*Vgt%*%invVlt%*%(ytl-Bt%*%xtl), Sigmalt=deltal*Vgt-deltal*Vgt%*%invVlt%*%(deltal*Vgt)))}
-   wrapperECM1=function(l){ytl=Yt[,l]; xtl=Xt[,l]; deltal=eigZKZt$values[l]
-   return( ECM1(ytl=ytl, xtl=xtl, Vgt=Vgt,Vet=Vet,Bt=Bt, deltal=deltal))}
-   Vgfunc=function(l){Vgl=tcrossprod(outfromECM1[[l]]$gtl)
-   return((1/n)*(1/eigZKZt$values[l])*(Vgl + outfromECM1[[l]]$Sigmalt))}
-   Vefunc=function(l){etl = Yt[,l] - Bt%*%Xt[,l] - outfromECM1[[l]]$gtl
-   return((1/n)*((tcrossprod(etl)+ outfromECM1[[l]]$Sigmalt)))}
-   if (sum(is.na(Y))==0){ N=nrow(K); KZt=tcrossprod(K,Z)
-   ZKZt=Z%*%KZt; eigZKZt = eigen(ZKZt); n=nrow(ZKZt); d=nrow(Y)
-   Yt = Y%*%eigZKZt$vectors; Xt = X%*%eigZKZt$vectors
-   Vgt =cov(t(Y))/2; Vet =cov(t(Y))/2; XttinvXtXtt=t(Xt)%*%solve(tcrossprod(Xt))
-   Bt=Yt%*%XttinvXtXtt; Vetm1=Vet
-   repeat{ outfromECM1=lapply(1:n, wrapperECM1)
-         Vetm1=Vet; Gt=sapply(outfromECM1, function(x) {cbind(x$gtl)})
-         Bt = (Yt - Gt) %*% XttinvXtXtt
-         listVgts = lapply(1:n,Vgfunc); Vgt=Reduce('+', listVgts)
-         listVets = lapply(1:n,Vefunc); Vet=Reduce('+', listVets)
-         convnum=abs(sum(diag(Vet - Vetm1)))/abs(sum(diag(Vetm1)))
-         convcond=tryCatch({convnum<1e-06}, error=function(e){return(FALSE)})
-         if(convcond){break}}
- HobsInv=solve(kronecker(ZKZt,Vgt)+kronecker(diag(n),Vet)+diag(1e-06,d*n))
- ehat=matrix(Y - Bt%*%X,ncol=1, byrow=F)
- HobsInve=HobsInv%*%ehat; varvecG=kronecker(K,Vgt)
- gpred=varvecG%*%(kronecker(t(Z),diag(d)))%*%HobsInve
- Gpred=matrix(gpred, nrow=nrow(Y), byrow=F); 
- Fx=t(Bt); #rownames(Fx)=paste("beta",0:(nrow(Bt)-1),sep="")
- EBV = t(Gpred); colnames(Fx)=colnames(EBV)=paste("trait",1:d,sep="")
- VC = list("Vg"=Vgt,"Ve"=Vet,"h2"=diag(Vgt/(Vgt+Vet)),"GenCor"=cov2cor(Vgt))
- return(list("Fixed"=Fx,"VC"=VC,"EBV"=EBV))}}
- REML = ECM(Y=y,X=X,Z=Z,K=K)}
-
- class(REML) = "reml"
-return(REML)}
+    ECM=function(Y,X,Z,K){Y=t(Y);X=t(X)
+    ECM1=function(ytl, xtl, Vgt,Vet,Bt, deltal){Vlt=deltal*Vgt+Vet; invVlt=solve(Vlt+diag(1e-06,d))
+    return(list(Vlt=Vlt, gtl=deltal*Vgt%*%invVlt%*%(ytl-Bt%*%xtl), Sigmalt=deltal*Vgt-deltal*Vgt%*%invVlt%*%(deltal*Vgt)))}
+    wrapperECM1=function(l){ytl=Yt[,l]; xtl=Xt[,l]; deltal=eigZKZt$values[l]
+    return( ECM1(ytl=ytl, xtl=xtl, Vgt=Vgt,Vet=Vet,Bt=Bt, deltal=deltal))}
+    Vgfunc=function(l){Vgl=tcrossprod(outfromECM1[[l]]$gtl)
+    return((1/n)*(1/eigZKZt$values[l])*(Vgl + outfromECM1[[l]]$Sigmalt))}
+    Vefunc=function(l){etl = Yt[,l] - Bt%*%Xt[,l] - outfromECM1[[l]]$gtl
+    return((1/n)*((tcrossprod(etl)+ outfromECM1[[l]]$Sigmalt)))}
+    if (sum(is.na(Y))==0){ N=nrow(K); KZt=tcrossprod(K,Z)
+    ZKZt=Z%*%KZt; eigZKZt = eigen(ZKZt); n=nrow(ZKZt); d=nrow(Y)
+    Yt = Y%*%eigZKZt$vectors; Xt = X%*%eigZKZt$vectors
+    Vgt =cov(t(Y))/2; Vet =cov(t(Y))/2; XttinvXtXtt=t(Xt)%*%solve(tcrossprod(Xt))
+    Bt=Yt%*%XttinvXtXtt; Vetm1=Vet
+    repeat{ outfromECM1=lapply(1:n, wrapperECM1)
+    Vetm1=Vet; Gt=sapply(outfromECM1, function(x) {cbind(x$gtl)})
+    Bt = (Yt - Gt) %*% XttinvXtXtt
+    listVgts = lapply(1:n,Vgfunc); Vgt=Reduce('+', listVgts)
+    listVets = lapply(1:n,Vefunc); Vet=Reduce('+', listVets)
+    convnum=abs(sum(diag(Vet - Vetm1)))/abs(sum(diag(Vetm1)))
+    convcond=tryCatch({convnum<1e-06}, error=function(e){return(FALSE)})
+    if(convcond){break}}
+    HobsInv=solve(kronecker(ZKZt,Vgt)+kronecker(diag(n),Vet)+diag(1e-06,d*n))
+    ehat=matrix(Y - Bt%*%X,ncol=1, byrow=F)
+    HobsInve=HobsInv%*%ehat; varvecG=kronecker(K,Vgt)
+    gpred=varvecG%*%(kronecker(t(Z),diag(d)))%*%HobsInve
+    Gpred=matrix(gpred, nrow=nrow(Y), byrow=F); 
+    Fx=t(Bt); #rownames(Fx)=paste("beta",0:(nrow(Bt)-1),sep="")
+    EBV = t(Gpred); colnames(Fx)=colnames(EBV)=paste("trait",1:d,sep="")
+    VC = list("Vg"=Vgt,"Ve"=Vet,"h2"=diag(Vgt/(Vgt+Vet)),"GenCor"=cov2cor(Vgt))
+    return(list("Fixed"=Fx,"VC"=VC,"EBV"=EBV))}}
+    REML = ECM(Y=y,X=X,Z=Z,K=K)}
+  
+  class(REML) = "reml"
+  return(REML)}
 
 MCreml = function(y,K,X=NULL,MC=300,samp=300){
   
