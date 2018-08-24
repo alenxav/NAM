@@ -18,6 +18,7 @@
 \alias{emBL}
 \alias{emDE}
 \alias{emEN}
+\alias{emML}
 \alias{Gdist}
 \alias{markov}
 \alias{eigX}
