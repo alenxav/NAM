@@ -392,6 +392,10 @@ Although it is possible to use `reml` and `gibbs` to generate breeding values, t
 
 + `eMix = emBL(y = phenotype, gen = genotype)`
 
+**r. Maximum likelihood**
+
++ `eML = emML(y = phenotype, gen = genotype)`
+
 For a comparison of the ten methods, one can perform a cross-validation study. In cross-validation studies, a \code{k} part of the data is omitted and predicted back. The procedure is repeated various times. Prediction statistics such as mean-squared prediction error (MSPE) and prediction ability (PA) are computed by the comparison between observed and predicted values. For sake of example, load the script
 
 + `source(system.file("add","cvNAM.R",package="NAM"))`
