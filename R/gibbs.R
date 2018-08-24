@@ -120,20 +120,21 @@ gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,
   # Hperpriors: Degrees of freedom (DF) and Shape (S)
   df0 = DF
   
+  # S0 has analystical solution (De los Campos et al 2013)
   if(is.null(S)){
-    S0=rep(0,Randoms) # S0 has analystical solution (De los Campos et al 2013)
+    S0=rep(0,Randoms) 
     if(!GSRU){
     for(i in 1:Randoms) 
-      S0[i]=(var(y,na.rm=T)*0.5)/mean(
+      S0[i]=(VY*0.5)/mean(
         (t((t(C[Qs1[i+1]:Qs2[i+1],Qs1[i+1]:Qs2[i+1]])-
               colMeans(C[Qs1[i+1]:Qs2[i+1],Qs1[i+1]:Qs2[i+1]]))))^2 )
     }else{
       for(i in 1:Randoms) 
-        S0[i]=(var(y,na.rm=T)*0.5)/
+        S0[i]=(VY*0.5)/
         mean( (t((t(W[,Qs1[i+1]:Qs2[i+1]])-colMeans(W[,Qs1[i+1]:Qs2[i+1]]))))^2 )
     }
     
-  }else{S0=rep(S,Randoms)}
+  }else{S0=rep(S*VY,Randoms)}
     
   # Saving memory for some vectors
   e = rep(0,N)
