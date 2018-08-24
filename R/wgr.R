@@ -56,8 +56,9 @@ wgr = function(y,X,
   vy = var(y,na.rm=T)
   # Priors 10/15/17
   Sb = (R2)*df*vy/MSx;
+  if((pi>0)&(!iv)){Sb = Sb/(1-pi)}
   Se = (1-R2)*df*vy;
-  if(!is.null(eigK)) Sk = R2*var(y,na.rm=T)*(df+2)
+  if(!is.null(eigK)) Sk = R2*var(y,na.rm=T)*df
   # Storing Posterior
   B0 = VA = VE = VP = S = 0
   VB = D = B = rep(0,p)
