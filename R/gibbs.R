@@ -145,15 +145,13 @@ gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,
   for(iteration in 1:Iter){
     
     # Sampling hyper-priors
-    S0a = runif(Randoms,S0*0.5,S0*1.5)
-    df0a = runif(Randoms,df0*0.5,df0*1.5)
+    S0a = runif(Randoms,S0*0.75,S0*1.25)
+    df0a = min(2,df0) * runif(1,0.75,1.25)
     dfu = q + df0a
-    if(is.null(S)){
-      S0b = runif(1,0.0001,2)
-    }else{
-        S0b = runif(1,S*0.5,S*1.5)
-        }
-    df0b = runif(1,min(2,df0)*0.5,min(2,df0)*1.5)
+    
+    # Residual hyper-priors
+    S0b = 0.5 * VY * runif(1,0.75,1.25)
+    df0b = min(2,df0) * runif(1,0.75,1.25)
     dfe = n + df0b
     
     # Random variance
