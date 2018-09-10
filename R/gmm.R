@@ -33,9 +33,7 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
     KERN = TRUE
     if(model=="GBLUP"){
       idnames = rownames(gen)
-      gen = apply(gen,2,function(x) x-mean(x))
-      gen = tcrossprod(gen)
-      gen = gen/mean(diag(gen))
+      gen = GRM(gen)
       cat("Eigendecomposing GRM for GBLUP \n")
       gen = eigen(gen,TRUE)
       V = gen$values
@@ -45,8 +43,7 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
     }
     if(model=="RKHS"){
       idnames = rownames(gen)
-      gen = as.matrix(dist(gen)^2)
-      gen = exp(-gen/median(gen))
+      gen = GAU(gen)
       cat("Eigendecomposing Gaussian Kernel for RKHS \n")
       gen = eigen(gen,TRUE)
       V = gen$values
