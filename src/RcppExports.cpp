@@ -336,6 +336,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// GRM
+NumericMatrix GRM(NumericMatrix X);
+RcppExport SEXP _NAM_GRM(SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(GRM(X));
+    return rcpp_result_gen;
+END_RCPP
+}
 // SPC
 NumericVector SPC(NumericVector y, NumericVector blk, NumericVector row, NumericVector col, int rN, int cN);
 RcppExport SEXP _NAM_SPC(SEXP ySEXP, SEXP blkSEXP, SEXP rowSEXP, SEXP colSEXP, SEXP rNSEXP, SEXP cNSEXP) {
@@ -352,6 +363,63 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// SPM
+NumericMatrix SPM(NumericVector blk, NumericVector row, NumericVector col, int rN, int cN);
+RcppExport SEXP _NAM_SPM(SEXP blkSEXP, SEXP rowSEXP, SEXP colSEXP, SEXP rNSEXP, SEXP cNSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type blk(blkSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type row(rowSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type col(colSEXP);
+    Rcpp::traits::input_parameter< int >::type rN(rNSEXP);
+    Rcpp::traits::input_parameter< int >::type cN(cNSEXP);
+    rcpp_result_gen = Rcpp::wrap(SPM(blk, row, col, rN, cN));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BRR2
+SEXP BRR2(NumericVector y, NumericMatrix X1, NumericMatrix X2, double it, double bi, double df, double R2);
+RcppExport SEXP _NAM_BRR2(SEXP ySEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BRR2(y, X1, X2, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+
+RcppExport SEXP NAM_calcSize(SEXP, SEXP);
+RcppExport SEXP NAM_CNT(SEXP);
+RcppExport SEXP NAM_emBA(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emBB(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emBC(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emBL(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emDE(SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emEN(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emRR(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_funI(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_funX(SEXP, SEXP);
+RcppExport SEXP NAM_GAU(SEXP);
+RcppExport SEXP NAM_gs(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_IMP(SEXP);
+RcppExport SEXP NAM_inputRow(SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_KMUP(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_KMUP2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_MSX(SEXP);
+RcppExport SEXP NAM_NOR(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_SAMP(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_SAMP2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_SPC(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_timesMatrix(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_timesVec(SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"_NAM_emBA", (DL_FUNC) &_NAM_emBA, 4},
@@ -378,7 +446,34 @@ static const R_CallMethodDef CallEntries[] = {
     {"_NAM_IMP", (DL_FUNC) &_NAM_IMP, 1},
     {"_NAM_NOR", (DL_FUNC) &_NAM_NOR, 6},
     {"_NAM_GAU", (DL_FUNC) &_NAM_GAU, 1},
+    {"_NAM_GRM", (DL_FUNC) &_NAM_GRM, 1},
     {"_NAM_SPC", (DL_FUNC) &_NAM_SPC, 6},
+    {"_NAM_SPM", (DL_FUNC) &_NAM_SPM, 5},
+    {"_NAM_BRR2", (DL_FUNC) &_NAM_BRR2, 7},
+    {"NAM_calcSize",    (DL_FUNC) &NAM_calcSize,    2},
+    {"NAM_CNT",         (DL_FUNC) &NAM_CNT,         1},
+    {"NAM_emBA",        (DL_FUNC) &NAM_emBA,        4},
+    {"NAM_emBB",        (DL_FUNC) &NAM_emBB,        5},
+    {"NAM_emBC",        (DL_FUNC) &NAM_emBC,        5},
+    {"NAM_emBL",        (DL_FUNC) &NAM_emBL,        4},
+    {"NAM_emDE",        (DL_FUNC) &NAM_emDE,        3},
+    {"NAM_emEN",        (DL_FUNC) &NAM_emEN,        4},
+    {"NAM_emRR",        (DL_FUNC) &NAM_emRR,        4},
+    {"NAM_funI",        (DL_FUNC) &NAM_funI,        4},
+    {"NAM_funX",        (DL_FUNC) &NAM_funX,        2},
+    {"NAM_GAU",         (DL_FUNC) &NAM_GAU,         1},
+    {"NAM_gs",          (DL_FUNC) &NAM_gs,          4},
+    {"NAM_IMP",         (DL_FUNC) &NAM_IMP,         1},
+    {"NAM_inputRow",    (DL_FUNC) &NAM_inputRow,    3},
+    {"NAM_KMUP",        (DL_FUNC) &NAM_KMUP,        8},
+    {"NAM_KMUP2",       (DL_FUNC) &NAM_KMUP2,       9},
+    {"NAM_MSX",         (DL_FUNC) &NAM_MSX,         1},
+    {"NAM_NOR",         (DL_FUNC) &NAM_NOR,         6},
+    {"NAM_SAMP",        (DL_FUNC) &NAM_SAMP,        5},
+    {"NAM_SAMP2",       (DL_FUNC) &NAM_SAMP2,       8},
+    {"NAM_SPC",         (DL_FUNC) &NAM_SPC,         6},
+    {"NAM_timesMatrix", (DL_FUNC) &NAM_timesMatrix, 5},
+    {"NAM_timesVec",    (DL_FUNC) &NAM_timesVec,    4},
     {NULL, NULL, 0}
 };
 
