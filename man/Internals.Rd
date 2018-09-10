@@ -129,3 +129,8 @@ ls(Ks)
 h = emBA(y,gen)
 plot(h$b,pch=20)
 }
+\keyword{ NAM }
+\keyword{ BLUP }
+\keyword{ LD }
+\keyword{ GRM }
+\keyword{ SPATIAL }
