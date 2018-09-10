@@ -19,6 +19,7 @@
 \alias{emDE}
 \alias{emEN}
 \alias{emML}
+\alias{BRR2}
 \alias{Gdist}
 \alias{markov}
 \alias{eigX}
@@ -36,7 +37,9 @@
 \alias{IMP}
 \alias{NOR}
 \alias{GAU}
+\alias{GRM}
 \alias{SPC}
+\alias{SPM}
 \title{
   Internal functions
 }
@@ -77,11 +80,17 @@ Some of the functions available for users include:
 
 14) \code{GAU(X):}{ Created a Gaussian kernel from matrix \code{X}.}
 
-15) \code{MSX(X):}{ Computes the cross-product of each column of \code{X} and the sum of variances of each column of \code{X}.}
+15) \code{GRM(X):}{ Created a linear kernel from matrix \code{X}.}
 
-16) \code{NOR(y,X,cxx,xx,maxit=50,tol=10e-6):}{ Solves a ridge regression using GSRU, where  \code{y} corresponds to the response variable, \code{X} is the set of parameters, \code{cxx} and \code{xx} are the output from the MSX function, \code{maxit} and \code{tol} are the convergence criteria.}
+16) \code{MSX(X):}{ Computes the cross-product of each column of \code{X} and the sum of variances of each column of \code{X}.}
 
-17) \code{SPC(y,blk,row,col,rN=3,cN=1):}{ Computes a spatial covariate, similar to what could be obtained using NNsrc and NNcov but in a single step. It often is faster than NNsrc/NNcov.}
+17) \code{NOR(y,X,cxx,xx,maxit=50,tol=10e-6):}{ Solves a ridge regression using GSRU, where  \code{y} corresponds to the response variable, \code{X} is the set of parameters, \code{cxx} and \code{xx} are the output from the MSX function, \code{maxit} and \code{tol} are the convergence criteria.}
+
+18) \code{SPC(y,blk,row,col,rN=3,cN=1):}{ Computes a spatial covariate, similar to what could be obtained using NNsrc and NNcov but in a single step. It often is faster than NNsrc/NNcov.}
+
+19) \code{SPM(blk,row,col,rN=3,cN=1):}{ Computes a spatial matrix that capture nearest neighbots, to be used as design matrix of random effects. The least-square solution gives the same as SPC.}
+
+20) \code{BRR2(y,X1,X2,it=1500,bi=500,df=5,R2=0.5):}{ A simple C++ implementation of a Bayesian Ridge Regression that accomodates two random effects.}
 
 }
 \author{
