@@ -134,3 +134,4 @@ plot(h$b,pch=20)
 \keyword{ LD }
 \keyword{ GRM }
 \keyword{ SPATIAL }
+\keyword{ PEDIGREE }
