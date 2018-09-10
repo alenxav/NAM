@@ -753,9 +753,27 @@ NumericMatrix GAU(NumericMatrix X){
     for(int i=0; i<n; i++){K(i,_) = exp(-K(i,_)/md);} return K;}
 
 // [[Rcpp::export]]
+NumericMatrix GRM(NumericMatrix X){
+  int n = X.nrow(), p = X.ncol();
+  NumericMatrix K(n,n); NumericVector xx(p); double zz;
+  for(int i=0; i<n; i++){; for(int j=0; j<n; j++){
+        zz = sum( (X(i,_)-xx(i))*(X(j,_)-xx(j)) );
+        K(i,j)=zz; K(j,i)=zz;}}
+  for(int i=0; i<p; i++){xx[i] = K(i,i);}
+  return K/mean(xx);}
+
+// [[Rcpp::export]]
 NumericVector SPC(NumericVector y, NumericVector blk, NumericVector row, NumericVector col, int rN=3, int cN=1){
   int n = y.size(); NumericVector Cov(n), Phe(n), Obs(n);
   for(int i=0; i<n; i++){; for(int j=0; j<n; j++){
       if( (i>j) & (blk[i]==blk[j]) & (abs(row[i]-row[j])<=rN) & (abs(col[i]-col[j])<=cN) ){
         Phe[i] = Phe[i]+y[j]; Obs[i] = Obs[i]+1; Phe[j] = Phe[j]+y[i]; Obs[j] = Obs[j]+1; }}}
   Cov = Phe/Obs; return Cov;}
+
+// [[Rcpp::export]]
+NumericMatrix SPM(NumericMatrix sp, int Rows=2, int Cols=1){
+  int n = sp.nrow(); NumericVector blk=sp(_,0), row=sp(_,1), col=sp(_,2); NumericMatrix X(n,n);
+  for(int i=0; i<n; i++){; for(int j=0; j<n; j++){
+      if( (blk[i]==blk[j]) & (i>j) & (abs(row[i]-row[j])<=Rows) & (abs(col[i]-col[j])<=Cols) ){
+        X(i,j) = 1; X(j,i) = 1; }else{ X(i,j) = 0; X(j,i) = 0; }}; X(i,i) = 0;}  return X;}
+
