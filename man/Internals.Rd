@@ -128,6 +128,14 @@ ls(Ks)
 # Genomic regression fitted via EM
 h = emBA(y,gen)
 plot(h$b,pch=20)
+
+# GBLUP and RRBLUP
+g = GRM(gen)
+eg = eigen(g)
+gblup = emML(y=y, gen=eg$vectors,D=eg$values)
+rrblup = emML(y=y, gen=gen)
+plot(gblup$hat,rrblup$hat,xlab = 'gblup',ylab='rrblup')
+
 }
 \keyword{ NAM }
 \keyword{ BLUP }
