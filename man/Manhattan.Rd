@@ -11,7 +11,7 @@ Generates a graphical visualization for the output of the function gwas/gwas2/gw
 }
 \arguments{
    \item{x}{
-Output of the gwas/gwas2 function.
+Output of the gwas/gwas2/gwas3 function.
 }
   \item{...}{
 Further arguments passed to or from other methods.
