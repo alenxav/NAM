@@ -78,9 +78,9 @@ Some of the functions available for users include:
 
 13) \code{IMP(X):}{  Imputes missing points from matrix \code{X} with the average value of the column. This function does not return anything, rather it modifies \code{X} directly.}
 
-14) \code{GAU(X):}{ Created a Gaussian kernel from matrix \code{X}.}
+14) \code{GAU(X):}{ Creates a Gaussian kernel from matrix \code{X}.}
 
-15) \code{GRM(X):}{ Created a linear kernel from matrix \code{X}.}
+15) \code{GRM(X):}{ Creates genomic relationship matrix as linear kernel from matrix \code{X}.}
 
 16) \code{MSX(X):}{ Computes the cross-product of each column of \code{X} and the sum of variances of each column of \code{X}.}
 
