@@ -261,7 +261,7 @@ Two arguments are necessary for this function: the genotypic matrix (`gen`) and 
 + `my_FST = Fst ( gen = genotypes, fam = stratification )`
 + `plot(my_FST)`
 
-# 6. BLUPs
+# 6. BLUPs and GEBVs
 
 Considering that phenotypes are often replaced by BLUP values for mapping and selection, the NAM package provide functions that allow users to solve mixed models to compute BLUPs and variance components: `reml` and `gibbs`.
 
