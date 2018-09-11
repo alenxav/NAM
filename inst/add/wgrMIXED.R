@@ -1,3 +1,5 @@
+# function initially implemented in the bWGR package
+
 mixed = function(y,random=NULL,fixed=NULL,data=NULL,X=list(),alg=emML,maxit=10,...){
   
   # Get y vector
