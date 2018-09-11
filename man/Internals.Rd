@@ -40,6 +40,7 @@
 \alias{GRM}
 \alias{SPC}
 \alias{SPM}
+\alias{press}
 \title{
   Internal functions
 }
@@ -92,6 +93,8 @@ Some of the functions available for users include:
 
 20) \code{BRR2(y,X1,X2,it=1500,bi=500,df=5,R2=0.5):}{ A simple C++ implementation of a Bayesian Ridge Regression that accomodates two random effects.}
 
+21) \code{press(y,K,MaxIt=10):}{Solves a PRESS-regularized GBLUP. You can provide K as a matrix or as the output of the functin eigen. MaxIt the maximum number of iterations to for updating missing values (if any) if H*y does not converge.} 
+
 }
 \author{
   Alencar Xavier and Tiago Pimenta
@@ -101,7 +104,7 @@ Some of the functions available for users include:
 data(tpod)
 fast.impute = markov(gen,chr)
 
-# A matrix
+# Wright's A matrix 
 PedMat()
 
 # Pairwise LD
