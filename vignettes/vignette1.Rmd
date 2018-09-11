@@ -211,7 +211,7 @@ The meaning of each column from PolyTest is summarized below:
 
 The output of the  GWAS function provides the allele effect into the GWAS of multiple populations context, testing one marker at a time. To find out the effect of each marker conditional to the genome (i.e. given all the other makers are in the model). This technique is known as whole-genome regression (WGR) method.
 
-+ `WGR = wgr( y = phenotype, gen = genotypes)`
++ `WGR = wgr( y = phenotype, gen = genotypes )`
 + `Allele_effect = WGR$g`
 + `plot(abs(Allele_effect))` *# Have a look*
 
@@ -286,8 +286,7 @@ Another possibility is to fit a GBLUP, useful to obtain breeding values using mo
 
 Genomic relationship matrix
 
-+ `G = tcrossprod(gen)`
-+ `G = G/mean(diag(G))`
++ `G = GRM(gen)`
 
 Fit the model
 
@@ -303,7 +302,7 @@ Now, lets see how to fit a GBLUP with the environment factor set as random effec
 
 Genomic relationship matrix
 
-+ `G = tcrossprod(gen); G = G/mean(diag(G))`
++ `G = GRM(gen)`
 + `iG = chol2inv(G)`
 
 Fit the model
@@ -395,6 +394,10 @@ Although it is possible to use `reml` and `gibbs` to generate breeding values, t
 **r. Maximum likelihood**
 
 + `eML = emML(y = phenotype, gen = genotype)`
+
+**r. PRESS-regularized gblup**
+
++ `ePRESS = press(y = phenotype, K = GRM(genotype))`
 
 For a comparison of the ten methods, one can perform a cross-validation study. In cross-validation studies, a \code{k} part of the data is omitted and predicted back. The procedure is repeated various times. Prediction statistics such as mean-squared prediction error (MSPE) and prediction ability (PA) are computed by the comparison between observed and predicted values. For sake of example, load the script
 
