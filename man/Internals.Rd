@@ -82,7 +82,7 @@ Some of the functions available for users include:
 
 14) \code{GAU(X):}{ Creates a Gaussian kernel from matrix \code{X}.}
 
-15) \code{GRM(X):}{ Creates genomic relationship matrix as linear kernel from matrix \code{X}.}
+15) \code{GRM(X, Code012=FALSE):}{ Creates genomic relationship matrix as linear kernel from matrix \code{X}. If genotypes are coded as 012 and Code012=TRUE, the kinship is the same as proposed by VanRaden (2008), otherwise the outcome is an additive G2A kernel.}
 
 16) \code{MSX(X):}{ Computes the cross-product of each column of \code{X} and the sum of variances of each column of \code{X}.}
 
