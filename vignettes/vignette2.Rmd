@@ -4,9 +4,9 @@ author: "Alencar Xavier and Shizhong Xu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Background for Meta-analysis}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \VignetteIndexEntry{Background for Meta-analysis}
+  \VignetteEngine{knitr::rmarkdown}
+  \VignetteEncoding{UTF-8}
 ---
 ```{r,echo=FALSE,message=F,comment=F,warning=F}
 require(knitr)
