@@ -319,9 +319,9 @@ Fit BRR using the gibbs function
 
 +  `FIT_BRR = gibbs ( y = trait, X = ~ env , Z = gen, S=NULL)`
 
-Both functions `reml` and `gibbs` accept formulas and matrices as inputs. When multiple random effects are used in `gibbs`, the argument `Z` accepts formula or a list of matrices and the argument `iK` accepts matrix (if only the first random effect has known structure) or a list of matrices (if multiple random effects have known covariance structure). An additional argument in the `gibbs` function, `iR` allows users to include residual covariance structure.
+Both functions `reml` and `gibbs` accept formulas and matrices as inputs. When multiple random effects are used in `gibbs`, the argument `Z` accepts formula or a list of matrices and the argument `iK` accepts matrix (if only the first random effect has known structure) or a list of matrices (if multiple random effects have known covariance structure). An additional argument in the `gibbs` function, `iR` allows users to include residual covariance structure. An example of `iR` could be the inverse kernel to informs the spatial layout of the observations, such as the outcome of the function `covar`, to account for heteroscedasticity due to spatial auto-correlation.
 
-Although it is possible to use `reml` and `gibbs` to generate breeding values, the functions `gmm` and `wgr` (also implemented in the bWGR package) enables the use of more appropriated and optimized models for genomic prediction. Some popular methods that can be obtained from this function (Bayesian alphabet). To estimate breeding values for observed genotypes or predict unphenotyped material, fit the model as follows:
+Although it is possible to use `reml` and `gibbs` to generate breeding values, the functions `wgr` (also implemented in the bWGR package) and `gmm` enables the use of more appropriated and optimized models for genomic prediction. Some faster algorithms not based on MCMC are also available, such as `emBB`, `emML`, `emDE`, `press` and others. Some popular methods that can be obtained from this function (Bayesian alphabet). The NAM package provides a wide variety of methods to estimate breeding values for observed genotypes or predict unphenotyped material, fit the model as follows:
 
 **a. BLUP**
 
