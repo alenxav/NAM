@@ -4,8 +4,8 @@ author: "Alencar Xavier (alenxav@gmail.com)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  \VignetteIndexEntry{Introduction to NAM}
-  \VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Introduction to NAM}
+  %\VignetteEngine{knitr::rmarkdown}
   \VignetteEncoding{UTF-8}
 ---
 
