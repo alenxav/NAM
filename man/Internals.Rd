@@ -41,6 +41,7 @@
 \alias{SPC}
 \alias{SPM}
 \alias{press}
+\alias{emGWA}
 \title{
   Internal functions
 }
@@ -95,6 +96,8 @@ Some of the functions available for users include:
 
 21) \code{press(y,K,MaxIt=10):}{Solves a PRESS-regularized GBLUP. You can provide K as a matrix or as the output of the functin eigen. MaxIt the maximum number of iterations to for updating missing values (if any) if H*y does not converge.} 
 
+22) \code{emGWA(y,gen):}{ A vanilla algorithm written in C++ for GWAS (very simple, but very efficient). It fits a snpBLUP via EM-REML based GSRU, then run an additional round checkinkg the likelihood of treating each marker as fixed effect instead of random, thus avoiding double-fitting. It returns the marker p-values, snpBLUP marker effects for genomic prediction, LS marker effects from the GWAS, variance components, heritability, and GEBVs (fitted values).}
+
 }
 \author{
   Alencar Xavier and Tiago Pimenta
@@ -139,9 +142,14 @@ gblup = emML(y=y, gen=eg$vectors,D=eg$values)
 rrblup = emML(y=y, gen=gen)
 plot(gblup$hat,rrblup$hat,xlab = 'gblup',ylab='rrblup')
 
+# Vanilla GWAS
+gwa = emGWA(y,gen)
+plot(gwas$PVAL,pch=20)
+
 }
 \keyword{ NAM }
 \keyword{ BLUP }
+\keyword{ GWAS }
 \keyword{ LD }
 \keyword{ GRM }
 \keyword{ SPATIAL }
