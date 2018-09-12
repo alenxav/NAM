@@ -144,7 +144,7 @@ plot(gblup$hat,rrblup$hat,xlab = 'gblup',ylab='rrblup')
 
 # Vanilla GWAS
 gwa = emGWA(y,gen)
-plot(gwas$PVAL,pch=20)
+plot(gwa$PVAL,pch=20)
 
 }
 \keyword{ NAM }
