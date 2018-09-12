@@ -655,7 +655,10 @@ covar = function(sp=NULL,rho=3.5,type=1,dist=2.5){
     colnames(sp)=c("block","row","col")
     cat("Example of field information input 'sp'\n")
     print(head(sp,10))
-  }
+    example = TRUE
+  }else{
+    example = FALSE
+    }
   if(type==1) cat("Exponential Kernel\n")
   if(type==2) cat("Gaussian Kernel\n")
   obs=nrow(sp)
@@ -673,7 +676,7 @@ covar = function(sp=NULL,rho=3.5,type=1,dist=2.5){
     dimnames(M) = list(abs(-3:3),abs(-3:3))
     print(M)
   } 
-  if(obs!=49) return(quad)
+  if(!example) return(quad)
 }
 
 # Map field neighbor plots
