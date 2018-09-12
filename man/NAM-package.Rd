@@ -30,5 +30,5 @@ Maintainer: Alencar Xavier <alenxav@gmail.com>
 \keyword{ REML }
 \keyword{ BGS }
 \seealso{
-Package include functions to perform association analysis (gwas, gwas2, gwas3), meta-gwas (gwasGE, meta3), solve mixed models (gibbs, reml), genomic prediction (wgr, gmm), populations genetic analysis (Fst, Gdist, LD), data quality control (snpQC, snpH2, markov), spatial analysis (covar, SPC, SPM), build kinships (GRM, GAU, PedMat) and more.
+Package include functions to perform association analysis (gwas, gwas2, gwas3), meta-gwas (gwasGE, meta3), solve mixed models (gibbs, reml), genomic prediction (wgr, gmm, press), populations genetic analysis (Fst, Gdist, LD), data quality control (snpQC, snpH2, markov), spatial analysis (covar, SPC, SPM), build kinships (GRM, GAU, PedMat) and more.
 }
