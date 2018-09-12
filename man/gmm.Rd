@@ -71,4 +71,6 @@ fit$Vg*fit$cxx / (fit$Vg*fit$cxx+fit$Ve)
 
 }
 \keyword{ BLUP }
-\keyword{ BGS }
+\keyword{ BGS }                                                                                                                    
+\keyword{ GRM }
+\keyword{ SPATIAL }
