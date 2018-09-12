@@ -337,13 +337,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // GRM
-NumericMatrix GRM(NumericMatrix X);
-RcppExport SEXP _NAM_GRM(SEXP XSEXP) {
+NumericMatrix GRM(NumericMatrix X, bool Code012);
+RcppExport SEXP _NAM_GRM(SEXP XSEXP, SEXP Code012SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
-    rcpp_result_gen = Rcpp::wrap(GRM(X));
+    Rcpp::traits::input_parameter< bool >::type Code012(Code012SEXP);
+    rcpp_result_gen = Rcpp::wrap(GRM(X, Code012));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -408,6 +409,31 @@ BEGIN_RCPP
 END_RCPP
 }
 
+RcppExport SEXP NAM_calcSize(SEXP, SEXP);
+RcppExport SEXP NAM_CNT(SEXP);
+RcppExport SEXP NAM_emBA(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emBB(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emBC(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emBL(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emDE(SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emEN(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_emRR(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_funI(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_funX(SEXP, SEXP);
+RcppExport SEXP NAM_GAU(SEXP);
+RcppExport SEXP NAM_gs(SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_IMP(SEXP);
+RcppExport SEXP NAM_inputRow(SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_KMUP(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_KMUP2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_MSX(SEXP);
+RcppExport SEXP NAM_NOR(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_SAMP(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_SAMP2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_SPC(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_timesMatrix(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP NAM_timesVec(SEXP, SEXP, SEXP, SEXP);
+
 static const R_CallMethodDef CallEntries[] = {
     {"_NAM_emBA", (DL_FUNC) &_NAM_emBA, 4},
     {"_NAM_emBB", (DL_FUNC) &_NAM_emBB, 5},
@@ -433,11 +459,35 @@ static const R_CallMethodDef CallEntries[] = {
     {"_NAM_IMP", (DL_FUNC) &_NAM_IMP, 1},
     {"_NAM_NOR", (DL_FUNC) &_NAM_NOR, 6},
     {"_NAM_GAU", (DL_FUNC) &_NAM_GAU, 1},
-    {"_NAM_GRM", (DL_FUNC) &_NAM_GRM, 1},
+    {"_NAM_GRM", (DL_FUNC) &_NAM_GRM, 2},
     {"_NAM_SPC", (DL_FUNC) &_NAM_SPC, 6},
     {"_NAM_SPM", (DL_FUNC) &_NAM_SPM, 5},
     {"_NAM_BRR2", (DL_FUNC) &_NAM_BRR2, 7},
     {"_NAM_emGWA", (DL_FUNC) &_NAM_emGWA, 2},
+    {"NAM_calcSize",    (DL_FUNC) &NAM_calcSize,    2},
+    {"NAM_CNT",         (DL_FUNC) &NAM_CNT,         1},
+    {"NAM_emBA",        (DL_FUNC) &NAM_emBA,        4},
+    {"NAM_emBB",        (DL_FUNC) &NAM_emBB,        5},
+    {"NAM_emBC",        (DL_FUNC) &NAM_emBC,        5},
+    {"NAM_emBL",        (DL_FUNC) &NAM_emBL,        4},
+    {"NAM_emDE",        (DL_FUNC) &NAM_emDE,        3},
+    {"NAM_emEN",        (DL_FUNC) &NAM_emEN,        4},
+    {"NAM_emRR",        (DL_FUNC) &NAM_emRR,        4},
+    {"NAM_funI",        (DL_FUNC) &NAM_funI,        4},
+    {"NAM_funX",        (DL_FUNC) &NAM_funX,        2},
+    {"NAM_GAU",         (DL_FUNC) &NAM_GAU,         1},
+    {"NAM_gs",          (DL_FUNC) &NAM_gs,          4},
+    {"NAM_IMP",         (DL_FUNC) &NAM_IMP,         1},
+    {"NAM_inputRow",    (DL_FUNC) &NAM_inputRow,    3},
+    {"NAM_KMUP",        (DL_FUNC) &NAM_KMUP,        8},
+    {"NAM_KMUP2",       (DL_FUNC) &NAM_KMUP2,       9},
+    {"NAM_MSX",         (DL_FUNC) &NAM_MSX,         1},
+    {"NAM_NOR",         (DL_FUNC) &NAM_NOR,         6},
+    {"NAM_SAMP",        (DL_FUNC) &NAM_SAMP,        5},
+    {"NAM_SAMP2",       (DL_FUNC) &NAM_SAMP2,       8},
+    {"NAM_SPC",         (DL_FUNC) &NAM_SPC,         6},
+    {"NAM_timesMatrix", (DL_FUNC) &NAM_timesMatrix, 5},
+    {"NAM_timesVec",    (DL_FUNC) &NAM_timesVec,    4},
     {NULL, NULL, 0}
 };
 
