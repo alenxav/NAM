@@ -247,7 +247,7 @@ press = function(y, K, MaxIt=10){
         y = y1 = ifelse(w,fit,y)
         cnv = sum((y0[which(w)]-y1[which(w)])**2)
         its = its+1
-        cat(its,cnv,'\n')
+        # cat(its,cnv,'\n')
       }
     }else{
       fit = c(tcrossprod(t(y),H));
