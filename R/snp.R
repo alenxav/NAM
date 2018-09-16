@@ -5,7 +5,7 @@ snpH2=function(gen,K=NULL){
   if(!is.null(K)){ if(!is.numeric(K)) stop("Object K must to be a numeric matrix")  }
   anyNA = function(x) any(is.na(x))
   # Checking for missing and imputing
-  if(any(is.na(gen))) IMP(gen)
+  if(any(is.na(gen))) gen = IMP(gen)
 # Setup
 snps = ncol(gen)
 obs = nrow(gen)
