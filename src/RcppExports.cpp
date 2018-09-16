@@ -410,6 +410,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// BCpi
+SEXP BCpi(NumericVector y, NumericMatrix X, double it, double bi, double df, double R2);
+RcppExport SEXP _NAM_BCpi(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BCpi(y, X, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 RcppExport SEXP NAM_calcSize(SEXP, SEXP);
 RcppExport SEXP NAM_CNT(SEXP);
@@ -466,6 +482,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_NAM_SPM", (DL_FUNC) &_NAM_SPM, 5},
     {"_NAM_BRR2", (DL_FUNC) &_NAM_BRR2, 7},
     {"_NAM_emGWA", (DL_FUNC) &_NAM_emGWA, 2},
+    {"_NAM_BCpi", (DL_FUNC) &_NAM_BCpi, 6},
     {"NAM_calcSize",    (DL_FUNC) &NAM_calcSize,    2},
     {"NAM_CNT",         (DL_FUNC) &NAM_CNT,         1},
     {"NAM_emBA",        (DL_FUNC) &NAM_emBA,        4},
