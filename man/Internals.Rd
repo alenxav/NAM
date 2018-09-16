@@ -76,9 +76,9 @@ Some of the functions available for users include:
 
 11) \code{emXX(y,gen,...):}{  Fits whole-genome regressions using the expectation-maximization algorithm as opposed to MCMC. Currently avaible methods include BayesA (\code{emBA}), BayesB (\code{emBB}), BayesC (\code{emBC}), BLASSO (\code{emBL}), BLASSO2 (\code{emDE}), Elastic-Net (\code{emEN}), maximum likelihood (\code{emML}), and Ridge regression (\code{emRR}).}
 
-12) \code{CNT(X):}{  Centralizes parameters from matrix \code{X}. Useful to convert allele coding from 012 or -101 into G2A coding. This function does not return anything, rather it modifies \code{X} directly.}
+12) \code{CNT(X):}{  Centralizes parameters from matrix \code{X}.}
 
-13) \code{IMP(X):}{  Imputes missing points from matrix \code{X} with the average value of the column. This function does not return anything, rather it modifies \code{X} directly.}
+13) \code{IMP(X):}{  Imputes missing points from matrix \code{X} with the average value of the column.}
 
 14) \code{GAU(X):}{ Creates a Gaussian kernel from matrix \code{X}.}
 
