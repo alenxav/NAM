@@ -264,17 +264,17 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
     e = e-bvs
     
     if(KERN){
-      Vb = (sum(g^2/V) + Sk_prior)/rchisq(1, df_prior + p)
-      Ve = (crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
+      Vb = c(sum(g^2/V) + Sk_prior)/rchisq(1, df_prior + p)
+      Ve = c(crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
       L = Ve/(Vb*V)
     }else{
       # Update BayesA variance components
       S_conj = rgamma(1, p * df_prior/2 + shape_prior, sum(1/(g^2))/2 + rate_prior)
       # For every round
-      Vb = (S_conj + g^2)/rchisq(p, df_prior + 1)
+      Vb = c(S_conj + g^2)/rchisq(p, df_prior + 1)
       S_conj = rgamma(1, p * df_prior/2 + shape_prior,sum(1/Vb)/2 + rate_prior)  
       # Update Ve and Lambda
-      Ve = (crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
+      Ve = c(crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
       L = Ve/Vb
     }
     
@@ -347,38 +347,38 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
       
       # (d) Update VC
       if(model=="BRR"){
-        Va = (sum(g^2) + S_prior)/rchisq(1, df_prior + p)
+        Va = c(sum(g^2) + S_prior)/rchisq(1, df_prior + p)
         Vm = rep(Va,p)
-        Ve = (crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
+        Ve = c(crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
         L = Ve/Vm
       }
       if(model=="BayesA"){
-        Vm = (S_conj + g^2)/rchisq(p, df_prior + 1)
+        Vm = c(S_conj + g^2)/rchisq(p, df_prior + 1)
         S_conj = rgamma(1, p * df_prior/2 + shape_prior,sum(1/Vb)/2 + rate_prior)  
-        Ve = (crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
+        Ve = c(crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
         L = Ve/Vm
       }
       if(model=="BLASSO"){
         AG=abs(g); MAG=mean(AG); phi=(AG*MAG+S_prior)*(1+rpois(1,10))
         Vm = rchisq(p,phi)
-        Ve = (crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
+        Ve = c(crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
         L = Ve/Vm
       }
       if(model=="Average"){
         AG=abs(g); MAG=mean(AG); phi=(AG*MAG+S_prior)*(1+rpois(1,10))
-        Va = (sum(g^2) + S_prior)/rchisq(1, df_prior + p) # Ridge
-        Vb = (S_conj + g^2)/rchisq(p, df_prior + 1) # BayesA
+        Va = c(sum(g^2) + S_prior)/rchisq(1, df_prior + p) # Ridge
+        Vb = c(S_conj + g^2)/rchisq(p, df_prior + 1) # BayesA
         Vc = rchisq(p,phi) # Bayesian LASSO
-        Vm = (Va+Vb+Vc)/3 # Average
+        Vm = c(Va+Vb+Vc)/3 # Average
         S_conj = rgamma(1, p * df_prior/2 + shape_prior,sum(1/Vb)/2 + rate_prior)  
         Ve = (crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
-        L = Ve/Vm
+        L = c(Ve)/c(Vm)
       }
       if(KERN){
-        Va = (sum(g^2/V) + Sk_prior)/rchisq(1, df_prior + p)
+        Va = c(sum(g^2/V) + Sk_prior)/rchisq(1, df_prior + p)
         Vm = rep(Va,p)
-        Ve = (crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
-        L = Ve/(Vm*V)
+        Ve = c(crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
+        L = c(Ve)/c(Vm*V)
       }
       
     }
