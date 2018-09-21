@@ -42,19 +42,19 @@ CV_NAM=function(y,gen,k=5,Seeds=1:5,IT=500,BI=100,cl=NULL){
     cat('emDE\n')
     f9=emDE(y[-w],gen[-w,])
     # Mix L1l2
-    cat('emBL\n')
-    f10=emBL(y[-w],gen[-w,])
+    cat('emBB\n')
+    f10=emBB(y[-w],gen[-w,])
     # Elastic net
     cat('emEN\n')
     f11=emEN(y[-w],gen[-w,])
     # Maximum likelihood
     cat('emML\n')
     f12=emML(y[-w],gen[-w,])
-    
+   
     NamesMod = c('BayesA','BayesB','BayesC',
                  'BRR','BLASSO','GBLUP','RKHS',
-                 'emRR','emDE','emBL','emEN','emML'
-                 'OBSERVATION')
+                 'emRR','emDE','emBB','emEN',
+                 'emML', 'OBSERVATION')
     
     M = matrix(NA,Nk,length(NamesMod))
     colnames(M) = NamesMod
