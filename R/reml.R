@@ -280,6 +280,78 @@ press = function(y, K, MaxIt=10){
   OUT = list(hat=FIT, lambda=LMB, press=PRESS)
   return(OUT)}
 
+emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE,llo=NULL){
+  folds = function(Seed, y, gen, k) {
+    N = nrow(gen)
+    set.seed(Seed)
+    Nk = round(N/k)
+    w = sample(1:N, Nk)
+    Y = y
+    y[w] = NA
+    f1 = emRR(y[-w], gen[-w, ], R2 = R2, df = df)
+    f2 = emEN(y[-w], gen[-w, ], alpha = alpha, R2 = R2)
+    f3 = emBL(y[-w], gen[-w, ], alpha = alpha, R2 = R2)
+    f4 = emDE(y[-w], gen[-w, ], R2 = R2)
+    f5 = emBA(y[-w], gen[-w, ], R2 = R2, df = df)
+    f6 = emBB(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
+    f7 = emBC(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
+    f8 = emML(y[-w], gen[-w, ])
+    cat("DONE WITH CROSS-VALIDATION CYCLE", Seed, "\n")
+    NamesMod = c("emRR", "emEN", "emBL", "emDE", "emBA", 
+                 "emBB", "emBC", "emML", "OBSERVATION")
+    M = matrix(NA, Nk, length(NamesMod))
+    colnames(M) = NamesMod
+    for (i in 1:(length(NamesMod)-1)) M[, i] = gen[w, ] %*% get(paste("f", i,sep = ""))$b
+    M[,length(NamesMod)] = Y[w]
+    return(M)
+  }
+  llo_folds = function(lev, y, gen) {
+    w = which(llo==lev)
+    Nk = length(w)
+    Y = y
+    y[w] = NA
+    f1 = emRR(y[-w], gen[-w, ], R2 = R2, df = df)
+    f2 = emEN(y[-w], gen[-w, ], alpha = alpha, R2 = R2)
+    f3 = emBL(y[-w], gen[-w, ], alpha = alpha, R2 = R2)
+    f4 = emDE(y[-w], gen[-w, ], R2 = R2)
+    f5 = emBA(y[-w], gen[-w, ], R2 = R2, df = df)
+    f6 = emBB(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
+    f7 = emBC(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
+    f8 = emML(y[-w], gen[-w, ])
+    cat("DONE WITH CROSS-VALIDATION CYCLE", lev, "\n")
+    NamesMod = c("emRR", "emEN", "emBL", "emDE", "emBA", 
+                 "emBB", "emBC", "emML", "OBSERVATION")
+    M = matrix(NA, Nk, length(NamesMod))
+    colnames(M) = NamesMod
+    for (i in 1:(length(NamesMod)-1)) M[, i] = gen[w, ] %*% get(paste("f", i,sep = ""))$b
+    M[,length(NamesMod)] = Y[w]
+    return(M)
+  }
+  if(is.null(llo)){
+    Seeds = 1:n
+    b = lapply(Seeds, FUN = folds, y = y, gen = gen, k = k)
+  }else{
+    lev = unique(as.character(llo))
+    b = lapply(lev, FUN = llo_folds, y = y, gen = gen)
+  }
+  names(b) = paste("CV_", 1:length(b), sep = "")
+  sCV = function(cv) {
+    n = length(cv)
+    m = ncol(cv$CV_1)
+    if(avg){
+      dta = matrix(0, 0, m)
+      for (i in 1:n) dta = rbind(dta, cv[[i]])
+      PA = sort(cor(dta)[-m, m], decreasing = TRUE)
+      return(round(PA, digits = 4))
+    }else{
+      dta = c()
+      for (i in 1:n) dta = rbind(dta, cor(cv[[i]])[-m, m])
+      rownames(dta) = paste('CV',1:n,sep='_')
+      return(round(dta, digits = 4))
+    }
+  }
+  return(sCV(b))
+}
                  
                  
                  
