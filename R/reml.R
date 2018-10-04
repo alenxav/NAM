@@ -280,7 +280,7 @@ press = function(y, K, MaxIt=10){
   OUT = list(hat=FIT, lambda=LMB, press=PRESS)
   return(OUT)}
 
-emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE,llo=NULL){
+emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE, llo=NULL){
   folds = function(Seed, y, gen, k) {
     N = nrow(gen)
     set.seed(Seed)
@@ -296,9 +296,10 @@ emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE,
     f6 = emBB(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
     f7 = emBC(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
     f8 = emML(y[-w], gen[-w, ])
+    f9 = emMX(y[-w], gen[-w, ], R2 = R2)
     cat("DONE WITH CROSS-VALIDATION CYCLE", Seed, "\n")
     NamesMod = c("emRR", "emEN", "emBL", "emDE", "emBA", 
-                 "emBB", "emBC", "emML", "OBSERVATION")
+                 "emBB", "emBC", "emML", "emMX", "OBSERVATION")
     M = matrix(NA, Nk, length(NamesMod))
     colnames(M) = NamesMod
     for (i in 1:(length(NamesMod)-1)) M[, i] = gen[w, ] %*% get(paste("f", i,sep = ""))$b
@@ -318,9 +319,10 @@ emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE,
     f6 = emBB(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
     f7 = emBC(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
     f8 = emML(y[-w], gen[-w, ])
+    f9 = emMX(y[-w], gen[-w, ], R2 = R2)
     cat("DONE WITH CROSS-VALIDATION CYCLE", lev, "\n")
     NamesMod = c("emRR", "emEN", "emBL", "emDE", "emBA", 
-                 "emBB", "emBC", "emML", "OBSERVATION")
+                 "emBB", "emBC", "emML", "emMX", "OBSERVATION")
     M = matrix(NA, Nk, length(NamesMod))
     colnames(M) = NamesMod
     for (i in 1:(length(NamesMod)-1)) M[, i] = gen[w, ] %*% get(paste("f", i,sep = ""))$b
@@ -352,6 +354,3 @@ emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE,
   }
   return(sCV(b))
 }
-                 
-                 
-                 
