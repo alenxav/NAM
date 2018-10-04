@@ -19,6 +19,7 @@
 \alias{emDE}
 \alias{emEN}
 \alias{emML}
+\alias{emMX}
 \alias{emCV}
 \alias{BRR2}
 \alias{Gdist}
