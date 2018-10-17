@@ -210,7 +210,7 @@ gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,
   
   # Mean and Mode Posterior
   Mean.B = apply(POSTg,1,mean)
-  Post.VC = c(apply(POSTv,1,moda))
+  Post.VC = c(apply(POSTv,1,mean))
   names(Post.VC) = c(paste("Va",1:Randoms,sep=""),"Ve")
   rownames(POSTv) = c(paste("Va",1:Randoms,sep=""),"Ve")
   
