@@ -95,10 +95,10 @@ gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,
   # GSRU does not deal with WW or iK
   if(!GSRU){
     if(is.null(iR)){
-      r = crossprod(W,y)
+      r = c(crossprod(W,y))
       WW = (crossprod(W))
     }else{
-      r = crossprod(W,iR)%*%y
+      r = c(crossprod(W,iR)%*%y)
       WW = (crossprod(W,iR))%*%W
     }
     # Covariance Matrix
@@ -168,7 +168,7 @@ gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,
     
     # Residual variance
     e = y - W%*%g
-    Ve = (crossprod(e)+S0b*df0b) / rchisq(1,df=dfe)
+    Ve = c(crossprod(e)+S0b*df0b) / rchisq(1,df=dfe)
     
     # Ve/Va
     lambda = Ve/Va
@@ -320,10 +320,10 @@ ml = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,DF=5,S=0.5,nor=TRUE){
   n = length(y)
   
   if(is.null(iR)){
-    r = crossprod(W,y)
+    r = c(crossprod(W,y))
     WW = (crossprod(W))
   }else{
-    r = crossprod(W,iR)%*%y
+    r = c(crossprod(W,iR)%*%y)
     WW = (crossprod(W,iR))%*%W
   }
   
@@ -331,8 +331,7 @@ ml = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,DF=5,S=0.5,nor=TRUE){
   Sigma = matrix(0,N,N)
   for(i in 1:Randoms) Sigma[Qs1[i+1]:Qs2[i+1],Qs1[i+1]:Qs2[i+1]] = iK[[i]]*lambda[i]
   # Matching WW and Sigma
-  C = WW+Sigma
-  
+  C = WW+Sigma  
   g = rep(0,N)
   
   # Variance components
@@ -350,15 +349,15 @@ ml = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,DF=5,S=0.5,nor=TRUE){
   while(cf>1e-10){
     
     # Ve/Va
-    lambda = Ve/Va
+    lambda = c(Ve/Va)
     
     # Updating C
     for(i in 1:Randoms) Sigma[Qs1[i+1]:Qs2[i+1],Qs1[i+1]:Qs2[i+1]] = iK[[i]]*lambda[i]
     C = WW+Sigma
     
     # Residual variance
-    e = y - tcrossprod(g,W)
-    Ve = (tcrossprod(e)+S*DF)/dfe
+    e = y - c(tcrossprod(g,W))
+    Ve = c(tcrossprod(e)+S*DF)/dfe
     
     # the C++ SAMP updates "g" and doesn't return anything
     gs(C,g,r,N)
