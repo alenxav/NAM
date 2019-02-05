@@ -45,6 +45,7 @@
 \alias{press}
 \alias{emGWA}
 \alias{BCpi}
+\alias{mrr}
 \title{
   Internal functions
 }
