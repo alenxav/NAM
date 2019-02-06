@@ -79,7 +79,7 @@ Some of the functions available for users include:
 
 11) \code{NNcov(NN,y):}{  This function utilizes the output of \code{NNsrc} to generate a numeric vector, averageing the observed values of \code{y}. This function is useful to generate field covariates to control micro-environmental variance without krigging.}
 
-11) \code{emXX(y,gen,...):}{  Fits whole-genome regressions using the expectation-maximization algorithm as opposed to MCMC. Currently avaible methods include BayesA (\code{emBA}), BayesB (\code{emBB}), BayesC (\code{emBC}), BLASSO (\code{emBL}), BLASSO2 (\code{emDE}), Elastic-Net (\code{emEN}), maximum likelihood (\code{emML}), and Ridge regression (\code{emRR}). A cross-validation option is also available (\code{emCV}). Vide package bWGR for the documentation of these functions.}
+11) \code{emXX(y,gen,...):}{  Fits whole-genome regressions using the expectation-maximization algorithm as opposed to MCMC. Currently avaible methods include BayesA (\code{emBA}), BayesB (\code{emBB}), BayesC (\code{emBC}), BLASSO (\code{emBL}), BLASSO2 (\code{emDE}), Elastic-Net (\code{emEN}), maximum likelihood (\code{emML}), Ridge regression (\code{emRR}), and mixed-normals prior (\code{emMX}). A cross-validation option is also available (\code{emCV}).}
 
 12) \code{CNT(X):}{  Centralizes parameters from matrix \code{X}.}
 
@@ -99,11 +99,13 @@ Some of the functions available for users include:
 
 20) \code{BRR2(y,X1,X2,it=1500,bi=500,df=5,R2=0.5):}{ A simple C++ implementation of a Bayesian Ridge Regression that accomodates two random effects.}
 
-21) \code{press(y,K,MaxIt=10):}{Solves a PRESS-regularized GBLUP. You can provide K as a matrix or as the output of the functin eigen. MaxIt the maximum number of iterations to for updating missing values (if any) if H*y does not converge.} 
+21) \code{emML2(y,X1,X2,D1=NULL,D2=NULL):}{ A simple C++ implementation of emML that accomodates two random effects.}
 
-22) \code{emGWA(y,gen):}{ A vanilla algorithm written in C++ for GWAS (very simple, but very efficient). It fits a snpBLUP via EM-REML based GSRU, then run an additional round checkinkg the likelihood of treating each marker as fixed effect instead of random, thus avoiding double-fitting. It returns the marker p-values, snpBLUP marker effects for genomic prediction, LS marker effects from the GWAS, variance components, heritability, and GEBVs (fitted values).}
+22) \code{press(y,K,MaxIt=10):}{Solves a PRESS-regularized GBLUP. You can provide K as a matrix or as the output of the functin eigen. MaxIt the maximum number of iterations to for updating missing values (if any) if H*y does not converge.} 
 
-23) \code{BCpi(y,X,it=3000,bi=500,df=5,R2=0.5):}{ A vanilla implementation in C++ of BayesCpi for GWAS or GWP. It returns the marker p-values (as the minus log probability of marker excluded), marker effects for genomic prediction, probability of marker included, variance components, heritability, and GEBVs (fitted values). }
+23) \code{emGWA(y,gen):}{ A vanilla algorithm written in C++ for GWAS (very simple, but very efficient). It fits a snpBLUP via EM-REML based GSRU, then run an additional round checkinkg the likelihood of treating each marker as fixed effect instead of random, thus avoiding double-fitting. It returns the marker p-values, snpBLUP marker effects for genomic prediction, LS marker effects from the GWAS, variance components, heritability, and GEBVs (fitted values).}
+
+24) \code{BCpi(y,X,it=3000,bi=500,df=5,R2=0.5):}{ A vanilla implementation in C++ of BayesCpi for GWAS or GWP. It returns the marker p-values (as the minus log probability of marker excluded), marker effects for genomic prediction, probability of marker included, variance components, heritability, and GEBVs (fitted values). }
 
 }
 \author{
