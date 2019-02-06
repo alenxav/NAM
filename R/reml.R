@@ -1,5 +1,7 @@
 reml=function(y,X=NULL,Z=NULL,K=NULL){
   
+  Y=y
+  
   anyNA = function(x) any(is.na(x))
   if(!is.matrix(y)){
     # Dealing with random effect
