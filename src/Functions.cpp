@@ -1071,7 +1071,7 @@ SEXP BCpi(NumericVector y, NumericMatrix X,
 // [[Rcpp::export]]
 SEXP mrr(NumericMatrix Y, NumericMatrix X, bool Choleski = false){  
   // Convergence parameters
-  int maxit = 350;
+  int maxit = 150;
   double tol = 10e-8;  
   // Obtain environment containing function
   Rcpp::Environment base("package:base");
