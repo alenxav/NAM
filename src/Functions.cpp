@@ -1154,7 +1154,7 @@ SEXP emML2(NumericVector y, NumericMatrix X1, NumericMatrix X2,
                             Named("h2")=h2, Named("hat")=fit);}
 
 // [[Rcpp::export]]
-SEXP mrr(NumericMatrix Y, NumericMatrix X, bool bb = false){
+SEXP mrr(NumericMatrix Y, NumericMatrix X, bool bb = true){
   // Convergence parameters
   int maxit = 100; double tol = 10e-8;
   // Obtain environment containing function
