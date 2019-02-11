@@ -35,7 +35,7 @@ fixed<-function(lambda){
   beta<-qr.solve(xx,yx)
   sigma2<-(yy-t(yx)%*%solve(xx)%*%yx)/(n-q)
   sigma2 = as.numeric(sigma2)
-  var<-diag((chol2inv(xx))*sigma2)
+  var<-diag((solve(xx))*sigma2)
   stderr<-sqrt(var)
   return(c(beta,stderr,sigma2))}
 # Eigendecomposition of K
