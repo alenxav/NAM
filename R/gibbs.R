@@ -506,7 +506,7 @@ gibbs2 = function(Y,Z=NULL,X=NULL,iK=NULL,Iter=150,Burn=50,Thin=1,DF=5,S=0.5,nor
   n = length(Yk)
   
   # Keeping on
-  iR = chol2inv(R)
+  iR = solve(R)
   MM = t(Wk) %*% iR %*% Wk
   r = t(Wk) %*% iR %*% Yk
   
@@ -556,7 +556,7 @@ gibbs2 = function(Y,Z=NULL,X=NULL,iK=NULL,Iter=150,Burn=50,Thin=1,DF=5,S=0.5,nor
     R = kronecker(Ve,diag(n0))
     if(Ms) R=R[-MIS,-MIS]
     
-    iR = chol2inv(R)
+    iR = solve(R)
     MM = t(Wk) %*% iR %*% Wk
     r = t(Wk) %*% iR %*% Yk
     for(i in 1:Randoms) Sigma[Qs1[i+1]:Qs2[i+1],Qs1[i+1]:Qs2[i+1]] = kronecker(lambda[[i]],iK[[i]])
