@@ -1096,10 +1096,10 @@ gwas2 = function(y,gen,fam=NULL,chr=NULL,fixed=FALSE,EIG=NULL,cov=NULL){
       v<-zzi*drop(s2);
       if(r==1){
         g<-b; gamma<-g
-        wald<-t(b)%*%chol2inv(v)%*%b
+        wald<-t(b)%*%solve(v)%*%b
       }else{
         g<-b-mean(b); gamma<-g
-        wald<-t(g)%*%chol2inv(v)%*%g}
+        wald<-t(g)%*%solve(v)%*%g}
       sigma2<-s2
       if(r>1){
         rownames(gamma) = c("std.eff",paste("eff.",1:(r-1),sep=""))
@@ -1643,7 +1643,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
       detCAP = determinant.matrix(Capacitance)$modulus[1]
       detK = determinant.matrix(kk)$modulus[1]
       d = detCAP+detK # logDet
-      Capacitance = chol2inv(Capacitance)
+      Capacitance = solve(Capacitance)
       vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
       xpx = sum(vv)
       xpy = sum(crossprod(vv,y))
@@ -1663,7 +1663,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
       detCAP = determinant.matrix(Capacitance)$modulus[1]
       detK = determinant.matrix(kk)$modulus[1]
       d = detCAP+detK # logDet
-      Capacitance = chol2inv(Capacitance)
+      Capacitance = solve(Capacitance)
       vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
       r = y-mu
       like = -0.5*( d + sum(crossprod(vv,r)*r) )
@@ -1677,7 +1677,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
       RU = crossprod(ikk,U)
       Capacitance = crossprod(U,RU)
       diag(Capacitance) = diag(Capacitance)+1
-      Capacitance = chol2inv(Capacitance)
+      Capacitance = solve(Capacitance)
       vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
       xpx = sum(vv)
       xpy = sum(crossprod(vv,y))
@@ -1697,7 +1697,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
       detCAP = determinant.matrix(Capacitance)$modulus[1]
       detK = determinant.matrix(kk)$modulus[1]
       d = detCAP+detK # logDet
-      Capacitance = chol2inv(Capacitance)
+      Capacitance = solve(Capacitance)
       vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
       xpx = sum(vv)
       xpy = sum(crossprod(vv,y))
@@ -1717,7 +1717,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
       detCAP = determinant.matrix(Capacitance)$modulus[1]
       detK = determinant.matrix(kk)$modulus[1]
       d = detCAP+detK # logDet
-      Capacitance = chol2inv(Capacitance)
+      Capacitance = solve(Capacitance)
       vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
       r = y-mu
       like = -0.5*( d + sum(crossprod(vv,r)*r) )
@@ -1730,7 +1730,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
       RU = crossprod(ikk,U)
       Capacitance = crossprod(U,RU)
       diag(Capacitance) = diag(Capacitance)+1
-      Capacitance = chol2inv(Capacitance)
+      Capacitance = solve(Capacitance)
       vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
       xpx = sum(vv)
       xpy = sum(crossprod(vv,y))
@@ -1811,7 +1811,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
         # generate known residual covariance matrix
         for(j in 1:E){
           k1 = ByEnv[[j]]$VAR[,,i]
-          k2 = chol2inv(k1)
+          k2 = solve(k1)
           kk[(cVi[j]+1):cVi[j+1],(cVi[j]+1):cVi[j+1]]=k1
           ikk[(cVi[j]+1):cVi[j+1],(cVi[j]+1):cVi[j+1]]=k2
         }
@@ -1844,7 +1844,7 @@ gwasGE = function(Phe,gen,fam,chr=NULL,cov=NULL,ge=FALSE,ammi=1){
         # generate known residual covariance matrix
         for(j in 1:E){
           k1 = ByEnv[[j]]$VAR[,,i]
-          k2 = chol2inv(k1)
+          k2 = solve(k1)
           kk[(cVi[j]+1):cVi[j+1],(cVi[j]+1):cVi[j+1]]=k1
           ikk[(cVi[j]+1):cVi[j+1],(cVi[j]+1):cVi[j+1]]=k2
         } 
@@ -2331,7 +2331,7 @@ meta3 = function(ByEnv,ammi=1){
     detCAP = determinant.matrix(Capacitance)$modulus[1]
     detK = determinant.matrix(kk)$modulus[1]
     d = detCAP+detK # logDet
-    Capacitance = chol2inv(Capacitance)
+    Capacitance = solve(Capacitance)
     vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
     xpx = sum(vv)
     xpy = sum(crossprod(vv,y))
@@ -2351,7 +2351,7 @@ meta3 = function(ByEnv,ammi=1){
     detCAP = determinant.matrix(Capacitance)$modulus[1]
     detK = determinant.matrix(kk)$modulus[1]
     d = detCAP+detK # logDet
-    Capacitance = chol2inv(Capacitance)
+    Capacitance = solve(Capacitance)
     vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
     r = y-mu
     like = -0.5*( d + sum(crossprod(vv,r)*r) )
@@ -2365,7 +2365,7 @@ meta3 = function(ByEnv,ammi=1){
     RU = crossprod(ikk,U)
     Capacitance = crossprod(U,RU)
     diag(Capacitance) = diag(Capacitance)+1
-    Capacitance = chol2inv(Capacitance)
+    Capacitance = solve(Capacitance)
     vv = ikk - tcrossprod(RU,Capacitance)%*%crossprod(U,ikk)
     xpx = sum(vv)
     xpy = sum(crossprod(vv,y))
@@ -2453,7 +2453,7 @@ meta3 = function(ByEnv,ammi=1){
     # generate known residual covariance matrix
     for(j in 1:E){
       k1 = ByEnv[[j]]$VAR[,,i]
-      k2 = chol2inv(k1)
+      k2 = solve(k1)
       kk[(cVi[j]+1):cVi[j+1],(cVi[j]+1):cVi[j+1]]=k1
       ikk[(cVi[j]+1):cVi[j+1],(cVi[j]+1):cVi[j+1]]=k2
     } 
