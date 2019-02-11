@@ -222,11 +222,11 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
     # First round of WGR: Setting priors
     if(KERN){
       R2 = 0.5
-      df_prior = 5
+      df_prior = 10
       Sk_prior = R2 * var(y, na.rm = T) * (df_prior + 2)
     }else{
       R2 = 0.5
-      df_prior = 3
+      df_prior = 10
       MSx = sum(apply(gen, 2, var, na.rm = T))
       S_prior = R2 * var(y, na.rm = T) * (df_prior + 2)/MSx
       shape_prior = 1.1
