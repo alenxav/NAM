@@ -66,7 +66,7 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
       beta=qr.solve(xx,yx)
       sigma2=(yy-t(yx)%*%solve(xx)%*%yx)/(n-q)
       sigma2 = as.numeric(sigma2)
-      var=diag((chol2inv(xx))*sigma2)
+      var=diag((solve(xx))*sigma2)
       stderr=sqrt(var)
       return(c(beta,stderr,sigma2))}
     # Eigendecomposition of K
@@ -111,7 +111,7 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
     if(model=='Mixed'){
       ZZ = crossprod(z)
       diag(K0)=diag(K0)+1e-8
-      ZZ = ZZ + chol2inv(K0)*(Ve/Vg)
+      ZZ = ZZ + solve(K0)*(Ve/Vg)
       Zy = crossprod(z,re)
       U = solve(ZZ,Zy)
     }
