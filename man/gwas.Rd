@@ -104,12 +104,12 @@ Zhou, X., & Stephens, M. (2012). Genome-wide efficient mixed-model analysis for 
 Alencar Xavier, Tiago Pimenta, Qishan Wang and Shizhong Xu
 }
 \examples{
-
+\dontrun{
 data(tpod)
 gen=reference(gen)
 gwa=gwas2(y=y,gen=gen,fam=fam,chr=chr,fixed=TRUE)
 plot(gwa,pch=20,lwd=4)
-
+}
 }
 \keyword{ NAM }
 \keyword{ GWAS }
