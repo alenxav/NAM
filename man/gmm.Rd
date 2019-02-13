@@ -60,15 +60,17 @@ the random effect coefficients (\code{g}), variance components of markers (\code
 Alencar Xavier
 }
 \examples{
+\dontrun{
 
-# For a demo with wulti-environmental trial type:
-# demo(fittingMET)
-
-# Checking heritability
+  # Checking heritability
 data(tpod)
 fit = gmm(y,gen,model = 'BRR')
 fit$Vg*fit$cxx / (fit$Vg*fit$cxx+fit$Ve)
-
+  
+# For a demo with wulti-environmental trial type:
+# demo(fittingMET)
+  
+}
 }
 \keyword{ BLUP }
 \keyword{ BGS }                                                                                                                    
