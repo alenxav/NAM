@@ -30,9 +30,9 @@ Alencar Xavier
 
 }
 \examples{
-
+\dontrun{
 data(tpod)
 Heritability=snpH2(gen)
 plot(Heritability,chr=chr)
-
+}
 }
