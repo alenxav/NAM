@@ -79,7 +79,8 @@ Xavier, A., Hall, B., Casteel, S., Muir, W. and Rainey, K.M. (2017). Using unsup
 Alencar Xavier
 }
 \examples{
-
+\dontrun{
+      
 data(tpod)
 
 # Fitting GBLUP
@@ -115,7 +116,7 @@ plot(test2,col=3,lwd=2)
 # Heritability
 print(paste('h2 =',round(test2$VC.estimate[1]/sum(test2$VC.estimate),3)))
 
-
+}
 }
 \keyword{ BLUP }
 \keyword{ BGS }
