@@ -1,6 +1,6 @@
 
 # Bayesian gibbs sampling
-gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,S=0.5,nor=TRUE,GSRU=FALSE){
+gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,S=NULL,nor=TRUE,GSRU=FALSE){
   
   anyNA = function(x) any(is.na(x))
   if(nor) y = (y-mean(y,na.rm = TRUE))/sd(y,na.rm = TRUE)
