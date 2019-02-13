@@ -57,7 +57,7 @@ VanRaden, P. M. (2008). Efficient methods to compute genomic predictions. Journa
 Alencar Xavier, Tiago Pimenta and Shizhong Xu
 }
 \examples{
-
+\dontrun{
 # Fitting a random model
 data(tpod)
 FIT = reml(y=y,Z=~as.factor(fam))
@@ -74,7 +74,7 @@ rbind(gblup$VC,rrblup$VC)
 gebv_gblup = gblup$EBV
 gebv_rrblup = c(tcrossprod(t(rrblup$EBV),gen))
 plot(gebv_gblup,gebv_rrblup)
-
+}
 }
 \keyword{ REML }
 \keyword{ BLUP }
