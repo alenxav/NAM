@@ -121,7 +121,9 @@ mixed = function(y,random=NULL,fixed=NULL,data=NULL,X=list(),alg=emML,maxit=10,D
             U[[i]] = c(go$b)
           }}}
       # VarComp & Lambda
-      Ve = crossprod(y,e)[1,1]/(n-df)
+      # Ve = crossprod(y,e)[1,1]/(n-df)
+      Va0 = sapply(U,sd)
+      Va = (Vy-Ve)*(Va0/sum(Va0)) 
       Va = (sapply(U,crossprod)+Ve)/(df0-1)
       LMB = sqrt(LMB0*Ve/Va)}
     
