@@ -38,6 +38,7 @@ Wright, S. (1965). The interpretation of population structure by F-statistics wi
   Alencar Xavier and William Muir
 }
 \examples{
+  
   data(tpod)
   Fstat = Fst(gen=gen,fam=fam)
   plot(Fstat,chr=chr)
