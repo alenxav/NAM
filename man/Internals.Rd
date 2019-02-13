@@ -32,7 +32,6 @@
 \alias{LD}
 \alias{G2A_Kernels}
 \alias{Import_data}
-\alias{.Random.seed}
 \alias{NNsrc}
 \alias{NNcov}
 \alias{CNT}
