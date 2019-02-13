@@ -62,8 +62,10 @@ Stekhoven, D. J. and Buhlmann, P. 2012. MissForest - nonparametric missing value
 Alencar Xavier, Katy Rainey and William Muir
 }
 \examples{
+  \dontrun{
 data(tpod)
 gen=reference(gen)
 gen=snpQC(gen=gen,psy=1,MAF=0.05,remove=TRUE,impute=FALSE)
 test=cleanREP(y,gen)
+  }
 }
