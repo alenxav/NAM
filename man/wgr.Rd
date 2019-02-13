@@ -88,27 +88,33 @@ Legarra, A., & Misztal, I. (2008). Technical note: Computing strategies in genom
 Alencar Xavier
 }
 \examples{
+    \dontrun{
 # Load data
 data(tpod)
 
 # BLUP
-BRR = wgr(y,gen,iv=FALSE,pi=0,it=200,bi=50)
+BRR = wgr(y,gen,iv=FALSE,pi=0)
 cor(y,BRR$hat)
 
 # BayesA
-BayesA = wgr(y,gen,iv=TRUE,pi=0,it=200,bi=50)
+BayesA = wgr(y,gen,iv=TRUE,pi=0)
 cor(y,BayesA$hat)
 
 # BayesB
-BayesB = wgr(y,gen,iv=TRUE,pi=.95,it=200,bi=50)
+BayesB = wgr(y,gen,iv=TRUE,pi=.95)
 cor(y,BayesB$hat)
 
 # BayesC
-BayesC = wgr(y,gen,iv=FALSE,pi=.95,it=200,bi=50)
+BayesC = wgr(y,gen,iv=FALSE,pi=.95)
 cor(y,BayesC$hat)
 
+# BayesCpi
+BayesCpi = BCpi(y,gen)
+cor(y,BayesCpi$hat)        
+        
 # BayesL
-BayesL = wgr(y,gen,de=TRUE,it=200,bi=50)
+BayesL = wgr(y,gen,de=TRUE)
 cor(y,BayesL$hat)
-
+        
+   }
 }
