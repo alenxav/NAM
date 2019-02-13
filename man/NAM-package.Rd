@@ -12,8 +12,8 @@ Designed for association studies in nested association mapping (NAM) panels, als
 \tabular{ll}{
 Package: \tab NAM\cr
 Type: \tab Package\cr
-Version: \tab 1.6.5 \cr
-Date: \tab 2019-02-10\cr
+Version: \tab 1.7 \cr
+Date: \tab 2019-02-13\cr
 License: \tab GPL-3 \cr
 }
 
