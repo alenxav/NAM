@@ -301,7 +301,7 @@ emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE,
     f5 = emBA(y[-w], gen[-w, ], R2 = R2, df = df)
     f6 = emBB(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
     f7 = emBC(y[-w], gen[-w, ], Pi = Pi, R2 = R2, df = df)
-    f8 = emMX(y[-w], gen[-w, ], R2 = R2)
+    f8 = emML(y[-w], gen[-w, ])
     cat("DONE WITH CROSS-VALIDATION CYCLE", Seed, "\n")
     NamesMod = c("emRR", "emEN", "emBL", "emDE", "emBA", 
                  "emBB", "emBC", "emML", "OBSERVATION")
