@@ -108,7 +108,7 @@ Some of the functions available for users include:
 
 24) \code{BCpi(y,X,it=3000,bi=500,df=5,R2=0.5):}{ A vanilla implementation in C++ of BayesCpi for GWAS or GWP. It returns the marker p-values (as the minus log probability of marker excluded), marker effects for genomic prediction, probability of marker included, variance components, heritability, and GEBVs (fitted values). }
 
-25) \code{mrr(Y,X):}{A C++ implementation for multivariate regression.}
+25) \code{mrr(Y,X)/mrrV2(Y,X)/mrr2X(Y,X1,X2):}{A C++ implementation for multivariate regression.}
 
 }
 \author{
