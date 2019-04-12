@@ -46,6 +46,8 @@
 \alias{emGWA}
 \alias{BCpi}
 \alias{mrr}
+\alias{mrrV2}
+\alias{mrr2X}
 \title{
   Internal functions
 }
