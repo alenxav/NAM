@@ -5,198 +5,9 @@
 
 using namespace Rcpp;
 
-// emBA
-SEXP emBA(NumericVector y, NumericMatrix gen, double df, double R2);
-RcppExport SEXP _NAM_emBA(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    rcpp_result_gen = Rcpp::wrap(emBA(y, gen, df, R2));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emBB
-SEXP emBB(NumericVector y, NumericMatrix gen, double df, double R2, double Pi);
-RcppExport SEXP _NAM_emBB(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP, SEXP PiSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    Rcpp::traits::input_parameter< double >::type Pi(PiSEXP);
-    rcpp_result_gen = Rcpp::wrap(emBB(y, gen, df, R2, Pi));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emBC
-SEXP emBC(NumericVector y, NumericMatrix gen, double df, double R2, double Pi);
-RcppExport SEXP _NAM_emBC(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP, SEXP PiSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    Rcpp::traits::input_parameter< double >::type Pi(PiSEXP);
-    rcpp_result_gen = Rcpp::wrap(emBC(y, gen, df, R2, Pi));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emRR
-SEXP emRR(NumericVector y, NumericMatrix gen, double df, double R2);
-RcppExport SEXP _NAM_emRR(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    rcpp_result_gen = Rcpp::wrap(emRR(y, gen, df, R2));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emBL
-SEXP emBL(NumericVector y, NumericMatrix gen, double R2, double alpha);
-RcppExport SEXP _NAM_emBL(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP, SEXP alphaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(emBL(y, gen, R2, alpha));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emDE
-SEXP emDE(NumericVector y, NumericMatrix gen, double R2);
-RcppExport SEXP _NAM_emDE(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    rcpp_result_gen = Rcpp::wrap(emDE(y, gen, R2));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emEN
-SEXP emEN(NumericVector y, NumericMatrix gen, double R2, double alpha);
-RcppExport SEXP _NAM_emEN(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP, SEXP alphaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(emEN(y, gen, R2, alpha));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emML
-SEXP emML(NumericVector y, NumericMatrix gen, Rcpp::Nullable<Rcpp::NumericVector> D);
-RcppExport SEXP _NAM_emML(SEXP ySEXP, SEXP genSEXP, SEXP DSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type D(DSEXP);
-    rcpp_result_gen = Rcpp::wrap(emML(y, gen, D));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emMX
-SEXP emMX(NumericVector y, NumericMatrix gen, double R2);
-RcppExport SEXP _NAM_emMX(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    rcpp_result_gen = Rcpp::wrap(emMX(y, gen, R2));
-    return rcpp_result_gen;
-END_RCPP
-}
-// calcSize
-int calcSize(NumericVector col, NumericVector fam);
-RcppExport SEXP _NAM_calcSize(SEXP colSEXP, SEXP famSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type col(colSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type fam(famSEXP);
-    rcpp_result_gen = Rcpp::wrap(calcSize(col, fam));
-    return rcpp_result_gen;
-END_RCPP
-}
-// funI
-NumericVector funI(NumericVector col, int fam, int finsiz, int f);
-RcppExport SEXP _NAM_funI(SEXP colSEXP, SEXP famSEXP, SEXP finsizSEXP, SEXP fSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type col(colSEXP);
-    Rcpp::traits::input_parameter< int >::type fam(famSEXP);
-    Rcpp::traits::input_parameter< int >::type finsiz(finsizSEXP);
-    Rcpp::traits::input_parameter< int >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(funI(col, fam, finsiz, f));
-    return rcpp_result_gen;
-END_RCPP
-}
-// funX
-NumericVector funX(NumericVector col, int finsiz);
-RcppExport SEXP _NAM_funX(SEXP colSEXP, SEXP finsizSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type col(colSEXP);
-    Rcpp::traits::input_parameter< int >::type finsiz(finsizSEXP);
-    rcpp_result_gen = Rcpp::wrap(funX(col, finsiz));
-    return rcpp_result_gen;
-END_RCPP
-}
-// gs
-void gs(NumericMatrix C, NumericVector g, NumericVector r, int N);
-RcppExport SEXP _NAM_gs(SEXP CSEXP, SEXP gSEXP, SEXP rSEXP, SEXP NSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type C(CSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type g(gSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type r(rSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    gs(C, g, r, N);
-    return R_NilValue;
-END_RCPP
-}
-// inputRow
-NumericVector inputRow(NumericVector x, int exp, int n);
-RcppExport SEXP _NAM_inputRow(SEXP xSEXP, SEXP expSEXP, SEXP nSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type exp(expSEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(inputRow(x, exp, n));
-    return rcpp_result_gen;
-END_RCPP
-}
 // KMUP
 SEXP KMUP(NumericMatrix X, NumericVector b, NumericVector d, NumericVector xx, NumericVector e, NumericVector L, double Ve, double pi);
-RcppExport SEXP _NAM_KMUP(SEXP XSEXP, SEXP bSEXP, SEXP dSEXP, SEXP xxSEXP, SEXP eSEXP, SEXP LSEXP, SEXP VeSEXP, SEXP piSEXP) {
+RcppExport SEXP _bWGR_KMUP(SEXP XSEXP, SEXP bSEXP, SEXP dSEXP, SEXP xxSEXP, SEXP eSEXP, SEXP LSEXP, SEXP VeSEXP, SEXP piSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -214,7 +25,7 @@ END_RCPP
 }
 // KMUP2
 SEXP KMUP2(NumericMatrix X, NumericVector Use, NumericVector b, NumericVector d, NumericVector xx, NumericVector E, NumericVector L, double Ve, double pi);
-RcppExport SEXP _NAM_KMUP2(SEXP XSEXP, SEXP UseSEXP, SEXP bSEXP, SEXP dSEXP, SEXP xxSEXP, SEXP ESEXP, SEXP LSEXP, SEXP VeSEXP, SEXP piSEXP) {
+RcppExport SEXP _bWGR_KMUP2(SEXP XSEXP, SEXP UseSEXP, SEXP bSEXP, SEXP dSEXP, SEXP xxSEXP, SEXP ESEXP, SEXP LSEXP, SEXP VeSEXP, SEXP piSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -231,69 +42,314 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// SAMP
-void SAMP(NumericMatrix C, NumericVector g, NumericVector r, int N, double Ve);
-RcppExport SEXP _NAM_SAMP(SEXP CSEXP, SEXP gSEXP, SEXP rSEXP, SEXP NSEXP, SEXP VeSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type C(CSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type g(gSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type r(rSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< double >::type Ve(VeSEXP);
-    SAMP(C, g, r, N, Ve);
-    return R_NilValue;
-END_RCPP
-}
-// SAMP2
-void SAMP2(NumericMatrix X, NumericVector g, NumericVector y, NumericVector xx, NumericVector E, NumericVector L, int N, double Ve);
-RcppExport SEXP _NAM_SAMP2(SEXP XSEXP, SEXP gSEXP, SEXP ySEXP, SEXP xxSEXP, SEXP ESEXP, SEXP LSEXP, SEXP NSEXP, SEXP VeSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type g(gSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type xx(xxSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type E(ESEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type L(LSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< double >::type Ve(VeSEXP);
-    SAMP2(X, g, y, xx, E, L, N, Ve);
-    return R_NilValue;
-END_RCPP
-}
-// timesMatrix
-NumericMatrix timesMatrix(NumericMatrix ma1, NumericVector h, NumericMatrix ma2, int rows, int cols);
-RcppExport SEXP _NAM_timesMatrix(SEXP ma1SEXP, SEXP hSEXP, SEXP ma2SEXP, SEXP rowsSEXP, SEXP colsSEXP) {
+// emBA
+SEXP emBA(NumericVector y, NumericMatrix gen, double df, double R2);
+RcppExport SEXP _bWGR_emBA(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type ma1(ma1SEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type h(hSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type ma2(ma2SEXP);
-    Rcpp::traits::input_parameter< int >::type rows(rowsSEXP);
-    Rcpp::traits::input_parameter< int >::type cols(colsSEXP);
-    rcpp_result_gen = Rcpp::wrap(timesMatrix(ma1, h, ma2, rows, cols));
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(emBA(y, gen, df, R2));
     return rcpp_result_gen;
 END_RCPP
 }
-// timesVec
-NumericMatrix timesVec(NumericVector aa, NumericVector h, NumericMatrix bb, int q);
-RcppExport SEXP _NAM_timesVec(SEXP aaSEXP, SEXP hSEXP, SEXP bbSEXP, SEXP qSEXP) {
+// emBB
+SEXP emBB(NumericVector y, NumericMatrix gen, double df, double R2, double Pi);
+RcppExport SEXP _bWGR_emBB(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP, SEXP PiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type aa(aaSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type h(hSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type bb(bbSEXP);
-    Rcpp::traits::input_parameter< int >::type q(qSEXP);
-    rcpp_result_gen = Rcpp::wrap(timesVec(aa, h, bb, q));
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    Rcpp::traits::input_parameter< double >::type Pi(PiSEXP);
+    rcpp_result_gen = Rcpp::wrap(emBB(y, gen, df, R2, Pi));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emBC
+SEXP emBC(NumericVector y, NumericMatrix gen, double df, double R2, double Pi);
+RcppExport SEXP _bWGR_emBC(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP, SEXP PiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    Rcpp::traits::input_parameter< double >::type Pi(PiSEXP);
+    rcpp_result_gen = Rcpp::wrap(emBC(y, gen, df, R2, Pi));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emRR
+SEXP emRR(NumericVector y, NumericMatrix gen, double df, double R2);
+RcppExport SEXP _bWGR_emRR(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(emRR(y, gen, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emBL
+SEXP emBL(NumericVector y, NumericMatrix gen, double R2, double alpha);
+RcppExport SEXP _bWGR_emBL(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(emBL(y, gen, R2, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emDE
+SEXP emDE(NumericVector y, NumericMatrix gen, double R2);
+RcppExport SEXP _bWGR_emDE(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(emDE(y, gen, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emEN
+SEXP emEN(NumericVector y, NumericMatrix gen, double R2, double alpha);
+RcppExport SEXP _bWGR_emEN(SEXP ySEXP, SEXP genSEXP, SEXP R2SEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(emEN(y, gen, R2, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emML
+SEXP emML(NumericVector y, NumericMatrix gen, Rcpp::Nullable<Rcpp::NumericVector> D);
+RcppExport SEXP _bWGR_emML(SEXP ySEXP, SEXP genSEXP, SEXP DSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type D(DSEXP);
+    rcpp_result_gen = Rcpp::wrap(emML(y, gen, D));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emGWA
+SEXP emGWA(NumericVector y, NumericMatrix gen);
+RcppExport SEXP _bWGR_emGWA(SEXP ySEXP, SEXP genSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
+    rcpp_result_gen = Rcpp::wrap(emGWA(y, gen));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesA
+SEXP BayesA(NumericVector y, NumericMatrix X, double it, double bi, double df, double R2);
+RcppExport SEXP _bWGR_BayesA(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesA(y, X, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesB
+SEXP BayesB(NumericVector y, NumericMatrix X, double it, double bi, double pi, double df, double R2);
+RcppExport SEXP _bWGR_BayesB(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP piSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type pi(piSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesB(y, X, it, bi, pi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesC
+SEXP BayesC(NumericVector y, NumericMatrix X, double it, double bi, double pi, double df, double R2);
+RcppExport SEXP _bWGR_BayesC(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP piSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type pi(piSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesC(y, X, it, bi, pi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesL
+SEXP BayesL(NumericVector y, NumericMatrix X, double it, double bi, double df, double R2);
+RcppExport SEXP _bWGR_BayesL(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesL(y, X, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesRR
+SEXP BayesRR(NumericVector y, NumericMatrix X, double it, double bi, double df, double R2);
+RcppExport SEXP _bWGR_BayesRR(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesRR(y, X, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesCpi
+SEXP BayesCpi(NumericVector y, NumericMatrix X, double it, double bi, double df, double R2);
+RcppExport SEXP _bWGR_BayesCpi(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesCpi(y, X, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesDpi
+SEXP BayesDpi(NumericVector y, NumericMatrix X, double it, double bi, double df, double R2);
+RcppExport SEXP _bWGR_BayesDpi(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesDpi(y, X, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesA2
+SEXP BayesA2(NumericVector y, NumericMatrix X1, NumericMatrix X2, double it, double bi, double df, double R2);
+RcppExport SEXP _bWGR_BayesA2(SEXP ySEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesA2(y, X1, X2, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesB2
+SEXP BayesB2(NumericVector y, NumericMatrix X1, NumericMatrix X2, double it, double bi, double pi, double df, double R2);
+RcppExport SEXP _bWGR_BayesB2(SEXP ySEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP itSEXP, SEXP biSEXP, SEXP piSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type pi(piSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesB2(y, X1, X2, it, bi, pi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BayesRR2
+SEXP BayesRR2(NumericVector y, NumericMatrix X1, NumericMatrix X2, double it, double bi, double df, double R2);
+RcppExport SEXP _bWGR_BayesRR2(SEXP ySEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< double >::type it(itSEXP);
+    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
+    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesRR2(y, X1, X2, it, bi, df, R2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emML2
+SEXP emML2(NumericVector y, NumericMatrix X1, NumericMatrix X2, Rcpp::Nullable<Rcpp::NumericVector> D1, Rcpp::Nullable<Rcpp::NumericVector> D2);
+RcppExport SEXP _bWGR_emML2(SEXP ySEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP D1SEXP, SEXP D2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X2(X2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type D1(D1SEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type D2(D2SEXP);
+    rcpp_result_gen = Rcpp::wrap(emML2(y, X1, X2, D1, D2));
     return rcpp_result_gen;
 END_RCPP
 }
 // CNT
 NumericMatrix CNT(NumericMatrix X);
-RcppExport SEXP _NAM_CNT(SEXP XSEXP) {
+RcppExport SEXP _bWGR_CNT(SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -302,20 +358,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// MSX
-SEXP MSX(NumericMatrix X);
-RcppExport SEXP _NAM_MSX(SEXP XSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
-    rcpp_result_gen = Rcpp::wrap(MSX(X));
-    return rcpp_result_gen;
-END_RCPP
-}
 // IMP
 NumericMatrix IMP(NumericMatrix X);
-RcppExport SEXP _NAM_IMP(SEXP XSEXP) {
+RcppExport SEXP _bWGR_IMP(SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -324,25 +369,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// NOR
-SEXP NOR(NumericVector y, NumericMatrix X, double cxx, NumericVector xx, int maxit, double tol);
-RcppExport SEXP _NAM_NOR(SEXP ySEXP, SEXP XSEXP, SEXP cxxSEXP, SEXP xxSEXP, SEXP maxitSEXP, SEXP tolSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
-    Rcpp::traits::input_parameter< double >::type cxx(cxxSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type xx(xxSEXP);
-    Rcpp::traits::input_parameter< int >::type maxit(maxitSEXP);
-    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
-    rcpp_result_gen = Rcpp::wrap(NOR(y, X, cxx, xx, maxit, tol));
-    return rcpp_result_gen;
-END_RCPP
-}
 // GAU
 NumericMatrix GAU(NumericMatrix X);
-RcppExport SEXP _NAM_GAU(SEXP XSEXP) {
+RcppExport SEXP _bWGR_GAU(SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -353,7 +382,7 @@ END_RCPP
 }
 // GRM
 NumericMatrix GRM(NumericMatrix X, bool Code012);
-RcppExport SEXP _NAM_GRM(SEXP XSEXP, SEXP Code012SEXP) {
+RcppExport SEXP _bWGR_GRM(SEXP XSEXP, SEXP Code012SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -365,7 +394,7 @@ END_RCPP
 }
 // SPC
 NumericVector SPC(NumericVector y, NumericVector blk, NumericVector row, NumericVector col, double rN, double cN);
-RcppExport SEXP _NAM_SPC(SEXP ySEXP, SEXP blkSEXP, SEXP rowSEXP, SEXP colSEXP, SEXP rNSEXP, SEXP cNSEXP) {
+RcppExport SEXP _bWGR_SPC(SEXP ySEXP, SEXP blkSEXP, SEXP rowSEXP, SEXP colSEXP, SEXP rNSEXP, SEXP cNSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -381,7 +410,7 @@ END_RCPP
 }
 // SPM
 NumericMatrix SPM(NumericVector blk, NumericVector row, NumericVector col, double rN, double cN);
-RcppExport SEXP _NAM_SPM(SEXP blkSEXP, SEXP rowSEXP, SEXP colSEXP, SEXP rNSEXP, SEXP cNSEXP) {
+RcppExport SEXP _bWGR_SPM(SEXP blkSEXP, SEXP rowSEXP, SEXP colSEXP, SEXP rNSEXP, SEXP cNSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -394,69 +423,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// BRR2
-SEXP BRR2(NumericVector y, NumericMatrix X1, NumericMatrix X2, double it, double bi, double df, double R2);
-RcppExport SEXP _NAM_BRR2(SEXP ySEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X1(X1SEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X2(X2SEXP);
-    Rcpp::traits::input_parameter< double >::type it(itSEXP);
-    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
-    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    rcpp_result_gen = Rcpp::wrap(BRR2(y, X1, X2, it, bi, df, R2));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emGWA
-SEXP emGWA(NumericVector y, NumericMatrix gen);
-RcppExport SEXP _NAM_emGWA(SEXP ySEXP, SEXP genSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type gen(genSEXP);
-    rcpp_result_gen = Rcpp::wrap(emGWA(y, gen));
-    return rcpp_result_gen;
-END_RCPP
-}
-// BCpi
-SEXP BCpi(NumericVector y, NumericMatrix X, double it, double bi, double df, double R2);
-RcppExport SEXP _NAM_BCpi(SEXP ySEXP, SEXP XSEXP, SEXP itSEXP, SEXP biSEXP, SEXP dfSEXP, SEXP R2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
-    Rcpp::traits::input_parameter< double >::type it(itSEXP);
-    Rcpp::traits::input_parameter< double >::type bi(biSEXP);
-    Rcpp::traits::input_parameter< double >::type df(dfSEXP);
-    Rcpp::traits::input_parameter< double >::type R2(R2SEXP);
-    rcpp_result_gen = Rcpp::wrap(BCpi(y, X, it, bi, df, R2));
-    return rcpp_result_gen;
-END_RCPP
-}
-// emML2
-SEXP emML2(NumericVector y, NumericMatrix X1, NumericMatrix X2, Rcpp::Nullable<Rcpp::NumericVector> D1, Rcpp::Nullable<Rcpp::NumericVector> D2);
-RcppExport SEXP _NAM_emML2(SEXP ySEXP, SEXP X1SEXP, SEXP X2SEXP, SEXP D1SEXP, SEXP D2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X1(X1SEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type X2(X2SEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type D1(D1SEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type D2(D2SEXP);
-    rcpp_result_gen = Rcpp::wrap(emML2(y, X1, X2, D1, D2));
-    return rcpp_result_gen;
-END_RCPP
-}
 // mrr
 SEXP mrr(NumericMatrix Y, NumericMatrix X);
-RcppExport SEXP _NAM_mrr(SEXP YSEXP, SEXP XSEXP) {
+RcppExport SEXP _bWGR_mrr(SEXP YSEXP, SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -468,7 +437,7 @@ END_RCPP
 }
 // mrrV2
 SEXP mrrV2(NumericMatrix Y, NumericMatrix X);
-RcppExport SEXP _NAM_mrrV2(SEXP YSEXP, SEXP XSEXP) {
+RcppExport SEXP _bWGR_mrrV2(SEXP YSEXP, SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -478,9 +447,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mrrV3
+SEXP mrrV3(NumericMatrix Y, NumericMatrix X);
+RcppExport SEXP _bWGR_mrrV3(SEXP YSEXP, SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(mrrV3(Y, X));
+    return rcpp_result_gen;
+END_RCPP
+}
 // mrr2X
 SEXP mrr2X(NumericMatrix Y, NumericMatrix X1, NumericMatrix X2);
-RcppExport SEXP _NAM_mrr2X(SEXP YSEXP, SEXP X1SEXP, SEXP X2SEXP) {
+RcppExport SEXP _bWGR_mrr2X(SEXP YSEXP, SEXP X1SEXP, SEXP X2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -491,47 +472,62 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mtgsru
+SEXP mtgsru(NumericMatrix Y, NumericMatrix X, NumericMatrix b, NumericMatrix vb, NumericVector ve, NumericMatrix iG, int maxit);
+RcppExport SEXP _bWGR_mtgsru(SEXP YSEXP, SEXP XSEXP, SEXP bSEXP, SEXP vbSEXP, SEXP veSEXP, SEXP iGSEXP, SEXP maxitSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type b(bSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type vb(vbSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ve(veSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type iG(iGSEXP);
+    Rcpp::traits::input_parameter< int >::type maxit(maxitSEXP);
+    rcpp_result_gen = Rcpp::wrap(mtgsru(Y, X, b, vb, ve, iG, maxit));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_NAM_emBA", (DL_FUNC) &_NAM_emBA, 4},
-    {"_NAM_emBB", (DL_FUNC) &_NAM_emBB, 5},
-    {"_NAM_emBC", (DL_FUNC) &_NAM_emBC, 5},
-    {"_NAM_emRR", (DL_FUNC) &_NAM_emRR, 4},
-    {"_NAM_emBL", (DL_FUNC) &_NAM_emBL, 4},
-    {"_NAM_emDE", (DL_FUNC) &_NAM_emDE, 3},
-    {"_NAM_emEN", (DL_FUNC) &_NAM_emEN, 4},
-    {"_NAM_emML", (DL_FUNC) &_NAM_emML, 3},
-    {"_NAM_emMX", (DL_FUNC) &_NAM_emMX, 3},
-    {"_NAM_calcSize", (DL_FUNC) &_NAM_calcSize, 2},
-    {"_NAM_funI", (DL_FUNC) &_NAM_funI, 4},
-    {"_NAM_funX", (DL_FUNC) &_NAM_funX, 2},
-    {"_NAM_gs", (DL_FUNC) &_NAM_gs, 4},
-    {"_NAM_inputRow", (DL_FUNC) &_NAM_inputRow, 3},
-    {"_NAM_KMUP", (DL_FUNC) &_NAM_KMUP, 8},
-    {"_NAM_KMUP2", (DL_FUNC) &_NAM_KMUP2, 9},
-    {"_NAM_SAMP", (DL_FUNC) &_NAM_SAMP, 5},
-    {"_NAM_SAMP2", (DL_FUNC) &_NAM_SAMP2, 8},
-    {"_NAM_timesMatrix", (DL_FUNC) &_NAM_timesMatrix, 5},
-    {"_NAM_timesVec", (DL_FUNC) &_NAM_timesVec, 4},
-    {"_NAM_CNT", (DL_FUNC) &_NAM_CNT, 1},
-    {"_NAM_MSX", (DL_FUNC) &_NAM_MSX, 1},
-    {"_NAM_IMP", (DL_FUNC) &_NAM_IMP, 1},
-    {"_NAM_NOR", (DL_FUNC) &_NAM_NOR, 6},
-    {"_NAM_GAU", (DL_FUNC) &_NAM_GAU, 1},
-    {"_NAM_GRM", (DL_FUNC) &_NAM_GRM, 2},
-    {"_NAM_SPC", (DL_FUNC) &_NAM_SPC, 6},
-    {"_NAM_SPM", (DL_FUNC) &_NAM_SPM, 5},
-    {"_NAM_BRR2", (DL_FUNC) &_NAM_BRR2, 7},
-    {"_NAM_emGWA", (DL_FUNC) &_NAM_emGWA, 2},
-    {"_NAM_BCpi", (DL_FUNC) &_NAM_BCpi, 6},
-    {"_NAM_emML2", (DL_FUNC) &_NAM_emML2, 5},
-    {"_NAM_mrr", (DL_FUNC) &_NAM_mrr, 2},
-    {"_NAM_mrrV2", (DL_FUNC) &_NAM_mrrV2, 2},
-    {"_NAM_mrr2X", (DL_FUNC) &_NAM_mrr2X, 3},
+    {"_bWGR_KMUP", (DL_FUNC) &_bWGR_KMUP, 8},
+    {"_bWGR_KMUP2", (DL_FUNC) &_bWGR_KMUP2, 9},
+    {"_bWGR_emBA", (DL_FUNC) &_bWGR_emBA, 4},
+    {"_bWGR_emBB", (DL_FUNC) &_bWGR_emBB, 5},
+    {"_bWGR_emBC", (DL_FUNC) &_bWGR_emBC, 5},
+    {"_bWGR_emRR", (DL_FUNC) &_bWGR_emRR, 4},
+    {"_bWGR_emBL", (DL_FUNC) &_bWGR_emBL, 4},
+    {"_bWGR_emDE", (DL_FUNC) &_bWGR_emDE, 3},
+    {"_bWGR_emEN", (DL_FUNC) &_bWGR_emEN, 4},
+    {"_bWGR_emML", (DL_FUNC) &_bWGR_emML, 3},
+    {"_bWGR_emGWA", (DL_FUNC) &_bWGR_emGWA, 2},
+    {"_bWGR_BayesA", (DL_FUNC) &_bWGR_BayesA, 6},
+    {"_bWGR_BayesB", (DL_FUNC) &_bWGR_BayesB, 7},
+    {"_bWGR_BayesC", (DL_FUNC) &_bWGR_BayesC, 7},
+    {"_bWGR_BayesL", (DL_FUNC) &_bWGR_BayesL, 6},
+    {"_bWGR_BayesRR", (DL_FUNC) &_bWGR_BayesRR, 6},
+    {"_bWGR_BayesCpi", (DL_FUNC) &_bWGR_BayesCpi, 6},
+    {"_bWGR_BayesDpi", (DL_FUNC) &_bWGR_BayesDpi, 6},
+    {"_bWGR_BayesA2", (DL_FUNC) &_bWGR_BayesA2, 7},
+    {"_bWGR_BayesB2", (DL_FUNC) &_bWGR_BayesB2, 8},
+    {"_bWGR_BayesRR2", (DL_FUNC) &_bWGR_BayesRR2, 7},
+    {"_bWGR_emML2", (DL_FUNC) &_bWGR_emML2, 5},
+    {"_bWGR_CNT", (DL_FUNC) &_bWGR_CNT, 1},
+    {"_bWGR_IMP", (DL_FUNC) &_bWGR_IMP, 1},
+    {"_bWGR_GAU", (DL_FUNC) &_bWGR_GAU, 1},
+    {"_bWGR_GRM", (DL_FUNC) &_bWGR_GRM, 2},
+    {"_bWGR_SPC", (DL_FUNC) &_bWGR_SPC, 6},
+    {"_bWGR_SPM", (DL_FUNC) &_bWGR_SPM, 5},
+    {"_bWGR_mrr", (DL_FUNC) &_bWGR_mrr, 2},
+    {"_bWGR_mrrV2", (DL_FUNC) &_bWGR_mrrV2, 2},
+    {"_bWGR_mrrV3", (DL_FUNC) &_bWGR_mrrV3, 2},
+    {"_bWGR_mrr2X", (DL_FUNC) &_bWGR_mrr2X, 3},
+    {"_bWGR_mtgsru", (DL_FUNC) &_bWGR_mtgsru, 7},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_NAM(DllInfo *dll) {
+RcppExport void R_init_bWGR(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
