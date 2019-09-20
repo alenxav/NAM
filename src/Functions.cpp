@@ -1579,7 +1579,7 @@ SEXP mkr(NumericMatrix Y, NumericMatrix K){
                       Named("GC")=GC);}
 
 // [[Rcpp::export]]
-SEXP (NumericMatrix Y, NumericMatrix K1, NumericMatrix K2){
+SEXP mkr2(NumericMatrix Y, NumericMatrix K1, NumericMatrix K2){
   // Convergence parameters
   int maxit = 200; double tol = 10e-8;
   // Obtain environment containing function
