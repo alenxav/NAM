@@ -48,6 +48,9 @@
 \alias{mrr}
 \alias{mrrV2}
 \alias{mrr2X}
+\alias{mkr}
+\alias{mkr2X}
+\alias{mrrFast}
 \title{
   Internal functions
 }
