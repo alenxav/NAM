@@ -15,6 +15,7 @@
 \alias{emBA}
 \alias{emBB}
 \alias{emBC}
+\alias{emBD}
 \alias{emBL}
 \alias{emDE}
 \alias{emEN}
