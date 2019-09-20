@@ -993,8 +993,8 @@ SEXP emGWA(NumericVector y, NumericMatrix gen){
 
 // [[Rcpp::export]]
 SEXP BCpi(NumericVector y, NumericMatrix X,
-              double it = 3000, double bi = 500,
-              double df = 5, double R2 = 0.5){
+          double it = 3000, double bi = 500,
+          double df = 5, double R2 = 0.5){
   // Get dimensions of X
   int p = X.ncol(), n = X.nrow();
   // Estimate crossproducts and MSx
@@ -1004,16 +1004,13 @@ SEXP BCpi(NumericVector y, NumericMatrix X,
     vx[i] = var(X(_,i));}
   double MSx = sum(vx);
   // Get priors
-  double priorA = 1;
-  double priorB = 1;
   double pi = 0.5;
   double vy = var(y);
   double Sb = df*(R2)*vy/MSx/(1-pi);
   double Se = df*(1-R2)*vy;
   double mu = mean(y);
   // Create empty objects
-  double b0,b1,b2,eM,h2,C,MU,VB,VE,Pi,pj,vg,ve=vy,vb=Sb;
-  double PiAlpha,PiBeta,PiMean,PiVar;
+  double b0,b1,b2,eM,h2,C,MU,VB,VE,vee,Pi,pj,ve=vy,vb=Sb;
   NumericVector d(p),b(p),D(p),B(p),fit(n);
   NumericVector e=y-mu,e1(n),e2(n);
   double Lmb=ve/vb;
@@ -1047,11 +1044,8 @@ SEXP BCpi(NumericVector y, NumericMatrix X,
     vb = (sum(b*b)+Sb)/R::rchisq(p+df);
     ve = (sum(e*e)+Se)/R::rchisq(n+df);
     Lmb = ve/vb;
-    // Update Pi from beta
-    PiMean = mean(d); PiVar = var(d);
-    PiAlpha = priorA+((1-PiMean)/PiVar-1/PiMean)*(PiMean*PiMean);
-    PiBeta = priorB+PiAlpha*(1/PiMean-1);
-    pi = R::rbeta(PiAlpha,PiBeta);
+    // Update Pi
+    pi = mean(d);
     Sb = df*(R2)*vy/MSx/(1-pi);
     // Store posterior sums
     if(i>bi){MU=MU+mu; B=B+b; D=D+d; VB=VB+vb; VE=VE+ve; Pi = Pi+pi;}
@@ -1063,7 +1057,8 @@ SEXP BCpi(NumericVector y, NumericMatrix X,
   // Getting GWAS results
   NumericVector PVAL = -log(1-D);
   // Get fitted values and h2
-  vg = VB*MSx/Pi; h2 = vg/(vg+VE);
+  vee = sum(y*e)/(n-1);
+  h2 = 1 - vee/vy;
   for(int k=0; k<n; k++){fit[k] = sum(X(k,_)*B)+MU;}
   // Return output
   return List::create(Named("mu") = MU, Named("b") = B,
