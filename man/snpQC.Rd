@@ -31,7 +31,7 @@ Missing value threshold. Default is 0.8, removing markers with more than 80 perc
 Logical. Remove SNPs due to PSY or MAF.
 }
   \item{impute}{
-If TRUE, impute missing values using Random Forest adapted from the package missForest (Stekhoven and Buhlmann 2012) as suggested by Rutkoski et al (2013).
+If TRUE, impute missing values using the expected value.
 }
   \item{y}{
 Numeric vector (\eqn{n}) or numeric matrix (\eqn{n} x \eqn{t}) of observations describing the trait to be analyzed. \code{NA} is allowed.
@@ -52,11 +52,6 @@ snpQC - Returns the genomic matrix without missing values, redundancy or low MAF
 cleanREP - List containing the inputs without replicates. Groups of replicates are replaced by a single observation with the phenotypic expected value. The algorithm keeps the genotypic information of the first individual (genotypic matrix order).
 
 reference - Returns a recoded \eqn{gen} matrix
-}
-\references{
-Rutkoski, J. E., Poland, J., Jannink, J. L., & Sorrells, M. E. (2013). Imputation of unordered markers and the impact on genomic selection accuracy. G3: Genes| Genomes| Genetics, 3(3), 427-439.
-
-Stekhoven, D. J. and Buhlmann, P. 2012. MissForest - nonparametric missing value imputation for mixed-type data. Bioinformatics, 28(1), 112-118.
 }
 \author{
 Alencar Xavier, Katy Rainey and William Muir
