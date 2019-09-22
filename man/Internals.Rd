@@ -84,7 +84,7 @@ Some of the functions available for users include:
 
 11) \code{NNcov(NN,y):}{  This function utilizes the output of \code{NNsrc} to generate a numeric vector, averageing the observed values of \code{y}. This function is useful to generate field covariates to control micro-environmental variance without krigging.}
 
-11) \code{emXX(y,gen,...):}{  Fits whole-genome regressions using the expectation-maximization algorithm as opposed to MCMC. Currently avaible methods include BayesA (\code{emBA}), BayesB (\code{emBB}), BayesC (\code{emBC}), BLASSO (\code{emBL}), BLASSO2 (\code{emDE}), Elastic-Net (\code{emEN}), maximum likelihood (\code{emML}), Ridge regression (\code{emRR}), and mixed-normals prior (\code{emMX}). A cross-validation option is also available (\code{emCV}).}
+11) \code{emXX(y,gen,...):}{  Fits whole-genome regressions using the expectation-maximization algorithm as opposed to MCMC. Currently avaible methods include BayesA (\code{emBA}), BayesB (\code{emBB}), BayesC (\code{emBC}), BayesD (\code{emBD}), BLASSO (\code{emBL}), FLM (\code{emDE}), Elastic-Net (\code{emEN}), maximum likelihood (\code{emML}) and ridge regression (\code{emRR}). A cross-validation option is also available (\code{emCV}).}
 
 12) \code{CNT(X):}{  Centralizes parameters from matrix \code{X}.}
 
@@ -112,7 +112,7 @@ Some of the functions available for users include:
 
 24) \code{BCpi(y,X,it=3000,bi=500,df=5,R2=0.5):}{ A vanilla implementation in C++ of BayesCpi for GWAS or GWP. It returns the marker p-values (as the minus log probability of marker excluded), marker effects for genomic prediction, probability of marker included, variance components, heritability, and GEBVs (fitted values). }
 
-25) \code{mrr(Y,X)/mrrV2(Y,X)/mrr2X(Y,X1,X2):}{A C++ implementation for multivariate regression.}
+25) \code{mrr(Y,X)/mkr(Y,K)/mrrV2(Y,X)/mrr2X(Y,X1,X2)/mkr2X(Y,K1,K2):}{A C++ implementation for multivariate regression.}
 
 }
 \author{
