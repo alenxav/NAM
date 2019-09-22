@@ -11,7 +11,6 @@ importFrom("stats", "as.dist", "cor", "cov", "cov2cor", "dchisq","as.formula",
 importFrom("utils", "head", "read.delim", "read.table",
            "setTxtProgressBar", "tail", "txtProgressBar")
 importFrom(Rcpp, evalCpp)
-importFrom(randomForest, randomForest)
 S3method(plot, NAM)
 S3method(plot, fst)
 S3method(plot, H2)
