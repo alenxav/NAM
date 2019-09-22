@@ -158,6 +158,7 @@ plot.fst = function(x,..., p=NULL,chr=NULL){
     lines(KK,type="h",lwd=2,col=rgb(1,0.5,0,0.6))}
 }
 
+                                
 # function for marker quality control
 snpQC=function(gen,psy=1,MAF=0.05,misThr=0.8,remove=TRUE,impute=FALSE){
   anyNA = function(x) any(is.na(x))
@@ -207,56 +208,18 @@ snpQC=function(gen,psy=1,MAF=0.05,misThr=0.8,remove=TRUE,impute=FALSE){
       if(any(noVal)){gen3=gen3[,-noVal]}
       }
   }else{gen3=gen2}
-  if(impute){
-    rf <- function(xmis){ # Author: D.Stekhoven, stekhoven@stat.math.ethz.ch
-      maxiter = 10; ntree = 100
-      mtry = floor(sqrt(ncol(xmis)))
-      cutoff=NULL;classwt=NULL;strata=NULL;replace=T
-      sampsize=NULL;nodesize=NULL;maxnodes=NULL
-      n <- nrow(xmis);  p <- ncol(xmis)
-      ## perform initial S.W.A.G. on xmis (mean imputation)
-      ximp <- xmis; xAttrib <- lapply(xmis, attributes)
-      varType <- character(p);  for (t.co in 1:p){
-        if (is.null(xAttrib[[t.co]])){ varType[t.co] <- 'numeric'
-        ximp[is.na(xmis[,t.co]),t.co] <- mean(xmis[,t.co], na.rm = TRUE)
-        }else{ varType[t.co] <- 'factor'
-        max.level <- max(table(ximp[,t.co]))
-        class.assign <- sample(names(which(max.level == summary(ximp[,t.co]))), 1)
-        if (class.assign != "NA's"){ximp[is.na(xmis[,t.co]),t.co] <- class.assign } else {
-          while(class.assign=="NA's"){class.assign=sample(names(which(max.level==summary(ximp[,t.co]))), 1)}
-          ximp[is.na(xmis[,t.co]),t.co] <- class.assign }}}
-      NAloc <- is.na(xmis);  noNAvar <- apply(NAloc, 2, sum) 
-      sort.j <- order(noNAvar); sort.noNAvar <- noNAvar[sort.j]
-      nzsort.j <- sort.j[sort.noNAvar > 0]; Ximp <- vector('list', maxiter)
-      iter <- 0; k <- length(unique(varType));  convNew <- rep(0, k)
-      convOld <- rep(Inf, k); OOBerror <- numeric(p); names(OOBerror) <- varType
-      if (k==1){if(unique(varType)=='numeric'){names(convNew)=c('numeric')}else{names(convNew)=c('factor')}
-        convergence <- c(); OOBerr <- numeric(1)} else {
-          names(convNew) <- c('numeric', 'factor');convergence <- matrix(NA, ncol = 2);OOBerr <- numeric(2)}
-      stopCriterion <- function(varType, convNew, convOld, iter, maxiter){
-        k <- length(unique(varType)); if (k == 1){(convNew < convOld) & (iter < maxiter)} else {
-          ((convNew[1] < convOld[1]) | (convNew[2] < convOld[2])) & (iter < maxiter)}}
-      while (stopCriterion(varType, convNew, convOld, iter, maxiter)){
-        if (iter != 0){convOld <- convNew;OOBerrOld <- OOBerr}
-        cat("RF iteration", iter+1, "\n");t.start <- proc.time();ximp.old <- ximp
-        for(s in 1:p){varInd=sort.j[s];if(noNAvar[[varInd]]!=0){obsi=!NAloc[,varInd];misi=NAloc[, varInd];
-        obsY=ximp[obsi,varInd];obsX=ximp[obsi, seq(1,p)[-varInd]];misX=ximp[misi, seq(1,p)[-varInd]];
-        typeY=varType[varInd];RF=randomForest(x=obsX,y=obsY,ntree=ntree,mtry=mtry,replace=T,
-                                              sampsize=if(!is.null(sampsize))sampsize[[varInd]] else if (replace) nrow(obsX) else
-                                                ceiling(0.632*nrow(obsX)), nodesize = if (!is.null(nodesize)) nodesize[1] else 1,
-                                              maxnodes = if (!is.null(maxnodes)) maxnodes else NULL); OOBerror[varInd] <- RF$mse[ntree]
-                                              misY <- predict(RF, misX); ximp[misi, varInd] <- misY }}; iter <- iter+1;Ximp[[iter]] <- ximp
-        t.co2 <- 1;for (t.type in names(convNew)){ t.ind <- which(varType == t.type)
-        convNew[t.co2]=sum((ximp[,t.ind]-ximp.old[,t.ind])^2)/sum(ximp[,t.ind]^2);t.co2=t.co2 + 1}}
-      if (iter == maxiter){out <- Ximp[[iter]]}else{out <- Ximp[[iter-1]]}
-      return(out)}
-    gen=gen3;gen[gen==5]=NA   
-    k=100*length(which(is.na(gen)))/length(gen)
-    k=round(k,2);cat(k,"% of missing data",'\n')
-    cat("Imputations being performed by Random Forest",'\n')
-    if(any(is.na(gen))){gen=suppressWarnings(rf(gen));gen=round(gen)}
-    gen3=gen}
-  return(gen3)}
+                 
+# IMPUTATION                 
+if(impute){
+  rf = function(X) apply(X,2,function(x){x[is.na(x)]=mean(x,na.rm=T);return(x)} )
+  gen=gen3;gen[gen==5]=NA   
+  k=100*length(which(is.na(gen)))/length(gen)
+  k=round(k,2);cat(k,"% of missing data",'\n')
+  cat("Imputations via expectation",'\n')
+  if(any(is.na(gen))){gen=suppressWarnings(rf(gen));gen=round(gen)}
+  gen3=gen}
+
+return(gen3)}
 
 # function to remove repeated genotypes
 cleanREP = function(y,gen,fam=NULL,thr=0.95){
