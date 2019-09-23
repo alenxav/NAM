@@ -44,7 +44,7 @@ For whole-genome regression models (BRR or BayesA), \eqn{u = Ma}, where \eqn{M} 
 
 Unobserved genotypes not provided in \code{dta} but provided in \code{gen} are predicted in the output of the function. Genotypes without genotypic information are transfered to the fixed effect (eg. checks). Missing loci are imputed with the expectation. If \code{dta} is not provided, the function will work as a regular genomic prediction model, so the length of \code{y} must match the number of rows of \code{gen}.
 
-In whole-genome regression models, the regularization of the genetic term is either based on chosen prior (t, Gaussian), Gaussian (from ridge regression) and t (from BayesA). Kernel models (GBLUP and RKHS) are regularized as Gaussian process, which is similar to a ridge regression of Eigenvectors where the regularization of Eigenpairs also relies on the Eigenvalues. Random forest is, at some extend, regularized by multiple parameters including sample size (SSZ), numer of trees (NTR), number of variables (MTR), etc.
+In whole-genome regression models, the regularization of the genetic term is either based on chosen prior (t, Gaussian), Gaussian (from ridge regression) and t (from BayesA). Kernel models (GBLUP and RKHS) are regularized as Gaussian process, which is similar to a ridge regression of Eigenvectors where the regularization of Eigenpairs also relies on the Eigenvalues.
 
 If there is a large number of trials and users acknowledge the necessity of sparse matrices, we recommend installing the Matrix package and run the following code that enables sparsity:
 
