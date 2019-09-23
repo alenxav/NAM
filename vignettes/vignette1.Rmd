@@ -359,9 +359,9 @@ Although it is possible to use `reml` and `gibbs` to generate breeding values, t
 
 + `GK = gmm(y = phenotype, gen = genotype, model = "RKHS")`
 
-**j. Random Forest**
+**j. non-MCMC BayesDpi**
 
-+ `RF = gmm(y = phenotype, gen = genotype, model = "RF")`
++ `eBD = emBD(y = phenotype, gen = genotype)`
 
 **k. non-MCMC BayesA**
 
@@ -379,9 +379,9 @@ Although it is possible to use `reml` and `gibbs` to generate breeding values, t
 
 + `eRR = emRR(y = phenotype, gen = genotype)`
 
-**o. non-MCMC Bayesian LASSO**
+**o. Fast Laplace Model**
 
-+ `eBL = emDE(y = phenotype, gen = genotype)`
++ `flm = emDE(y = phenotype, gen = genotype)`
 
 **p. Elastic net**
 
@@ -401,7 +401,7 @@ Although it is possible to use `reml` and `gibbs` to generate breeding values, t
 
 **s. BayesCpi**
 
-+ `eBCpi = BCpi(y = phenotype, X = genotype)`
++ `bcpi = BCpi(y = phenotype, X = genotype)`
 
 
 For a comparison of the ten methods, one can perform a cross-validation study. In cross-validation studies, a \code{k} part of the data is omitted and predicted back. The procedure is repeated various times. Prediction statistics such as mean-squared prediction error (MSPE) and prediction ability (PA) are computed by the comparison between observed and predicted values.
