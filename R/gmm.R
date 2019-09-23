@@ -1,7 +1,7 @@
 
 gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
   
-  # models: BRR - BayesA - GBLUP - RKHS - RF
+  # models: BRR - BayesA - GBLUP - RKHS
   # spline: dta must include a column called "ID Block Row Col"
   
   if(is.null(dta)&nrow(gen)==length(y)){
@@ -28,7 +28,7 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
   } 
   
   # Checking if the model is acceptable
-  if(! model %in% c("BRR","BayesA","GBLUP","RKHS","RF")) stop("Model must be either 'BRR', 'BayesA','GBLUP','RKHS' or 'RF' ")
+  if(! model %in% c("BRR","BayesA","GBLUP","RKHS")) stop("Model must be either 'BRR', 'BayesA','GBLUP' or'RKHS' ")
   if(model=="GBLUP"|model=="RKHS"){
     KERN = TRUE
     if(model=="GBLUP"){
@@ -180,42 +180,15 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
   gen = gen[colnames(Z),]
   MAP = function(e,Z,Weight) as.vector(crossprod(Z,e))/Weight
   
-  # Setting random forest parameters
-  if(model=="RF"){
-    RF = TRUE
-    RFReg = function(x,y,NTR=50,MTR=50,SSZ=80,NSZ=4,
-                     MNO=10,IMP=TRUE,RPL=TRUE)
-          randomForest::randomForest(x=x,y=y,ntree=NTR,
-                    mtry=MTR,sampsize=SSZ,nodesize=NSZ,
-                    maxnodes=MNO,importance=IMP,
-                    replace=RPL)
-  }else{
-    RF = FALSE
-  }
-  
-  if(!RF){
-    cat("Computing priors and genomic parameters \n")
+  cat("Computing priors and genomic parameters \n")
     xx = apply(gen,2,crossprod)
     p = ncol(gen)
     g = rep(0,p)
     L = rep(1,p)
     Ve = 1
-  }
   
   # (c) Running first round
-  if(RF){
-    E = MAP(e,Z,Weight)
-    # FIT
-    u=RFReg(gen,E,...)
-    # PREDICT
-    bv_pred = as.vector(predict(u,gen))
-    bv = u$predicted
-    bvs = as.vector(tcrossprod(bv,Z))
-    e = e-bvs
-    
-  }else{
-    
-    # KERNEL AND REGRESSION METHODS
+      # KERNEL AND REGRESSION METHODS
     d = rep(1,ncol(gen))
     E = MAP(e,Z,Weight) 
     update = KMUP(X=gen,b=g,d=d,xx=xx,e=E,L=L,Ve=Ve,pi=0)
@@ -254,8 +227,6 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
       Ve = c(crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
       L = c(Ve)/c(Vb)
     }
-    
-  }
   
 
   # (d) Adding Splines to X
@@ -269,14 +240,8 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
   # What to STORE
   MCMC = seq(bi,it,th)
   mc = length(MCMC)
-  if(RF){
-    Mu = 0
-    BV = rep(0,nrow(gen))
-    BV_pred = rep(0,nrow(gen0))
-  }else{
-    G = VE = Mu = 0
-    VB = rep(0,p)
-  }
+  G = VE = Mu = 0
+  VB = rep(0,p)
   
   if(isTRUE(spline)) SP = rep(0,n) 
   if(isTRUE(fixed)) B = rep(0,ncol(X))
@@ -299,22 +264,7 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
     }
     
     # (c) Update genetic components
-    if(RF){
-      
-      bvs0 = bvs
-      E = MAP(e,Z,Weight)+bv
-      # FIT
-      u=RFReg(gen,E,...)
-      
-      # PREDICT
-      bv_pred = as.vector(predict(u,gen0))
-      bv = u$predicted
-      bvs = as.vector(tcrossprod(bv,Z))
-      e = e+bvs0-bvs
-      
-    }else{
-      
-      bvs0 = bvs
+    bvs0 = bvs
       E = MAP(e,Z,Weight)
       update = KMUP(X=gen,b=g,d=d,xx=xx,e=E,L=L,Ve=Ve,pi=0)
       g = update$b
@@ -341,7 +291,6 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
         Ve = (crossprod(e)+Se_prior)/rchisq(1,n+df_prior)
         L = c(Ve)/c(Vm*V)
       }
-    }
     
     # (e) Update Splines
     if(isTRUE(spline)){
@@ -354,14 +303,9 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
     # (f) Storage
     if(i %in% MCMC){
       Mu = Mu+mu
-      if(RF){
-        BV = BV + bv
-        BV_pred = BV_pred+bv_pred
-      }else{
-        G = G+g
+      G = G+g
         VB = VB+Vm
         VE = VE+Ve
-      }
       if(isTRUE(fixed)) B = B+b
       if(isTRUE(spline)) SP = SP+sp
     }
@@ -372,29 +316,17 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
   close(pb)
   
   # Posterior means
-  if(RF){
-    BV = BV/mc
-    BV_pred = BV_pred/mc
-  }else{
-    Mu = Mu/mc
+  Mu = Mu/mc
     G = G/mc
     VB = VB/mc
     VE = VE/mc
     if(model=="BRR"|KERN) VB=mean(VB)
-  }
   
   # Fitted
-  if(RF){
-    RND = as.vector(tcrossprod(BV,Z))
-    names(RND) = rownames(gen)
-    GEBV = BV_pred
-    names(GEBV) = rownames(gen0)
-  }else{
-    RND = as.vector(tcrossprod(Z,tcrossprod(G,gen)))
+  RND = as.vector(tcrossprod(Z,tcrossprod(G,gen)))
     names(RND) = rownames(gen)
     GEBV = as.vector(tcrossprod(G,gen0))
     names(GEBV) = rownames(gen0)
-  }
   
   # Hat
   hat = Mu + RND
@@ -411,15 +343,10 @@ gmm = function(y,gen,dta=NULL,it=75,bi=25,th=1,model="BRR",...){
     hat = hat + FIX
   }
   
-  if(RF){
-    FINAL = list('hat'=hat,'obs'=y,
-                 "mu"=Mu,"EBV"=GEBV)
-  }else{
-    FINAL = list('hat'=hat,'obs'=y,
+  FINAL = list('hat'=hat,'obs'=y,
                  "mu"=Mu,"Z"=Z,"g"=G,
                  "Vg"=VB,"Ve"=VE,
                  "EBV"=GEBV)
-  }
   
   if(model=="BRR"|KERN){
     FINAL = c(FINAL,list('cxx'=mean(xx)))
