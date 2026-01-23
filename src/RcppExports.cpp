@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // emBA
 SEXP emBA(NumericVector y, NumericMatrix gen, double df, double R2);
 RcppExport SEXP _NAM_emBA(SEXP ySEXP, SEXP genSEXP, SEXP dfSEXP, SEXP R2SEXP) {

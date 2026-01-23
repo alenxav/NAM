@@ -287,6 +287,7 @@ press = function(y, K, MaxIt=10){
 
                  
 emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE, llo=NULL, tbv=NULL){
+  
   folds = function(Seed, y, gen, k) {
     N = nrow(gen)
     set.seed(Seed)
@@ -306,6 +307,7 @@ emCV = function (y, gen, k=5, n=5, Pi=0.75, alpha=0.02, df=10, R2=0.5, avg=TRUE,
     cat("DONE WITH CROSS-VALIDATION CYCLE", Seed, "\n")
     NamesMod = c("emRR", "emEN", "emBL", "emDE", "emBA", 
                  "emBB", "emBC", "emBD", "emML", "OBSERVATION")
+    
     M = matrix(NA, Nk, length(NamesMod))
     colnames(M) = NamesMod
     for (i in 1:(length(NamesMod)-1)) M[, i] = gen[w, ] %*% get(paste("f", i,sep = ""))$b
