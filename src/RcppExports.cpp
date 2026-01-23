@@ -548,6 +548,8 @@ BEGIN_RCPP
 END_RCPP
 }
 
+RcppExport SEXP PEGS_lapack(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+
 static const R_CallMethodDef CallEntries[] = {
     {"_NAM_emBA", (DL_FUNC) &_NAM_emBA, 4},
     {"_NAM_emBB", (DL_FUNC) &_NAM_emBB, 5},
@@ -588,6 +590,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_NAM_mkr", (DL_FUNC) &_NAM_mkr, 2},
     {"_NAM_mkr2X", (DL_FUNC) &_NAM_mkr2X, 3},
     {"_NAM_mrrFast", (DL_FUNC) &_NAM_mrrFast, 2},
+    {"PEGS_lapack", (DL_FUNC) &PEGS_lapack, 8},
     {NULL, NULL, 0}
 };
 

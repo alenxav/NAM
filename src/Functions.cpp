@@ -396,15 +396,16 @@ SEXP emEN(NumericVector y, NumericMatrix gen, double R2 = 0.5, double alpha = 0.
   for(int k=0; k<p; k++){xx[k] = sum(gen(_,k)*gen(_,k));}
   NumericVector vx(p);
   for(int k=0; k<p; k++){vx[k] = var(gen(_,k));}
-  double cxx = sum(vx)*(1-R2)/R2;
+  double MSx = sum(vx);
+  double cxx = MSx*(1-R2)/R2;
   // Regulation coefficients
-  double Ve, Va;
+  double Ve, Va = 0.0;
   double Sy = sd(y);
   double Lmb = cxx;
   double Lmb1 = 0.5*Lmb*alpha*Sy;
   double Lmb2 = Lmb*(1-alpha);
   double trAC22 = sum(1/(xx+Lmb));
-  double OLS, b1;
+  double OLS, b1, h2;
   // Convergence control
   NumericVector bc(p);
   int numit = 0;
@@ -446,12 +447,14 @@ SEXP emEN(NumericVector y, NumericMatrix gen, double R2 = 0.5, double alpha = 0.
   // Fitting the model
   NumericVector fit(n); for(int k=0; k<n; k++){ fit[k] = sum(gen(k,_)*b)+mu; }
   // Output
+  double Vg = MSx*Va;
+  h2 = (Vg)/(Vg+Ve);
   return List::create(Named("mu")=mu,
                       Named("b")=b,
                       Named("hat")=fit,
-                      Named("Va")=Va*cxx,
+                      Named("Va")=Vg,
                       Named("Ve")=Ve,
-                      Named("h2")=Va*cxx/(Va*cxx+Ve));
+                      Named("h2")=h2);
 }
 
 // [[Rcpp::export]]

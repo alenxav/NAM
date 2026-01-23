@@ -3,6 +3,8 @@
 \alias{Y}
 \alias{X}
 \alias{simu}
+\alias{PEGS_lapack}
+
 \title{Pseudo-Expectation Gauss-Seidel for Multivariate Models}
 \usage{
 pegs(Y, X, maxit = 100, logtol = -4, NNC = FALSE, 
