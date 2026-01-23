@@ -1,15 +1,13 @@
-citHeader("To cite NAM in publications use:")
-
-citEntry(entry = "Article",
-  title        = "{NAM}: association studies in multiple populations",
-  author       = personList(as.person("Alencar Xavier"),as.person("Shizhong Xu"),as.person("William Muir"),as.person("Katy Rainey")),
+bibentry(
+  bibtype      = "Article",
+  title        = "NAM: association studies in multiple populations",
+  author       =  c(person("Alencar", "Xavier", role=c("aut", "cre")), person("William", "Muir", role=c("aut")), person("Shizhong", "Xu", role=c("aut")),person("Katy", "Rainey", role=c("aut"))),
   journal      = "Bioinformatics",
-  publisher    = "Oxford University Press",
   volume       = "31",
   number       = "23",
-  pages        = "3862-3864",
   year         = "2015",
-  textVersion  = "Xavier A, Xu S, Muir WM, Rainey KM. NAM: association studies in multiple populations. Bioinformatics 31(23):3862-3864."
-
+  pages        = "3862-3864",
+  doi          = "10.1093/bioinformatics/btv448",
+  textVersion  = "Xavier A, et al. (2019). NAM: association studies in multiple populations. Bioinformatics 31(23):3862-3864.",
+  mheader = "To cite NAM in publications use:"
 )
-

@@ -16,9 +16,9 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
     # Dealing with fixed effect matrix
     if(is.null(X)){X = matrix(1,N,1)}else{
       if(is.matrix(X)){if(nrow(X)!=N) stop("Fixed effect does not match dimensions of response variable")
-      }else{if(class(X)=="formula"){X=model.matrix(X)}}}
+      }else{if(class(X)[1]=="formula"){X=model.matrix(X)}}}
     if(model=='Ridge'){
-      if(class(Z)=="formula"){
+      if(class(Z)[1]=="formula"){
         Q = paste(Z); Q[2]=paste(Q[2],'- 1'); Z=as.formula(Q)
         Z=model.matrix(Z)
       }
@@ -29,7 +29,7 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
       K0=K
     }
     if(model=='Mixed'){
-      if(class(Z)=="formula"){
+      if(class(Z)[1]=="formula"){
         Q = paste(Z); Q[2]=paste(Q[2],'- 1'); Z=as.formula(Q)
         Z=model.matrix(Z)
       }
@@ -123,14 +123,14 @@ reml=function(y,X=NULL,Z=NULL,K=NULL){
     N = nrow(y)
     if(is.null(X)){X = matrix(1,N,1)}else{
       if(is.matrix(X)){if(nrow(X)!=N) stop("Fixed effect does not match dimensions of response variable")
-      }else{if(class(X)=="formula"){X=model.matrix(X)}}}
+      }else{if(class(X)[1]=="formula"){X=model.matrix(X)}}}
     if(is.null(K)&is.null(Z))stop("Either Z or K must be specified")
     if(is.null(K)){
-      if(class(Z)=="formula"){Z=model.matrix(Z)-1}
+      if(class(Z)[1]=="formula"){Z=model.matrix(Z)-1}
       V=tcrossprod(Z)}
     if(is.null(Z)){V=K}
     if(is.null(Z)!=T&&is.null(K)!=T){
-      if(class(Z)=="formula"){Z=model.matrix(Z)-1}
+      if(class(Z)[1]=="formula"){Z=model.matrix(Z)-1}
       V=crossprod(t(Z),K);V=tcrossprod(V,Z)};
     Z=diag(N); K=V
     if(any(is.na(Y))){

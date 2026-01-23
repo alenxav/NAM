@@ -8,7 +8,7 @@ gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,
   # Default for X; changing X to matrix if it is a formulas
   VY = var(y,na.rm=T)
   if(is.null(X)) X=matrix(1,length(y),1)
-  if(class(X)=="formula"){
+  if(class(X)[1]=="formula"){
     X=model.frame(X)
     Fixes=ncol(X)
     XX=matrix(1,length(y),1)
@@ -20,8 +20,8 @@ gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,
   # Defaults of Z: making "NULL","formula" and "matrix" as "list"
   if(is.null(Z)&is.null(iK)) stop("Either Z or iK must be specified")
   if(is.null(Z)) Z=list(diag(length(y)))
-  if(class(Z)=="matrix") Z = list(Z)
-  if(class(Z)=="formula") {
+  if(class(Z)[1]=="matrix") Z = list(Z)
+  if(class(Z)[1]=="formula") {
     Z=model.frame(Z)
     Randoms=ncol(Z)
     ZZ=list()
@@ -37,7 +37,7 @@ gibbs = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,Iter=1500,Burn=500,Thin=2,DF=5,
       Randoms=length(Z)
       for(var in 1:Randoms) iK[[var]]=diag(ncol(Z[[var]]))
     }
-    if(class(iK)=="matrix") iK=list(iK)
+    if(class(iK)[1]=="matrix") iK=list(iK)
     if(length(Z)!=length(iK)){
       a=length(Z)
       b=length(iK)
@@ -246,7 +246,7 @@ ml = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,DF=5,S=0.5,nor=TRUE){
   # Default for X; changing X to matrix if it is a formulas
   VY = var(y,na.rm=T)
   if(is.null(X)) X=matrix(1,length(y),1)
-  if(class(X)=="formula"){
+  if(class(X)[1]=="formula"){
     X=model.frame(X)
     Fixes=ncol(X)
     XX=matrix(1,length(y),1)
@@ -258,8 +258,8 @@ ml = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,DF=5,S=0.5,nor=TRUE){
   # Defaults of Z: making "NULL","formula" and "matrix" as "list"
   if(is.null(Z)&is.null(iK)) stop("Either Z or iK must be specified")
   if(is.null(Z)) Z=list(diag(length(y)))
-  if(class(Z)=="matrix") Z = list(Z)
-  if(class(Z)=="formula"){
+  if(class(Z)[1]=="matrix") Z = list(Z)
+  if(class(Z)[1]=="formula"){
     Z=model.frame(Z)
     Randoms=ncol(Z)
     ZZ=list()
@@ -274,7 +274,7 @@ ml = function(y,Z=NULL,X=NULL,iK=NULL,iR=NULL,DF=5,S=0.5,nor=TRUE){
     Randoms=length(Z)
     for(var in 1:Randoms) iK[[var]]=diag(ncol(Z[[var]]))
   }
-  if(class(iK)=="matrix") iK=list(iK)
+  if(class(iK)[1]=="matrix") iK=list(iK)
   if(length(Z)!=length(iK)){
     a=length(Z)
     b=length(iK)
@@ -409,7 +409,7 @@ gibbs2 = function(Y,Z=NULL,X=NULL,iK=NULL,Iter=150,Burn=50,Thin=1,DF=5,S=0.5,nor
   # Default for X; changing X to matrix if it is a formulas
   VY = apply(Y,2,var,na.rm=T)
   if(is.null(X)) X=matrix(1,nrow(Y),1)
-  if(class(X)=="formula"){
+  if(class(X)[1]=="formula"){
     X=model.frame(X)
     Fixes=ncol(X)
     XX=matrix(1,n0,1)
@@ -421,8 +421,8 @@ gibbs2 = function(Y,Z=NULL,X=NULL,iK=NULL,Iter=150,Burn=50,Thin=1,DF=5,S=0.5,nor
   # Defaults of Z: making "NULL","formula" and "matrix" as "list"
   if(is.null(Z)&is.null(iK)) stop("Either Z or iK must be specified")
   if(is.null(Z)) Z=list(diag(n0))
-  if(class(Z)=="matrix") Z = list(Z)
-  if(class(Z)=="formula") {
+  if(class(Z)[1]=="matrix") Z = list(Z)
+  if(class(Z)[1]=="formula") {
     Z=model.frame(Z)
     Randoms=ncol(Z)
     ZZ=list()
@@ -436,7 +436,7 @@ gibbs2 = function(Y,Z=NULL,X=NULL,iK=NULL,Iter=150,Burn=50,Thin=1,DF=5,S=0.5,nor
     Randoms=length(Z)
     for(var in 1:Randoms) iK[[var]]=diag(ncol(Z[[var]]))
   }  
-  if(class(iK)=="matrix") iK=list(iK)
+  if(class(iK)[1]=="matrix") iK=list(iK)
   if(length(Z)!=length(iK)){
     a=length(Z)
     b=length(iK)

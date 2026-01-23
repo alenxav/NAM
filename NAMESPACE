@@ -3,7 +3,8 @@ exportPattern("^[[:alpha:]]+")
 importFrom("grDevices", "rgb")
 importFrom("graphics", "abline", "axis", "hist", "identify", "lines",
            "par", "plot", "rect")
-importFrom("stats", "as.dist", "cor", "cov", "cov2cor", "dchisq","as.formula",
+importFrom("stats", "reshape",
+           "as.dist", "cor", "cov", "cov2cor", "dchisq","as.formula",
            "density", "dist", "ecdf", "ksmooth", "lm", "median",
            "model.frame", "model.matrix", "na.omit", "optim", "pchisq",
            "predict", "qchisq", "rWishart", "rbeta", "rchisq",
